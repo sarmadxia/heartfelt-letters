@@ -1,0 +1,3249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heartfelt Letters — Write From the Soul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Nunito+Sans:wght@200;300;400;500&family=Dancing+Script:wght@400;500&family=Indie+Flower&family=Satisfy&family=Patrick+Hand&family=Sacramento&family=Pacifico&family=Kalam:wght@400;700&family=Shadows+Into+Light&family=Amatic+SC:wght@400;700&family=Great+Vibes&family=Homemade+Apple&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+/* ── CSS Variables ── */
+:root {
+  --ink: #1e120a;
+  --ink-soft: #4a3225;
+  --ink-muted: #8d7564;
+  --paper: #faf6f0;
+  --paper-dark: #f0ebe3;
+  --cream: #fffdf8;
+  --rose: #b5635a;
+  --rose-deep: #9e4f47;
+  --rose-light: #f6ebe9;
+  --sage: #5e8560;
+  --sage-light: #eaf2ea;
+  --gold: #be9230;
+  --gold-light: #f7f0df;
+  --border: #d4c5b3;
+  --border-light: #e4d9cc;
+  --night: #1e120a;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-cursive: 'Caveat', cursive;
+  --font-sans: 'Nunito Sans', 'Segoe UI', sans-serif;
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Grain Overlay ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── Shared Typography ── */
+.overline {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--ink);
+  line-height: 1.2;
+  margin: 0.6rem 0;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--rose);
+}
+.section-sub {
+  color: var(--ink-muted);
+  font-size: 0.86rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.72rem 1.6rem;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+}
+.btn-rose { background: var(--rose); color: #fff; border-color: var(--rose); }
+.btn-rose:hover { background: var(--rose-deep); border-color: var(--rose-deep); }
+.btn-outline { background: transparent; color: var(--ink-soft); border-color: var(--border); }
+.btn-outline:hover { border-color: var(--rose); color: var(--rose); }
+.btn-sage { background: var(--sage); color: #fff; border-color: var(--sage); }
+.btn-sage:hover { background: #4e7450; }
+.btn-gold { background: var(--gold); color: #fff; border-color: var(--gold); }
+.btn-gold:hover { background: #a87e28; }
+.btn-dark { background: var(--night); color: var(--paper); border-color: var(--night); }
+.btn-dark:hover { background: #2c1e14; }
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-muted);
+  border: 1px solid var(--border-light);
+  padding: 0.5rem 1.1rem;
+  font-size: 0.72rem;
+}
+.btn-ghost:hover { border-color: var(--rose); color: var(--rose); }
+.btn-sm { padding: 0.45rem 1rem; font-size: 0.7rem; }
+
+/* ── Top Bar ── */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 56px;
+  background: rgba(250, 246, 240, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: box-shadow 0.3s ease;
+}
+.top-bar.scrolled { box-shadow: 0 1px 12px rgba(30,18,10,0.06); }
+.top-bar .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+.top-bar .logo-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--rose-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: var(--rose);
+}
+.top-bar .logo-text {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.05rem;
+}
+.top-bar nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.top-bar nav a.nav-link {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-muted);
+  transition: color 0.2s;
+}
+.top-bar nav a.nav-link:hover { color: var(--rose); }
+
+/* ── Auth UI ── */
+.auth-area {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.login-link {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.login-link:hover { color: var(--rose); }
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--rose);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+.user-avatar:hover { box-shadow: 0 0 0 3px var(--rose-light); }
+.plan-badge {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+.plan-badge.pro { background: var(--sage); color: #fff; }
+.plan-badge.biz { background: var(--gold); color: #fff; }
+.credits-badge {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  background: var(--paper-dark);
+  padding: 0.2rem 0.55rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  white-space: nowrap;
+}
+
+/* User dropdown */
+.user-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(30,18,10,0.12);
+  min-width: 200px;
+  z-index: 110;
+  padding: 0.5rem 0;
+}
+.user-dropdown.show { display: block; }
+.user-dropdown-header {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border-light);
+}
+.user-dropdown-name {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.user-dropdown-email {
+  font-size: 0.68rem;
+  color: var(--ink-muted);
+}
+.user-dropdown-plan {
+  font-size: 0.7rem;
+  color: var(--sage);
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+.user-dropdown-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.user-dropdown-item:hover { background: var(--paper-dark); color: var(--ink); }
+
+/* Plan status bar in decoration */
+.plan-status-bar {
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.plan-status-bar.free {
+  background: var(--gold-light);
+  color: var(--ink-soft);
+  border: 1px solid rgba(190,146,48,0.2);
+}
+.plan-status-bar.paid {
+  background: var(--sage-light);
+  color: var(--sage);
+  border: 1px solid rgba(94,133,96,0.2);
+}
+.plan-status-bar a {
+  font-size: 0.68rem;
+  color: var(--rose);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+/* Auth form in modal */
+.auth-toggle {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}
+.auth-toggle a {
+  color: var(--rose);
+  cursor: pointer;
+  text-decoration: underline;
+}
+.auth-error {
+  background: var(--rose-light);
+  color: var(--rose-deep);
+  font-size: 0.75rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  margin-bottom: 0.8rem;
+  display: none;
+}
+.auth-error.show { display: block; }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 1.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(181,99,90,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(190,146,48,0.05) 0%, transparent 60%),
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-dark) 100%);
+}
+.hero .overline { animation: fadeUp 0.7s ease forwards; animation-delay: 0.2s; opacity: 0; }
+.hero-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.8rem, 7vw, 4.5rem);
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 1rem 0 1.2rem;
+  animation: fadeUp 0.7s ease forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+.hero-heading em { font-style: italic; color: var(--rose); }
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--ink-muted);
+  max-width: 480px;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.7s ease forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+.hero-btns {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp 0.7s ease forwards;
+  animation-delay: 0.8s;
+  opacity: 0;
+}
+.hero-badge {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  animation: fadeUp 0.7s ease forwards;
+  animation-delay: 1.0s;
+  opacity: 0;
+}
+.pulse-dot {
+  width: 7px; height: 7px;
+  background: var(--sage);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(94,133,96,0.35); }
+  50% { box-shadow: 0 0 0 6px rgba(94,133,96,0); }
+}
+
+/* Floating deco words */
+.deco-word {
+  position: absolute;
+  font-family: var(--font-cursive);
+  font-size: 3.5rem;
+  color: var(--ink);
+  opacity: 0.06;
+  pointer-events: none;
+  animation: floatWord 12s ease-in-out infinite;
+}
+.deco-word:nth-child(1) { top: 18%; left: 8%; animation-delay: 0s; }
+.deco-word:nth-child(2) { top: 60%; right: 6%; animation-delay: -4s; }
+.deco-word:nth-child(3) { bottom: 16%; left: 15%; animation-delay: -8s; }
+@keyframes floatWord {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: fadeUp 0.7s ease forwards;
+  animation-delay: 1.2s;
+  opacity: 0;
+}
+.scroll-indicator span {
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: var(--border-light);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 1px;
+  height: 50%;
+  background: var(--rose);
+  animation: scrollDown 2s ease-in-out infinite;
+}
+@keyframes scrollDown {
+  0% { top: -50%; }
+  100% { top: 100%; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── How It Works ── */
+.how-section {
+  padding: 5rem 1.5rem;
+  background: var(--paper);
+  position: relative;
+}
+.how-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+}
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.how-step {
+  text-align: center;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.how-step.visible { opacity: 1; transform: translateY(0); }
+.how-step::after {
+  content: '';
+  position: absolute;
+  top: 28px;
+  right: -1rem;
+  width: calc(2rem);
+  height: 1px;
+  background: var(--border-light);
+}
+.how-step:last-child::after { display: none; }
+.step-num {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: var(--border);
+  line-height: 1;
+  margin-bottom: 0.8rem;
+}
+.step-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.step-desc {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+/* ── Writer Section ── */
+.writer-section {
+  padding: 5rem 1.5rem;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(190,146,48,0.04) 0%, transparent 70%),
+    var(--paper-dark);
+}
+.writer-wrap { max-width: 860px; margin: 0 auto; }
+
+/* Step Tabs */
+.step-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-light);
+}
+.step-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  border-bottom: 2px solid transparent;
+  cursor: default;
+  transition: all 0.25s;
+}
+.step-tab.active { color: var(--rose); border-bottom-color: var(--rose); }
+.step-tab.done { color: var(--sage); }
+.tab-num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  font-weight: 400;
+  transition: all 0.25s;
+}
+.step-tab.active .tab-num { border-color: var(--rose); color: var(--rose); }
+.step-tab.done .tab-num { border-color: var(--sage); background: var(--sage); color: #fff; }
+
+/* Panels */
+.panel { display: none; }
+.panel.active { display: block; animation: fadeIn 0.35s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card {
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(30,18,10,0.04);
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+.form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 300;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  transition: border-color 0.2s;
+  outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--rose); }
+.form-group textarea { resize: vertical; }
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  gap: 0.8rem;
+}
+.form-error {
+  display: none;
+  background: var(--rose-light);
+  color: var(--rose-deep);
+  font-size: 0.78rem;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+.form-error.show { display: block; }
+
+/* Tone grid */
+.tone-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+.tone-btn {
+  padding: 0.55rem 0.6rem;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  background: var(--paper);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+.tone-btn:hover { border-color: var(--rose); }
+.tone-btn.selected { border-color: var(--rose); background: var(--rose-light); color: var(--rose-deep); }
+
+/* Letter display */
+.letter-loading {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+.writing-icon {
+  font-size: 2.5rem;
+  display: inline-block;
+  animation: writeAnim 1.2s ease-in-out infinite;
+}
+@keyframes writeAnim {
+  0% { transform: rotate(-5deg) translateX(0); }
+  25% { transform: rotate(3deg) translateX(8px); }
+  50% { transform: rotate(-3deg) translateX(16px); }
+  75% { transform: rotate(3deg) translateX(8px); }
+  100% { transform: rotate(-5deg) translateX(0); }
+}
+.letter-loading p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  margin-top: 1rem;
+}
+.letter-loading .sub {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  margin-top: 0.3rem;
+}
+
+.letter-result { display: none; }
+.letter-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.letter-meta-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+.letter-actions { display: flex; gap: 0.5rem; }
+.letter-paper {
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 2.5rem 2rem;
+  position: relative;
+  box-shadow:
+    2px 2px 0 var(--paper-dark),
+    4px 4px 0 var(--border-light);
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent,
+    transparent 31px,
+    rgba(181,99,90,0.06) 31px,
+    rgba(181,99,90,0.06) 32px
+  );
+}
+.letter-paper {
+  --corner-color: var(--gold);
+}
+.letter-paper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-top: 2px solid var(--corner-color);
+  border-right: 2px solid var(--corner-color);
+  opacity: 0.3;
+  border-radius: 0 4px 0 0;
+}
+.letter-text {
+  font-family: var(--font-cursive);
+  font-size: 1.32rem;
+  line-height: 2rem;
+  color: var(--ink-soft);
+  white-space: pre-wrap;
+}
+
+/* Letter error */
+.letter-error {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+}
+.letter-error p {
+  color: var(--rose-deep);
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+}
+
+/* Upsell banner */
+.upsell-banner {
+  margin-top: 2rem;
+  padding: 1.8rem 2rem;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--rose-light) 100%);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.upsell-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.upsell-banner h4 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.upsell-banner p {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  margin-bottom: 1.2rem;
+}
+.upsell-btns { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+
+/* Share buttons */
+.share-btns { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.btn-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  transition: all 0.25s ease;
+}
+.btn-share:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.btn-share svg { width: 16px; height: 16px; fill: currentColor; }
+.btn-whatsapp { background: #25D366; }
+.btn-whatsapp:hover { background: #1ebe5d; }
+.btn-facebook { background: #1877F2; }
+.btn-facebook:hover { background: #1466d8; }
+.btn-twitter { background: #000; }
+.btn-twitter:hover { background: #333; }
+.btn-download { background: var(--ink-soft); }
+.btn-download:hover { background: var(--ink); }
+.btn-native-share {
+  background: var(--rose);
+  display: none;
+}
+.btn-native-share:hover { background: var(--rose-deep); }
+.share-status {
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  font-style: italic;
+  margin-top: 0.5rem;
+  min-height: 1.2rem;
+}
+
+/* ── Decoration Panel ── */
+.deco-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1.5rem;
+  align-items: start;
+}
+.deco-preview { position: relative; }
+.deco-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.deco-section { }
+.deco-label {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* Font picker */
+.font-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 0.3rem;
+}
+.font-picker::-webkit-scrollbar { width: 4px; }
+.font-picker::-webkit-scrollbar-track { background: transparent; }
+.font-picker::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.font-opt {
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  background: var(--paper);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  text-align: left;
+}
+.font-opt:hover { border-color: var(--rose); }
+.font-opt.selected { border-color: var(--rose); background: var(--rose-light); }
+
+/* Paper picker */
+.paper-picker {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.4rem;
+}
+.paper-opt {
+  border: 2px solid var(--border-light);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+.paper-opt:hover { border-color: var(--rose); }
+.paper-opt.selected { border-color: var(--rose); box-shadow: 0 0 0 1px var(--rose); }
+.paper-opt-preview {
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0.4rem;
+  gap: 3px;
+}
+.paper-opt-line {
+  height: 1px;
+  opacity: 0.35;
+  border-radius: 1px;
+}
+.paper-opt-name {
+  font-size: 0.55rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 0.2rem 0;
+  color: var(--ink-muted);
+  background: rgba(255,253,248,0.8);
+}
+.paper-opt.dark-paper .paper-opt-name {
+  background: rgba(30,18,10,0.8);
+  color: var(--gold);
+}
+
+/* Locked paper styles */
+.paper-opt.locked {
+  position: relative;
+  opacity: 0.7;
+}
+.paper-opt.locked::after {
+  content: '🔒';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  font-size: 0.9rem;
+  z-index: 2;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+.paper-opt.locked:hover { border-color: var(--gold); opacity: 0.85; }
+.paper-opt.locked .paper-opt-name::after {
+  content: ' · $1';
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* Ink color picker */
+.ink-picker {
+  display: flex;
+  gap: 0.4rem;
+}
+.ink-opt {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--border-light);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ink-opt:hover { transform: scale(1.15); }
+.ink-opt.selected { border-color: var(--rose); box-shadow: 0 0 0 2px var(--rose-light); }
+
+/* Sticker picker */
+.sticker-picker {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.35rem;
+}
+.sticker-btn {
+  aspect-ratio: 1;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  background: var(--paper);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  padding: 0.3rem;
+}
+.sticker-btn:hover {
+  border-color: var(--rose);
+  background: var(--rose-light);
+  transform: scale(1.1);
+}
+.sticker-btn svg {
+  width: 100%;
+  height: 100%;
+  max-width: 28px;
+  max-height: 28px;
+}
+
+/* Placed stickers on letter */
+.letter-sticker {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  cursor: grab;
+  user-select: none;
+  z-index: 10;
+  filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.12));
+  transition: transform 0.1s;
+}
+.letter-sticker:active { cursor: grabbing; transform: scale(1.1); }
+.letter-sticker svg { width: 100%; height: 100%; }
+.sticker-remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--rose);
+  color: #fff;
+  font-size: 0.55rem;
+  border: none;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.letter-sticker:hover .sticker-remove { display: flex; }
+
+/* Decorate CTA in panel 3 */
+.decorate-cta {
+  margin-top: 2rem;
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--rose-light) 100%);
+  border-radius: 4px;
+}
+.decorate-cta h4 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.decorate-cta p {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .deco-layout {
+    grid-template-columns: 1fr;
+  }
+  .paper-picker {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.try-again {
+  display: block;
+  text-align: center;
+  margin-top: 1.5rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--rose);
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.try-again:hover { color: var(--rose-deep); }
+
+/* ── Offers Section ── */
+.offers-section {
+  padding: 5rem 1.5rem;
+  background: var(--paper);
+  position: relative;
+}
+.offers-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+}
+.offers-container {
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.offer-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  padding: 1.8rem 2rem;
+  background: var(--paper);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.offer-card.visible { opacity: 1; transform: translateY(0); }
+.offer-card:hover {
+  border-color: var(--rose);
+  box-shadow: 0 6px 24px rgba(30,18,10,0.08);
+  transform: translateY(-3px);
+}
+.offer-card.visible:hover { transform: translateY(-3px); }
+
+.offer-tier {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+}
+.tier-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+.tier-dot.rose { background: var(--rose); }
+.tier-dot.sage { background: var(--sage); }
+.tier-dot.gold { background: var(--gold); }
+.offer-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.offer-desc {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+  max-width: 480px;
+}
+.offer-value {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--sage);
+}
+.offer-value::before { content: '✦ '; }
+.offer-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+}
+.offer-price {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--ink);
+}
+.offer-unit {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  color: var(--ink-muted);
+  margin-top: -0.3rem;
+}
+
+/* Lead magnet card */
+.offer-card.lead-magnet {
+  background: var(--sage-light);
+  border-color: rgba(94,133,96,0.2);
+}
+.offer-card.lead-magnet .offer-price { color: var(--sage); }
+.offer-card.lead-magnet .offer-value { color: var(--sage); }
+
+/* Featured card */
+.offer-card.featured {
+  border-color: var(--rose);
+  background: linear-gradient(135deg, var(--paper) 0%, var(--rose-light) 100%);
+}
+.featured-badge {
+  position: absolute;
+  top: -10px;
+  right: 1.5rem;
+  background: var(--rose);
+  color: #fff;
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.7rem;
+  border-radius: 3px;
+}
+.price-tiers { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
+.price-tier {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}
+.price-tier strong {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+/* Enterprise card */
+.offer-card.enterprise {
+  background: var(--night);
+  border-color: rgba(212,197,179,0.15);
+}
+.offer-card.enterprise:hover { border-color: var(--gold); box-shadow: 0 8px 32px rgba(0,0,0,0.25); }
+.offer-card.enterprise .offer-tier { color: rgba(250,246,240,0.5); }
+.offer-card.enterprise .offer-title { color: var(--paper); }
+.offer-card.enterprise .offer-desc { color: rgba(141,117,100,0.8); }
+.offer-card.enterprise .offer-value { color: var(--gold); }
+.offer-card.enterprise .offer-price { color: var(--gold); }
+.offer-card.enterprise .offer-unit { color: rgba(190,146,48,0.7); }
+
+/* ── Stationery Section ── */
+.stationery-section {
+  padding: 5rem 1.5rem;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(181,99,90,0.04) 0%, transparent 70%),
+    var(--paper-dark);
+}
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.swatch {
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.swatch.visible { opacity: 1; transform: translateY(0); }
+.swatch:hover {
+  border-color: var(--rose);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(30,18,10,0.1);
+}
+.swatch.visible:hover { transform: translateY(-5px); }
+.swatch-preview {
+  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.2rem;
+  gap: 0.6rem;
+}
+.swatch-line {
+  height: 1px;
+  opacity: 0.3;
+  border-radius: 1px;
+}
+.swatch-line:nth-child(odd) { width: 100%; }
+.swatch-line:nth-child(even) { width: 75%; }
+.swatch-label {
+  padding: 0.6rem 0.8rem;
+  background: rgba(255,253,248,0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.swatch-name {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+.swatch-price {
+  font-size: 0.68rem;
+  color: var(--ink-muted);
+}
+
+/* Dark swatch label variant */
+.swatch.dark-swatch .swatch-label {
+  background: rgba(30,18,10,0.85);
+}
+.swatch.dark-swatch .swatch-name { color: var(--gold); }
+.swatch.dark-swatch .swatch-price { color: rgba(190,146,48,0.7); }
+
+/* ── Email Capture ── */
+.capture-section {
+  padding: 5rem 1.5rem;
+  background: var(--paper);
+}
+.capture-card {
+  max-width: 560px;
+  margin: 0 auto;
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(30,18,10,0.04);
+  position: relative;
+}
+.capture-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  right: 2rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.capture-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+.capture-card h3 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.capture-card p {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  margin-bottom: 1.5rem;
+}
+.capture-form {
+  display: flex;
+  gap: 0.6rem;
+}
+.capture-form input {
+  flex: 1;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 300;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  outline: none;
+}
+.capture-form input:focus { border-color: var(--rose); }
+.capture-success {
+  display: none;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--sage);
+}
+
+/* ── Footer ── */
+.footer {
+  background: var(--night);
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+.footer .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+.footer .logo-dot {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: rgba(181,99,90,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5rem;
+  color: var(--rose);
+}
+.footer .logo-text {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: rgba(250,246,240,0.6);
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(141,117,100,0.6);
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--rose); }
+.footer-tagline {
+  font-size: 0.72rem;
+  color: rgba(141,117,100,0.4);
+}
+
+/* ── Modal ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(30,18,10,0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.modal-overlay.open { display: flex; }
+.modal-card {
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 2.5rem 2rem;
+  max-width: 460px;
+  width: 100%;
+  position: relative;
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--ink-muted);
+  cursor: pointer;
+  line-height: 1;
+}
+.modal-close:hover { color: var(--ink); }
+.modal-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 1.2rem;
+}
+.modal-card .form-group { margin-bottom: 1rem; }
+.modal-card .form-group:last-of-type { margin-bottom: 0; }
+.modal-card .btn { width: 100%; justify-content: center; margin-top: 1.2rem; }
+.modal-success {
+  display: none;
+  text-align: center;
+  padding: 1rem 0;
+}
+.modal-success .check {
+  font-size: 1.5rem;
+  color: var(--sage);
+  margin-bottom: 0.5rem;
+}
+.modal-success p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--sage);
+  margin-bottom: 0.3rem;
+}
+.modal-success .sub {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .top-bar nav .nav-link { display: none; }
+  .top-bar { padding: 0 1.2rem; }
+  .hero-heading { font-size: 2.4rem; }
+  .deco-word { display: none; }
+  .how-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .how-step::after { display: none; }
+  .form-grid { grid-template-columns: 1fr; }
+  .tone-grid { grid-template-columns: repeat(2, 1fr); }
+  .offer-card {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .offer-right {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .price-tiers { flex-direction: column; align-items: flex-start; }
+  .price-tier { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+  .swatch-grid { grid-template-columns: repeat(2, 1fr); }
+  .capture-form { flex-direction: column; }
+  .step-tab { padding: 0.6rem 0.8rem; font-size: 0.62rem; }
+  .tab-label { display: none; }
+  .card { padding: 1.5rem; }
+  .letter-paper { padding: 1.8rem 1.2rem; }
+  .section-title { font-size: clamp(1.5rem, 5vw, 2rem); }
+}
+
+/* ── Print ── */
+@media print {
+  .top-bar, .hero, .how-section, .offers-section, .stationery-section,
+  .capture-section, .footer, .upsell-banner, .letter-actions,
+  .step-tabs, .try-again, .letter-meta, .modal-overlay,
+  .letter-loading, .letter-error { display: none !important; }
+  .writer-section { padding: 0; background: none; }
+  .card, .letter-paper { border: none; box-shadow: none; }
+  .letter-paper::before { display: none; }
+  .letter-paper { background-image: none; }
+  body::after { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Top Bar ── -->
+<header class="top-bar" id="topBar">
+  <a href="#" class="logo">
+    <div class="logo-dot">✦</div>
+    <span class="logo-text">Heartfelt Letters</span>
+  </a>
+  <nav>
+    <a href="#how" class="nav-link">How It Works</a>
+    <a href="#writer" class="nav-link">Try Free</a>
+    <a href="#offers" class="nav-link">Plans</a>
+    <a href="#writer" class="btn btn-dark btn-sm">Write a Letter</a>
+    <div class="auth-area" id="authArea">
+      <span class="login-link" id="loginBtn" onclick="openAuthModal('login')">Login</span>
+    </div>
+  </nav>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="deco-word">Dear</div>
+  <div class="deco-word">with love</div>
+  <div class="deco-word">always</div>
+
+  <p class="overline">AI-Crafted · Handwritten in Spirit</p>
+  <h1 class="hero-heading">Words That Deserve<br><em>To Be Held</em></h1>
+  <p class="hero-sub">Turn your feelings into a beautifully written letter — personal, meaningful, and ready to send in minutes.</p>
+  <div class="hero-btns">
+    <a href="#writer" class="btn btn-rose">Try a Free Letter ✦</a>
+    <a href="#offers" class="btn btn-outline">See All Plans</a>
+  </div>
+  <div class="hero-badge">
+    <span class="pulse-dot"></span>
+    Free sample — no sign-up required
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── How It Works ── -->
+<section class="how-section" id="how">
+  <div class="section-header">
+    <p class="overline">Simple Process</p>
+    <h2 class="section-title">How it <em>works</em></h2>
+    <p class="section-sub">Three simple steps to a letter that feels like it was written by hand, from your heart.</p>
+  </div>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="step-num">01</div>
+      <h3 class="step-title">Tell Us Who & Why</h3>
+      <p class="step-desc">Who's receiving this letter, and what's the occasion? A birthday, an apology, or just because.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-num">02</div>
+      <h3 class="step-title">Share Your Heart</h3>
+      <p class="step-desc">Tell us what you feel. Memories, inside jokes, the words you've been meaning to say.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-num">03</div>
+      <h3 class="step-title">Receive Your Letter</h3>
+      <p class="step-desc">Our AI writes a warm, personal letter in your voice — ready to copy, print, or send.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Free Letter Writer ── -->
+<section class="writer-section" id="writer">
+  <div class="section-header">
+    <p class="overline">Free Sample</p>
+    <h2 class="section-title">Write your letter <em>right now</em></h2>
+    <p class="section-sub">No sign-up needed. Tell us who it's for and what you feel — we'll do the rest.</p>
+  </div>
+  <div class="writer-wrap">
+    <!-- Step Tabs -->
+    <div class="step-tabs">
+      <div class="step-tab active" data-step="1">
+        <div class="tab-num">1</div>
+        <span class="tab-label">About</span>
+      </div>
+      <div class="step-tab" data-step="2">
+        <div class="tab-num">2</div>
+        <span class="tab-label">Message</span>
+      </div>
+      <div class="step-tab" data-step="3">
+        <div class="tab-num">3</div>
+        <span class="tab-label">Letter</span>
+      </div>
+      <div class="step-tab" data-step="4">
+        <div class="tab-num">4</div>
+        <span class="tab-label">Decorate</span>
+      </div>
+    </div>
+
+    <!-- Panel 1: About -->
+    <div class="panel active" id="panel1">
+      <div class="card">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>To (Recipient's Name)</label>
+            <input type="text" id="recipientName" placeholder="e.g. Sarah">
+          </div>
+          <div class="form-group">
+            <label>From (Your Name)</label>
+            <input type="text" id="senderName" placeholder="e.g. Michael">
+          </div>
+          <div class="form-group">
+            <label>Your Relationship</label>
+            <select id="relationship">
+              <option value="">Select...</option>
+              <option>Parent / Child</option>
+              <option>Romantic Partner</option>
+              <option>Best Friend</option>
+              <option>Sibling</option>
+              <option>Grandparent</option>
+              <option>Teacher / Mentor</option>
+              <option>Colleague / Friend</option>
+              <option>Long-Distance Friend</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Occasion</label>
+            <select id="occasion">
+              <option value="">Select...</option>
+              <option>Just Because</option>
+              <option>Birthday</option>
+              <option>Thank You</option>
+              <option>Apology</option>
+              <option>Missing Them</option>
+              <option>Encouragement</option>
+              <option>Anniversary</option>
+              <option>Graduation</option>
+              <option>Farewell</option>
+              <option>Get Well Soon</option>
+              <option>Grief / Loss</option>
+              <option>Congratulations</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-error" id="error1">Please fill in all the fields above.</div>
+        <div class="form-actions">
+          <button class="btn btn-rose" onclick="goToStep(2)">Continue →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 2: Message -->
+    <div class="panel" id="panel2">
+      <div class="card">
+        <div class="form-grid" style="grid-template-columns:1fr">
+          <div class="form-group">
+            <label>What do you want to express?</label>
+            <textarea id="feelings" rows="4" placeholder="What have you been wanting to say? What do you feel?"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Memories, inside jokes, or details to include (optional)</label>
+            <textarea id="memories" rows="3" placeholder="Any specific memories, moments, or details that make your relationship special..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Tone</label>
+            <div class="tone-grid">
+              <button class="tone-btn selected" data-tone="Warm" onclick="selectTone(this)">🌿 Warm</button>
+              <button class="tone-btn" data-tone="Emotional" onclick="selectTone(this)">💧 Emotional</button>
+              <button class="tone-btn" data-tone="Playful" onclick="selectTone(this)">✨ Playful</button>
+              <button class="tone-btn" data-tone="Poetic" onclick="selectTone(this)">🌙 Poetic</button>
+              <button class="tone-btn" data-tone="Formal" onclick="selectTone(this)">🕊️ Formal</button>
+              <button class="tone-btn" data-tone="Simple" onclick="selectTone(this)">🍃 Simple</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-error" id="error2">Please tell us what you want to express.</div>
+        <div class="form-actions">
+          <button class="btn btn-ghost" onclick="goToStep(1)">← Back</button>
+          <button class="btn btn-rose" onclick="goToStep(3)">Write My Letter ✦</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 3: Letter -->
+    <div class="panel" id="panel3">
+      <div class="letter-loading" id="letterLoading">
+        <div class="writing-icon">✒️</div>
+        <p id="loadingText">Writing your letter with care…</p>
+        <p class="sub">This usually takes a few seconds</p>
+      </div>
+
+      <div class="letter-error" id="letterError">
+        <p id="errorText">Something went wrong. Please try again.</p>
+        <button class="btn btn-ghost" onclick="goToStep(2)">← Go back</button>
+      </div>
+
+      <div class="letter-result" id="letterResult">
+        <div class="letter-meta">
+          <span class="letter-meta-title">A letter to <span id="letterTo"></span></span>
+          <div class="letter-actions">
+
+            <button class="btn btn-ghost btn-sm" onclick="handlePrint()">Print</button>
+            <button class="btn btn-ghost btn-sm" onclick="rewriteLetter()">Rewrite</button>
+          </div>
+        </div>
+        <div class="letter-paper" id="letterPaper">
+          <div class="letter-text" id="letterText"></div>
+        </div>
+
+        <div class="decorate-cta">
+          <h4>Make it beautiful ✦</h4>
+          <p>Choose fonts, paper styles, stickers & ink colors before sharing.</p>
+          <button class="btn btn-rose" onclick="goToStep(4)">Decorate Your Letter ✦</button>
+        </div>
+
+        <button class="try-again" onclick="resetWriter()">← Write another letter</button>
+      </div>
+    </div>
+
+    <!-- Panel 4: Decorate -->
+    <div class="panel" id="panel4">
+      <div class="deco-layout">
+        <!-- Live letter preview -->
+        <div class="deco-preview">
+          <div class="letter-paper" id="letterPaperPreview">
+            <div class="letter-text" id="letterTextPreview"></div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="deco-controls">
+          <!-- Plan status -->
+          <div class="plan-status-bar free" id="planStatusBar">
+            🔒 Free Plan — some features locked
+            <a href="#offers">Upgrade</a>
+          </div>
+
+          <!-- Font picker -->
+          <div class="deco-section">
+            <div class="deco-label">Handwriting Style</div>
+            <div class="font-picker">
+              <button class="font-opt selected" style="font-family:'Caveat'" onclick="setLetterFont('Caveat', this)">Caveat — Hello dear</button>
+              <button class="font-opt" style="font-family:'Dancing Script'" onclick="setLetterFont('Dancing Script', this)">Dancing Script — Hello dear</button>
+              <button class="font-opt" style="font-family:'Indie Flower'" onclick="setLetterFont('Indie Flower', this)">Indie Flower — Hello dear</button>
+              <button class="font-opt" style="font-family:'Satisfy'" onclick="setLetterFont('Satisfy', this)">Satisfy — Hello dear</button>
+              <button class="font-opt" style="font-family:'Patrick Hand'" onclick="setLetterFont('Patrick Hand', this)">Patrick Hand — Hello dear</button>
+              <button class="font-opt" style="font-family:'Sacramento'" onclick="setLetterFont('Sacramento', this)">Sacramento — Hello dear</button>
+              <button class="font-opt" style="font-family:'Pacifico'" onclick="setLetterFont('Pacifico', this)">Pacifico — Hello dear</button>
+              <button class="font-opt" style="font-family:'Kalam'" onclick="setLetterFont('Kalam', this)">Kalam — Hello dear</button>
+              <button class="font-opt" style="font-family:'Shadows Into Light'" onclick="setLetterFont('Shadows Into Light', this)">Shadows Into Light — Hello dear</button>
+              <button class="font-opt" style="font-family:'Amatic SC'" onclick="setLetterFont('Amatic SC', this)">Amatic SC — Hello dear</button>
+              <button class="font-opt" style="font-family:'Great Vibes'" onclick="setLetterFont('Great Vibes', this)">Great Vibes — Hello dear</button>
+              <button class="font-opt" style="font-family:'Homemade Apple'" onclick="setLetterFont('Homemade Apple', this)">Homemade Apple — Hello dear</button>
+            </div>
+          </div>
+
+          <!-- Paper picker -->
+          <div class="deco-section">
+            <div class="deco-label">Paper Style</div>
+            <div class="paper-picker">
+              <div class="paper-opt selected" onclick="setLetterPaper('cream', this)">
+                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#fffdf8,#f0ebe3)">
+                  <span class="paper-opt-line" style="background:#b5635a;width:100%"></span>
+                  <span class="paper-opt-line" style="background:#b5635a;width:75%"></span>
+                  <span class="paper-opt-line" style="background:#b5635a;width:100%"></span>
+                </div>
+                <div class="paper-opt-name">Classic</div>
+              </div>
+              <div class="paper-opt locked" onclick="handlePaperClick('rose', this)">
+                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#f5e8ef,#dbb5cb)">
+                  <span class="paper-opt-line" style="background:#c9a0b5;width:100%"></span>
+                  <span class="paper-opt-line" style="background:#c9a0b5;width:75%"></span>
+                  <span class="paper-opt-line" style="background:#c9a0b5;width:100%"></span>
+                </div>
+                <div class="paper-opt-name">Rose</div>
+              </div>
+              <div class="paper-opt locked" onclick="handlePaperClick('botanical', this)">
+                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#e8ede6,#a8c0a1)">
+                  <span class="paper-opt-line" style="background:#8aaa82;width:100%"></span>
+                  <span class="paper-opt-line" style="background:#8aaa82;width:75%"></span>
+                  <span class="paper-opt-line" style="background:#8aaa82;width:100%"></span>
+                </div>
+                <div class="paper-opt-name">Botanical</div>
+              </div>
+              <div class="paper-opt locked" onclick="handlePaperClick('parchment', this)">
+                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#f5f0e8,#e4d8c8)">
+                  <span class="paper-opt-line" style="background:#c4b49e;width:100%"></span>
+                  <span class="paper-opt-line" style="background:#c4b49e;width:75%"></span>
+                  <span class="paper-opt-line" style="background:#c4b49e;width:100%"></span>
+                </div>
+                <div class="paper-opt-name">Parchment</div>
+              </div>
+              <div class="paper-opt dark-paper locked" onclick="handlePaperClick('noir', this)">
+                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#1e120a,#3d2a1a)">
+                  <span class="paper-opt-line" style="background:#be9230;width:100%"></span>
+                  <span class="paper-opt-line" style="background:#be9230;width:75%"></span>
+                  <span class="paper-opt-line" style="background:#be9230;width:100%"></span>
+                </div>
+                <div class="paper-opt-name">Gold Noir</div>
+              </div>
+              <div class="paper-opt locked" onclick="handlePaperClick('denim', this)">
+                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#2c3e6b,#1a2744)">
+                  <span class="paper-opt-line" style="background:rgba(255,255,255,0.2);width:100%"></span>
+                  <span class="paper-opt-line" style="background:rgba(255,255,255,0.2);width:75%"></span>
+                  <span class="paper-opt-line" style="background:rgba(255,255,255,0.2);width:100%"></span>
+                </div>
+                <div class="paper-opt-name" style="background:rgba(44,62,107,0.8);color:#8aa4d6">Denim Blue</div>
+              </div>
+              <div class="paper-opt locked" onclick="handlePaperClick('kraft', this)">
+                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#c8a87c,#a88558)">
+                  <span class="paper-opt-line" style="background:rgba(80,50,20,0.2);width:100%"></span>
+                  <span class="paper-opt-line" style="background:rgba(80,50,20,0.2);width:75%"></span>
+                  <span class="paper-opt-line" style="background:rgba(80,50,20,0.2);width:100%"></span>
+                </div>
+                <div class="paper-opt-name">Kraft</div>
+              </div>
+              <div class="paper-opt locked" onclick="handlePaperClick('lavender', this)">
+                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#e8e0f0,#c9b8e0)">
+                  <span class="paper-opt-line" style="background:rgba(130,100,170,0.15);width:100%"></span>
+                  <span class="paper-opt-line" style="background:rgba(130,100,170,0.15);width:75%"></span>
+                  <span class="paper-opt-line" style="background:rgba(130,100,170,0.15);width:100%"></span>
+                </div>
+                <div class="paper-opt-name">Lavender</div>
+              </div>
+              <div class="paper-opt dark-paper locked" onclick="handlePaperClick('midnight', this)">
+                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#0d1b2a,#1b2838)">
+                  <span class="paper-opt-line" style="background:rgba(200,220,255,0.12);width:100%"></span>
+                  <span class="paper-opt-line" style="background:rgba(200,220,255,0.12);width:75%"></span>
+                  <span class="paper-opt-line" style="background:rgba(200,220,255,0.12);width:100%"></span>
+                </div>
+                <div class="paper-opt-name">Midnight</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ink color picker -->
+          <div class="deco-section">
+            <div class="deco-label">Ink Color</div>
+            <div class="ink-picker">
+              <div class="ink-opt selected" style="background:#4a3225" onclick="setInkColor('#4a3225', this)" title="Dark Brown"></div>
+              <div class="ink-opt" style="background:#1a1a1a" onclick="setInkColor('#1a1a1a', this)" title="Black"></div>
+              <div class="ink-opt" style="background:#1e3a5f" onclick="setInkColor('#1e3a5f', this)" title="Navy"></div>
+              <div class="ink-opt" style="background:#9e4f47" onclick="setInkColor('#9e4f47', this)" title="Deep Rose"></div>
+              <div class="ink-opt" style="background:#2d5a3d" onclick="setInkColor('#2d5a3d', this)" title="Forest Green"></div>
+              <div class="ink-opt" style="background:#ffffff; border-color:#ccc" onclick="setInkColor('#ffffff', this)" title="White"></div>
+            </div>
+          </div>
+
+          <!-- Sticker picker -->
+          <div class="deco-section">
+            <div class="deco-label">Stickers (click to add, drag to move)</div>
+            <div class="sticker-picker">
+              <button class="sticker-btn" onclick="addSticker('heart')" title="Heart">
+                <svg viewBox="0 0 100 100"><path d="M50 88C25 70 5 55 5 35 5 18 18 5 35 5c10 0 15 8 15 8s5-8 15-8c17 0 30 13 30 30 0 20-20 35-45 53z" fill="#e8626b" stroke="#d44f58" stroke-width="2"/></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('star')" title="Star">
+                <svg viewBox="0 0 100 100"><polygon points="50,5 63,35 95,38 72,60 78,92 50,76 22,92 28,60 5,38 37,35" fill="#f5c542" stroke="#e0ab2a" stroke-width="2"/></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('flower')" title="Flower">
+                <svg viewBox="0 0 100 100"><circle cx="50" cy="30" r="16" fill="#f9a8d4" opacity="0.9"/><circle cx="70" cy="45" r="16" fill="#f9a8d4" opacity="0.8"/><circle cx="62" cy="68" r="16" fill="#f9a8d4" opacity="0.85"/><circle cx="38" cy="68" r="16" fill="#f9a8d4" opacity="0.8"/><circle cx="30" cy="45" r="16" fill="#f9a8d4" opacity="0.9"/><circle cx="50" cy="50" r="11" fill="#fbbf24"/></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('butterfly')" title="Butterfly">
+                <svg viewBox="0 0 100 100"><ellipse cx="35" cy="40" rx="22" ry="28" fill="#a78bfa" transform="rotate(-15 35 40)" opacity="0.85"/><ellipse cx="65" cy="40" rx="22" ry="28" fill="#c4b5fd" transform="rotate(15 65 40)" opacity="0.85"/><ellipse cx="38" cy="65" rx="12" ry="18" fill="#7c3aed" transform="rotate(-10 38 65)" opacity="0.7"/><ellipse cx="62" cy="65" rx="12" ry="18" fill="#8b5cf6" transform="rotate(10 62 65)" opacity="0.7"/><rect x="48" y="25" width="4" height="55" rx="2" fill="#4c1d95"/></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('leaf')" title="Leaf">
+                <svg viewBox="0 0 100 100"><path d="M50 90C30 75 10 50 20 25 30 5 60 5 75 20c15 15 5 40-10 50-5 3-10 10-15 20z" fill="#34d399" stroke="#059669" stroke-width="2"/><path d="M50 90C45 65 35 45 45 30" fill="none" stroke="#059669" stroke-width="2"/></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('sparkle')" title="Sparkle">
+                <svg viewBox="0 0 100 100"><path d="M50 5L55 40 90 50 55 60 50 95 45 60 10 50 45 40z" fill="#fbbf24" stroke="#f59e0b" stroke-width="1.5"/><circle cx="75" cy="20" r="4" fill="#fbbf24"/><circle cx="25" cy="80" r="3" fill="#fbbf24"/></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('ribbon')" title="Ribbon">
+                <svg viewBox="0 0 100 100"><path d="M30 25C30 15 70 15 70 25L75 50C75 55 65 60 50 60 35 60 25 55 25 50z" fill="#fb7185" stroke="#e11d48" stroke-width="2"/><path d="M35 60L20 85 38 72 50 90 62 72 80 85 65 60" fill="#f43f5e" stroke="#e11d48" stroke-width="1.5"/><text x="50" y="47" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="sans-serif">LOVE</text></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('moon')" title="Moon">
+                <svg viewBox="0 0 100 100"><path d="M60 10A40 40 0 1 0 60 90 32 32 0 0 1 60 10z" fill="#fbbf24"/><circle cx="30" cy="25" r="2" fill="#fde68a"/><circle cx="22" cy="55" r="1.5" fill="#fde68a"/><circle cx="40" cy="70" r="2" fill="#fde68a"/></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('cloud')" title="Cloud Heart">
+                <svg viewBox="0 0 100 100"><ellipse cx="50" cy="55" rx="38" ry="22" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="2"/><circle cx="30" cy="45" r="18" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="2"/><circle cx="65" cy="42" r="20" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="2"/><path d="M45 52C42 46 48 42 50 48c2-6 8-2 5 4-2 3-5 5-5 5s-3-2-5-5z" fill="#f87171"/></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('dove')" title="Dove">
+                <svg viewBox="0 0 100 100"><path d="M20 55C15 45 25 30 40 35L55 25C65 20 80 25 75 40L65 50C70 60 60 70 50 65L35 70C25 72 22 62 20 55z" fill="white" stroke="#94a3b8" stroke-width="2"/><circle cx="35" cy="42" r="2.5" fill="#334155"/><path d="M15 50L5 45 15 48" fill="none" stroke="#94a3b8" stroke-width="2"/><path d="M50 65L45 80 55 72 60 82" fill="none" stroke="#94a3b8" stroke-width="1.5"/></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('diamond')" title="Diamond">
+                <svg viewBox="0 0 100 100"><polygon points="50,10 80,35 50,90 20,35" fill="#67e8f9" stroke="#22d3ee" stroke-width="2"/><polygon points="50,10 80,35 50,35 20,35" fill="#a5f3fc" stroke="#22d3ee" stroke-width="1"/><line x1="50" y1="35" x2="50" y2="90" stroke="#22d3ee" stroke-width="1" opacity="0.5"/></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('rose')" title="Rose">
+                <svg viewBox="0 0 100 100"><circle cx="50" cy="42" r="18" fill="#fda4af"/><path d="M42 42C42 35 50 30 50 38c0-8 8-3 8 4-2 5-8 8-8 8s-6-3-8-8z" fill="#e11d48" opacity="0.6"/><circle cx="50" cy="42" r="8" fill="#fb7185"/><path d="M50 60L48 85" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/><path d="M48 72C40 68 38 60 42 58" stroke="#16a34a" stroke-width="2" fill="none"/><ellipse cx="38" cy="58" rx="6" ry="4" fill="#22c55e" transform="rotate(-30 38 58)"/></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('envelope')" title="Love Letter">
+                <svg viewBox="0 0 100 100"><rect x="15" y="30" width="70" height="45" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/><path d="M15 30L50 58 85 30" fill="none" stroke="#f59e0b" stroke-width="2"/><path d="M45 52C42 46 48 42 50 48c2-6 8-2 5 4-2 3-5 5-5 5s-3-2-5-5z" fill="#e8626b"/></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('crown')" title="Crown">
+                <svg viewBox="0 0 100 100"><path d="M15 65L25 30 40 50 50 20 60 50 75 30 85 65z" fill="#fbbf24" stroke="#d97706" stroke-width="2"/><rect x="15" y="65" width="70" height="12" rx="3" fill="#f59e0b" stroke="#d97706" stroke-width="2"/><circle cx="50" cy="35" r="4" fill="#ef4444"/><circle cx="33" cy="45" r="3" fill="#3b82f6"/><circle cx="67" cy="45" r="3" fill="#22c55e"/></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('sun')" title="Sun">
+                <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="18" fill="#fbbf24"/><g stroke="#f59e0b" stroke-width="3" stroke-linecap="round"><line x1="50" y1="8" x2="50" y2="22"/><line x1="50" y1="78" x2="50" y2="92"/><line x1="8" y1="50" x2="22" y2="50"/><line x1="78" y1="50" x2="92" y2="50"/><line x1="20" y1="20" x2="30" y2="30"/><line x1="70" y1="70" x2="80" y2="80"/><line x1="80" y1="20" x2="70" y2="30"/><line x1="30" y1="70" x2="20" y2="80"/></g></svg>
+              </button>
+              <button class="sticker-btn" onclick="addSticker('infinity')" title="Forever">
+                <svg viewBox="0 0 100 100"><path d="M50 50C50 35 65 25 78 35s8 25-5 25S50 65 50 50zm0 0C50 35 35 25 22 35S14 60 27 60 50 65 50 50z" fill="none" stroke="#e8626b" stroke-width="4" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Share buttons -->
+      <div class="upsell-banner" style="margin-top:1.5rem">
+        <h4>Share your decorated letter</h4>
+        <p>Your letter is ready — save the image or share it directly.</p>
+        <div class="share-btns">
+          <button class="btn-share btn-download" onclick="shareLetter('download')">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Save Image
+          </button>
+          <button class="btn-share btn-whatsapp" onclick="shareLetter('whatsapp')">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </button>
+          <button class="btn-share btn-facebook" onclick="shareLetter('facebook')">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </button>
+          <button class="btn-share btn-twitter" onclick="shareLetter('twitter')">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            X
+          </button>
+          <button class="btn-share btn-native-share" id="nativeShareBtn2" onclick="shareLetter('native')">
+            <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+            Share…
+          </button>
+        </div>
+        <div class="share-status" id="shareStatus"></div>
+      </div>
+
+      <div class="form-actions" style="margin-top:1rem">
+        <button class="btn btn-ghost" onclick="goToStep(3)">← Back to Letter</button>
+        <button class="try-again" onclick="resetWriter()">Write another letter</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Offers ── -->
+<section class="offers-section" id="offers">
+  <div class="section-header">
+    <p class="overline">Our Services</p>
+    <h2 class="section-title">Words worth <em>holding onto</em></h2>
+    <p class="section-sub">From a single heartfelt letter to a year of monthly love — choose how you want to connect.</p>
+  </div>
+  <div class="offers-container">
+    <!-- Lead Magnet -->
+    <div class="offer-card lead-magnet">
+      <div>
+        <div class="offer-tier"><span class="tier-dot sage"></span> LEAD MAGNET</div>
+        <h3 class="offer-title">AI Handwriting Sample Pack</h3>
+        <p class="offer-desc">See how our AI crafts beautiful, personal letters. Try the free writer above — no sign-up, no strings attached.</p>
+        <p class="offer-value">Instant access · unlimited free samples</p>
+      </div>
+      <div class="offer-right">
+        <div class="offer-price" style="color:var(--sage)">Free</div>
+        <a href="#writer" class="btn btn-sage btn-sm">Try It Now</a>
+      </div>
+    </div>
+
+    <!-- Single Letter -->
+    <div class="offer-card">
+      <div>
+        <div class="offer-tier"><span class="tier-dot rose"></span> SINGLE LETTER</div>
+        <h3 class="offer-title">Personalized Handwritten Letter</h3>
+        <p class="offer-desc">A beautifully crafted letter, printed on premium stationery and mailed to anyone, anywhere.</p>
+        <p class="offer-value">Written, printed & mailed for you</p>
+      </div>
+      <div class="offer-right">
+        <div class="offer-price">$10</div>
+        <div class="offer-unit">per letter</div>
+        <button class="btn btn-rose btn-sm" onclick="openModal('order')">Order a Letter</button>
+      </div>
+    </div>
+
+    <!-- Monthly Subscription (Featured) -->
+    <div class="offer-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <div>
+        <div class="offer-tier"><span class="tier-dot sage"></span> MONTHLY SUBSCRIPTION</div>
+        <h3 class="offer-title">Monthly Love Letter Subscription</h3>
+        <p class="offer-desc">Every month, a new handwritten letter delivered to your loved one. Keep the connection alive — effortlessly.</p>
+        <p class="offer-value">New letter each month · cancel anytime</p>
+      </div>
+      <div class="offer-right">
+        <div class="price-tiers">
+          <div class="price-tier">
+            <span><strong>$29.99</strong>/mo · individuals</span>
+            <button class="btn btn-sage btn-sm" onclick="openModal('subscribe')">Subscribe</button>
+          </div>
+          <div class="price-tier">
+            <span><strong>$79.99</strong>/mo · businesses</span>
+            <button class="btn btn-outline btn-sm" onclick="openModal('business')">Business Plan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add-On -->
+    <div class="offer-card">
+      <div>
+        <div class="offer-tier"><span class="tier-dot gold"></span> ADD-ON</div>
+        <h3 class="offer-title">Premium Stationery Collection</h3>
+        <p class="offer-desc">Upgrade your letter with hand-picked paper — from classic linen to gold-foil noir.</p>
+        <p class="offer-value">4 exclusive stationery designs</p>
+      </div>
+      <div class="offer-right">
+        <div class="offer-price">$5 – $25</div>
+        <div class="offer-unit">per letter add-on</div>
+        <button class="btn btn-gold btn-sm" onclick="openModal('stationery')">Browse Designs</button>
+      </div>
+    </div>
+
+    <!-- Enterprise -->
+    <div class="offer-card enterprise">
+      <div>
+        <div class="offer-tier"><span class="tier-dot gold"></span> ENTERPRISE</div>
+        <h3 class="offer-title">Corporate Customization Package</h3>
+        <p class="offer-desc">Custom-branded stationery, bulk ordering, and API access for businesses that want to send letters at scale.</p>
+        <p class="offer-value">White-label · API access · dedicated support</p>
+      </div>
+      <div class="offer-right">
+        <div class="offer-price" style="color:var(--gold)">$10,000+</div>
+        <div class="offer-unit" style="color:rgba(190,146,48,0.7)">per year</div>
+        <button class="btn btn-gold btn-sm" onclick="openModal('enterprise')">Request a Demo</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Stationery Showcase ── -->
+<section class="stationery-section" id="stationery">
+  <div class="section-header">
+    <p class="overline">Premium Add-On</p>
+    <h2 class="section-title">The stationery <em>collection</em></h2>
+    <p class="section-sub">Choose the paper that matches the feeling. Each design is crafted to make your words unforgettable.</p>
+  </div>
+  <div class="swatch-grid">
+    <div class="swatch" onclick="openModal('stationery')">
+      <div class="swatch-preview" style="background:linear-gradient(180deg,#f5f0e8,#e4d8c8)">
+        <span class="swatch-line" style="background:#c4b49e"></span>
+        <span class="swatch-line" style="background:#c4b49e"></span>
+        <span class="swatch-line" style="background:#c4b49e"></span>
+        <span class="swatch-line" style="background:#c4b49e"></span>
+        <span class="swatch-line" style="background:#c4b49e"></span>
+      </div>
+      <div class="swatch-label">
+        <span class="swatch-name">Classic Linen</span>
+        <span class="swatch-price">+$5</span>
+      </div>
+    </div>
+    <div class="swatch" onclick="openModal('stationery')">
+      <div class="swatch-preview" style="background:linear-gradient(180deg,#f5e8ef,#dbb5cb)">
+        <span class="swatch-line" style="background:#c9a0b5"></span>
+        <span class="swatch-line" style="background:#c9a0b5"></span>
+        <span class="swatch-line" style="background:#c9a0b5"></span>
+        <span class="swatch-line" style="background:#c9a0b5"></span>
+        <span class="swatch-line" style="background:#c9a0b5"></span>
+      </div>
+      <div class="swatch-label">
+        <span class="swatch-name">Rose Petal</span>
+        <span class="swatch-price">+$10</span>
+      </div>
+    </div>
+    <div class="swatch" onclick="openModal('stationery')">
+      <div class="swatch-preview" style="background:linear-gradient(180deg,#e8ede6,#a8c0a1)">
+        <span class="swatch-line" style="background:#8aaa82"></span>
+        <span class="swatch-line" style="background:#8aaa82"></span>
+        <span class="swatch-line" style="background:#8aaa82"></span>
+        <span class="swatch-line" style="background:#8aaa82"></span>
+        <span class="swatch-line" style="background:#8aaa82"></span>
+      </div>
+      <div class="swatch-label">
+        <span class="swatch-name">Botanical Garden</span>
+        <span class="swatch-price">+$15</span>
+      </div>
+    </div>
+    <div class="swatch dark-swatch" onclick="openModal('stationery')">
+      <div class="swatch-preview" style="background:linear-gradient(180deg,#1e120a,#3d2a1a)">
+        <span class="swatch-line" style="background:#be9230"></span>
+        <span class="swatch-line" style="background:#be9230"></span>
+        <span class="swatch-line" style="background:#be9230"></span>
+        <span class="swatch-line" style="background:#be9230"></span>
+        <span class="swatch-line" style="background:#be9230"></span>
+      </div>
+      <div class="swatch-label">
+        <span class="swatch-name">Gold Foil Noir</span>
+        <span class="swatch-price">+$25</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Email Capture ── -->
+<section class="capture-section" id="capture">
+  <div class="capture-card">
+    <div class="capture-icon">✉️</div>
+    <h3>Get your free handwriting sample pack</h3>
+    <p>See how our AI turns your words into beautiful, personal letters. Delivered straight to your inbox — no commitment.</p>
+    <form class="capture-form" id="captureForm" onsubmit="handleCapture(event)">
+      <input type="email" placeholder="Your email address" required>
+      <button type="submit" class="btn btn-rose">Send Me Samples</button>
+    </form>
+    <div class="capture-success" id="captureSuccess">✦ Check your inbox — your samples are on the way.</div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <div class="logo">
+    <div class="logo-dot">✦</div>
+    <span class="logo-text">Heartfelt Letters</span>
+  </div>
+  <div class="footer-links">
+    <a href="#how">How It Works</a>
+    <a href="#writer">Try Free</a>
+    <a href="#offers">Plans & Pricing</a>
+    <a href="#" onclick="openModal('enterprise');return false">Enterprise</a>
+  </div>
+  <p class="footer-tagline">Crafted with ♡ — Every word matters</p>
+</footer>
+
+<!-- ── Modal ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modalContent"></div>
+    <div class="modal-success" id="modalSuccess">
+      <div class="check">✦</div>
+      <p>Thank you!</p>
+      <p class="sub">We'll be in touch shortly.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── Scroll: top bar shadow ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('topBar').classList.toggle('scrolled', window.scrollY > 10);
+});
+
+/* ── Scroll-triggered reveals ── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(entry.target.parentElement.children).indexOf(entry.target);
+      entry.target.style.transitionDelay = `${idx * 0.08}s`;
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.how-step, .offer-card, .swatch').forEach(el => {
+  revealObserver.observe(el);
+});
+
+/* ── Auth System ── */
+let currentUser = null;
+
+async function checkAuth() {
+  try {
+    const res = await fetch('/api/auth/me', { credentials: 'same-origin' });
+    const data = await res.json();
+    currentUser = data.user;
+    hasActivePlan = currentUser && currentUser.plan !== 'free';
+    updateAuthUI();
+  } catch (e) {
+    currentUser = null;
+    hasActivePlan = false;
+    updateAuthUI();
+  }
+}
+
+function updateAuthUI() {
+  const authArea = document.getElementById('authArea');
+  const planBar = document.getElementById('planStatusBar');
+
+  if (currentUser) {
+    const initial = currentUser.name.charAt(0).toUpperCase();
+    const planLabel = currentUser.plan === 'business' ? 'Business'
+      : currentUser.plan === 'individual' ? 'Pro' : 'Free';
+    const badgeHtml = currentUser.plan === 'individual'
+      ? '<span class="plan-badge pro">PRO</span>'
+      : currentUser.plan === 'business'
+      ? '<span class="plan-badge biz">BIZ</span>'
+      : '';
+
+    const lettersLeft = currentUser.letters_limit - currentUser.letters_used;
+    const creditsHtml = currentUser.plan !== 'free'
+      ? `<span class="credits-badge" title="${lettersLeft} letters remaining">📝 ${lettersLeft}</span>`
+      : '';
+
+    authArea.innerHTML = `
+      ${badgeHtml}
+      ${creditsHtml}
+      <div class="user-avatar" onclick="toggleUserDropdown()" id="userAvatar">
+        ${initial}
+        <div class="user-dropdown" id="userDropdown">
+          <div class="user-dropdown-header">
+            <div class="user-dropdown-name">${currentUser.name}</div>
+            <div class="user-dropdown-email">${currentUser.email}</div>
+            <div class="user-dropdown-plan">✦ ${planLabel} Plan</div>
+            <div style="font-size:0.68rem;color:var(--ink-muted);margin-top:0.25rem">📝 ${lettersLeft} of ${currentUser.letters_limit} letters left this month</div>
+          </div>
+          <a href="#offers" class="user-dropdown-item" onclick="closeUserDropdown()">View Plans</a>
+          <button class="user-dropdown-item" onclick="handleLogout()">Log Out</button>
+        </div>
+      </div>
+    `;
+
+    // Update plan status bar in decoration
+    if (planBar) {
+      if (hasActivePlan) {
+        const ll = currentUser.letters_limit - currentUser.letters_used;
+        planBar.className = 'plan-status-bar paid';
+        planBar.innerHTML = `✦ ${planLabel} Plan — <strong>${ll}</strong> of ${currentUser.letters_limit} letters remaining`;
+      } else {
+        planBar.className = 'plan-status-bar free';
+        planBar.innerHTML = '🔒 Free Plan — some features locked <a href="#offers">Upgrade</a>';
+      }
+    }
+
+    // If user has a plan, unlock all papers
+    if (hasActivePlan) {
+      document.querySelectorAll('.paper-opt.locked').forEach(opt => {
+        opt.classList.remove('locked');
+      });
+    }
+  } else {
+    authArea.innerHTML = '<span class="login-link" onclick="openAuthModal(\'login\')">Login</span>';
+    if (planBar) {
+      planBar.className = 'plan-status-bar free';
+      planBar.innerHTML = '🔒 Free Plan — some features locked <a href="#offers">Upgrade</a>';
+    }
+  }
+}
+
+function toggleUserDropdown() {
+  const dd = document.getElementById('userDropdown');
+  dd.classList.toggle('show');
+}
+function closeUserDropdown() {
+  const dd = document.getElementById('userDropdown');
+  if (dd) dd.classList.remove('show');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  const avatar = document.getElementById('userAvatar');
+  const dd = document.getElementById('userDropdown');
+  if (dd && avatar && !avatar.contains(e.target)) {
+    dd.classList.remove('show');
+  }
+});
+
+function openAuthModal(mode) {
+  const content = document.getElementById('modalContent');
+  if (mode === 'login') {
+    content.innerHTML = `
+      <h3 class="modal-title">Welcome Back</h3>
+      <div class="auth-error" id="authError"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="auth-email" placeholder="you@example.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="auth-password" placeholder="Your password"></div>
+      <button class="btn btn-rose" style="width:100%;justify-content:center;margin-top:1rem" onclick="handleLogin()">Log In</button>
+      <div class="auth-toggle">Don't have an account? <a onclick="openAuthModal('signup')">Sign up</a></div>
+    `;
+  } else {
+    content.innerHTML = `
+      <h3 class="modal-title">Create Your Account</h3>
+      <div class="auth-error" id="authError"></div>
+      <div class="form-group"><label>Your Name</label><input type="text" id="auth-name" placeholder="e.g. Sarah"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="auth-email" placeholder="you@example.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="auth-password" placeholder="At least 6 characters"></div>
+      <div class="form-group"><label>Confirm Password</label><input type="password" id="auth-password2" placeholder="Repeat password"></div>
+      <button class="btn btn-rose" style="width:100%;justify-content:center;margin-top:1rem" onclick="handleSignup()">Create Account</button>
+      <div class="auth-toggle">Already have an account? <a onclick="openAuthModal('login')">Log in</a></div>
+    `;
+  }
+  content.style.display = 'block';
+  document.getElementById('modalSuccess').style.display = 'none';
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function showAuthError(msg) {
+  const el = document.getElementById('authError');
+  el.textContent = msg;
+  el.classList.add('show');
+}
+
+async function handleLogin() {
+  const email = document.getElementById('auth-email').value.trim();
+  const password = document.getElementById('auth-password').value;
+  if (!email || !password) return showAuthError('Please fill in all fields.');
+
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (!res.ok) return showAuthError(data.error);
+
+    currentUser = data.user;
+    hasActivePlan = currentUser.plan !== 'free';
+    closeModal();
+    updateAuthUI();
+  } catch (e) {
+    showAuthError('Login failed. Please try again.');
+  }
+}
+
+async function handleSignup() {
+  const name = document.getElementById('auth-name').value.trim();
+  const email = document.getElementById('auth-email').value.trim();
+  const password = document.getElementById('auth-password').value;
+  const password2 = document.getElementById('auth-password2').value;
+
+  if (!name || !email || !password || !password2) return showAuthError('Please fill in all fields.');
+  if (password !== password2) return showAuthError('Passwords do not match.');
+  if (password.length < 6) return showAuthError('Password must be at least 6 characters.');
+
+  try {
+    const res = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ name, email, password })
+    });
+    const data = await res.json();
+    if (!res.ok) return showAuthError(data.error);
+
+    currentUser = data.user;
+    hasActivePlan = currentUser.plan !== 'free';
+    closeModal();
+    updateAuthUI();
+  } catch (e) {
+    showAuthError('Signup failed. Please try again.');
+  }
+}
+
+async function handleLogout() {
+  closeUserDropdown();
+  try {
+    await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' });
+  } catch (e) { /* ok */ }
+  currentUser = null;
+  hasActivePlan = false;
+  hasPaidForPrint = false;
+  updateAuthUI();
+  // Re-lock papers
+  document.querySelectorAll('.paper-opt:not(:first-child)').forEach(opt => {
+    if (!opt.classList.contains('locked') && !opt.querySelector('.paper-opt-name')?.textContent?.includes('Classic')) {
+      opt.classList.add('locked');
+    }
+  });
+}
+
+// Paywall for sharing/downloading
+function openSharePaywall() {
+  const content = document.getElementById('modalContent');
+  content.innerHTML = `
+    <h3 class="modal-title">Unlock Sharing & Downloads</h3>
+    <div style="text-align:center;margin:1.5rem 0">
+      <div style="font-size:2.5rem;margin-bottom:0.8rem">✦</div>
+      <p style="font-family:var(--font-serif);font-style:italic;font-size:1.15rem;color:var(--ink);margin-bottom:0.5rem">
+        Your letter is ready to share!
+      </p>
+      <p style="font-size:0.82rem;color:var(--ink-muted);margin-bottom:0.3rem">
+        Subscribe to a plan to download, print, and share your letters.
+      </p>
+      <div style="margin:1.2rem 0;padding:1rem;background:var(--sage-light);border-radius:6px;text-align:left">
+        <p style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem">What you get:</p>
+        <p style="font-size:0.8rem;color:var(--ink-soft);line-height:1.7">
+          ✓ Unlimited downloads & sharing<br>
+          ✓ All premium paper styles<br>
+          ✓ Print your letters<br>
+          ✓ All fonts & stickers
+        </p>
+      </div>
+    </div>
+    <button class="btn btn-sage" style="width:100%;justify-content:center" onclick="closeModal();openModal('subscribe')">
+      Subscribe — $29.99/mo
+    </button>
+    <button class="btn btn-outline" style="width:100%;justify-content:center;margin-top:0.5rem" onclick="closeModal();openModal('business')">
+      Business Plan — $79.99/mo
+    </button>
+    <a href="#offers" class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:0.5rem;text-decoration:none" onclick="closeModal()">
+      See All Plans
+    </a>
+  `;
+  content.style.display = 'block';
+  document.getElementById('modalSuccess').style.display = 'none';
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+// No letters remaining modal
+function openNoLettersModal() {
+  const content = document.getElementById('modalContent');
+  content.innerHTML = `
+    <h3 class="modal-title">No Letters Remaining</h3>
+    <div style="text-align:center;margin:1.5rem 0">
+      <div style="font-size:2.5rem;margin-bottom:0.8rem">📝</div>
+      <p style="font-size:0.88rem;color:var(--ink-muted);margin-bottom:0.5rem">
+        You've used all <strong>${currentUser.letters_limit}</strong> letters in your plan this month.
+      </p>
+      <p style="font-size:0.8rem;color:var(--ink-muted)">
+        Upgrade your plan for more letters, or wait for your monthly reset.
+      </p>
+    </div>
+    <button class="btn btn-sage" style="width:100%;justify-content:center" onclick="closeModal();openModal('subscribe')">
+      Upgrade Plan
+    </button>
+    <a href="#offers" class="btn btn-outline" style="width:100%;justify-content:center;margin-top:0.5rem;text-decoration:none" onclick="closeModal()">
+      See All Plans
+    </a>
+  `;
+  content.style.display = 'block';
+  document.getElementById('modalSuccess').style.display = 'none';
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+// Deduct a letter credit after share/download
+async function useLetterCredit() {
+  try {
+    const res = await fetch('/api/auth/use-letter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin'
+    });
+    const data = await res.json();
+    if (res.ok && currentUser) {
+      currentUser.letters_used = data.letters_used;
+      currentUser.letters_limit = data.letters_limit;
+      updateAuthUI();
+    }
+    return res.ok;
+  } catch (e) {
+    return false;
+  }
+}
+
+// Check auth on page load
+checkAuth();
+
+/* ── API helper ── */
+async function api(endpoint, body) {
+  const res = await fetch('/api/' + endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Request failed');
+  return data;
+}
+
+/* ── Writer: step navigation ── */
+let currentStep = 1;
+let selectedTone = 'Warm';
+let lastLetterText = '';
+
+function goToStep(step) {
+  if (step === 2 && currentStep === 1) {
+    const r = document.getElementById('recipientName').value.trim();
+    const s = document.getElementById('senderName').value.trim();
+    const rel = document.getElementById('relationship').value;
+    const occ = document.getElementById('occasion').value;
+    if (!r || !s || !rel || !occ) {
+      document.getElementById('error1').classList.add('show');
+      return;
+    }
+    document.getElementById('error1').classList.remove('show');
+  }
+  if (step === 3 && currentStep === 2) {
+    const f = document.getElementById('feelings').value.trim();
+    if (!f) {
+      document.getElementById('error2').classList.add('show');
+      return;
+    }
+    document.getElementById('error2').classList.remove('show');
+  }
+
+  document.querySelectorAll('.step-tab').forEach(t => {
+    const s = parseInt(t.dataset.step);
+    t.classList.remove('active', 'done');
+    if (s === step) t.classList.add('active');
+    else if (s < step) {
+      t.classList.add('done');
+      t.querySelector('.tab-num').textContent = '✓';
+    } else {
+      t.querySelector('.tab-num').textContent = s;
+    }
+  });
+
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel' + step).classList.add('active');
+  currentStep = step;
+
+  if (step === 3) writeLetter();
+  if (step === 4) syncDecoPreview();
+}
+
+/* ── Decoration Functions ── */
+
+// Paper presets
+const paperPresets = {
+  cream: {
+    bg: '#fffdf8',
+    bgGradient: 'linear-gradient(180deg, #fffdf8, #f0ebe3)',
+    lineColor: 'rgba(181,99,90,0.06)',
+    borderColor: '#e4d9cc',
+    cornerColor: '#be9230',
+    shadowColor1: '#f0ebe3',
+    shadowColor2: '#e4d9cc'
+  },
+  rose: {
+    bg: '#f5e8ef',
+    bgGradient: 'linear-gradient(180deg, #f5e8ef, #ecd5e0)',
+    lineColor: 'rgba(201,160,181,0.15)',
+    borderColor: '#dbb5cb',
+    cornerColor: '#c9a0b5',
+    shadowColor1: '#ecd5e0',
+    shadowColor2: '#dbb5cb'
+  },
+  botanical: {
+    bg: '#e8ede6',
+    bgGradient: 'linear-gradient(180deg, #eef3ec, #dde6da)',
+    lineColor: 'rgba(138,170,130,0.12)',
+    borderColor: '#a8c0a1',
+    cornerColor: '#5e8560',
+    shadowColor1: '#dde6da',
+    shadowColor2: '#a8c0a1'
+  },
+  parchment: {
+    bg: '#f5f0e8',
+    bgGradient: 'linear-gradient(180deg, #f5f0e8, #e4d8c8)',
+    lineColor: 'rgba(196,180,158,0.12)',
+    borderColor: '#c4b49e',
+    cornerColor: '#be9230',
+    shadowColor1: '#e4d8c8',
+    shadowColor2: '#c4b49e'
+  },
+  noir: {
+    bg: '#1e120a',
+    bgGradient: 'linear-gradient(180deg, #2a1c12, #1e120a)',
+    lineColor: 'rgba(190,146,48,0.1)',
+    borderColor: '#3d2a1a',
+    cornerColor: '#be9230',
+    shadowColor1: '#15100a',
+    shadowColor2: '#0a0705',
+    defaultInk: '#be9230'
+  },
+  denim: {
+    bg: '#2c3e6b',
+    bgGradient: 'linear-gradient(180deg, #2c3e6b, #1a2744)',
+    lineColor: 'rgba(255,255,255,0.06)',
+    borderColor: '#3a5080',
+    cornerColor: '#8aa4d6',
+    shadowColor1: '#1a2744',
+    shadowColor2: '#0f1825',
+    defaultInk: '#ffffff'
+  },
+  kraft: {
+    bg: '#c8a87c',
+    bgGradient: 'linear-gradient(180deg, #c8a87c, #a88558)',
+    lineColor: 'rgba(80,50,20,0.08)',
+    borderColor: '#a88558',
+    cornerColor: '#6b4c2a',
+    shadowColor1: '#a88558',
+    shadowColor2: '#8a6d40'
+  },
+  lavender: {
+    bg: '#e8e0f0',
+    bgGradient: 'linear-gradient(180deg, #e8e0f0, #d5c8e8)',
+    lineColor: 'rgba(130,100,170,0.08)',
+    borderColor: '#c9b8e0',
+    cornerColor: '#8a6cba',
+    shadowColor1: '#d5c8e8',
+    shadowColor2: '#c9b8e0'
+  },
+  midnight: {
+    bg: '#0d1b2a',
+    bgGradient: 'linear-gradient(180deg, #0d1b2a, #1b2838)',
+    lineColor: 'rgba(200,220,255,0.05)',
+    borderColor: '#1b2838',
+    cornerColor: '#4a7ab5',
+    shadowColor1: '#091420',
+    shadowColor2: '#050d15',
+    defaultInk: '#c8dcff'
+  }
+};
+
+let currentFont = 'Caveat';
+let currentPaper = 'cream';
+let currentInk = '#4a3225';
+
+// Sync the decoration preview with the main letter
+function syncDecoPreview() {
+  const mainText = document.getElementById('letterText').textContent;
+  const preview = document.getElementById('letterTextPreview');
+  const previewPaper = document.getElementById('letterPaperPreview');
+  preview.textContent = mainText;
+  preview.style.fontFamily = `'${currentFont}', cursive`;
+  preview.style.color = currentInk;
+  applyPaperStyle(previewPaper, currentPaper);
+}
+
+function applyPaperStyle(paperEl, preset) {
+  const p = paperPresets[preset];
+  paperEl.style.background = p.bgGradient;
+  paperEl.style.borderColor = p.borderColor;
+  paperEl.style.backgroundImage = `${p.bgGradient}, repeating-linear-gradient(180deg, transparent, transparent 31px, ${p.lineColor} 31px, ${p.lineColor} 32px)`;
+  paperEl.style.boxShadow = `2px 2px 0 ${p.shadowColor1}, 4px 4px 0 ${p.shadowColor2}`;
+  // Update corner color via CSS custom property
+  paperEl.style.setProperty('--corner-color', p.cornerColor);
+  // Auto-set ink for dark papers if current ink would be invisible
+  if (p.defaultInk && (currentInk === '#4a3225' || currentInk === '#1a1a1a')) {
+    const inkBtn = document.querySelector(`.ink-opt[title="${p.defaultInk === '#ffffff' ? 'White' : ''}"]`)
+      || document.querySelector('.ink-opt[style*="' + p.defaultInk.substring(1) + '"]');
+    if (inkBtn) setInkColor(p.defaultInk, inkBtn);
+  }
+}
+
+function setLetterFont(fontFamily, btn) {
+  currentFont = fontFamily;
+  document.querySelectorAll('.font-opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  // Update both previews
+  document.getElementById('letterTextPreview').style.fontFamily = `'${fontFamily}', cursive`;
+  document.getElementById('letterText').style.fontFamily = `'${fontFamily}', cursive`;
+}
+
+function setLetterPaper(preset, btn) {
+  currentPaper = preset;
+  document.querySelectorAll('.paper-opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  // Apply to both papers
+  applyPaperStyle(document.getElementById('letterPaperPreview'), preset);
+  applyPaperStyle(document.getElementById('letterPaper'), preset);
+}
+
+function setInkColor(color, btn) {
+  currentInk = color;
+  document.querySelectorAll('.ink-opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('letterTextPreview').style.color = color;
+  document.getElementById('letterText').style.color = color;
+}
+
+// SVG sticker definitions
+const stickerSVGs = {
+  heart: `<svg viewBox="0 0 100 100"><path d="M50 88C25 70 5 55 5 35 5 18 18 5 35 5c10 0 15 8 15 8s5-8 15-8c17 0 30 13 30 30 0 20-20 35-45 53z" fill="#e8626b" stroke="#d44f58" stroke-width="2"/></svg>`,
+  star: `<svg viewBox="0 0 100 100"><polygon points="50,5 63,35 95,38 72,60 78,92 50,76 22,92 28,60 5,38 37,35" fill="#f5c542" stroke="#e0ab2a" stroke-width="2"/></svg>`,
+  flower: `<svg viewBox="0 0 100 100"><circle cx="50" cy="30" r="16" fill="#f9a8d4" opacity="0.9"/><circle cx="70" cy="45" r="16" fill="#f9a8d4" opacity="0.8"/><circle cx="62" cy="68" r="16" fill="#f9a8d4" opacity="0.85"/><circle cx="38" cy="68" r="16" fill="#f9a8d4" opacity="0.8"/><circle cx="30" cy="45" r="16" fill="#f9a8d4" opacity="0.9"/><circle cx="50" cy="50" r="11" fill="#fbbf24"/></svg>`,
+  butterfly: `<svg viewBox="0 0 100 100"><ellipse cx="35" cy="40" rx="22" ry="28" fill="#a78bfa" transform="rotate(-15 35 40)" opacity="0.85"/><ellipse cx="65" cy="40" rx="22" ry="28" fill="#c4b5fd" transform="rotate(15 65 40)" opacity="0.85"/><ellipse cx="38" cy="65" rx="12" ry="18" fill="#7c3aed" transform="rotate(-10 38 65)" opacity="0.7"/><ellipse cx="62" cy="65" rx="12" ry="18" fill="#8b5cf6" transform="rotate(10 62 65)" opacity="0.7"/><rect x="48" y="25" width="4" height="55" rx="2" fill="#4c1d95"/></svg>`,
+  leaf: `<svg viewBox="0 0 100 100"><path d="M50 90C30 75 10 50 20 25 30 5 60 5 75 20c15 15 5 40-10 50-5 3-10 10-15 20z" fill="#34d399" stroke="#059669" stroke-width="2"/><path d="M50 90C45 65 35 45 45 30" fill="none" stroke="#059669" stroke-width="2"/></svg>`,
+  sparkle: `<svg viewBox="0 0 100 100"><path d="M50 5L55 40 90 50 55 60 50 95 45 60 10 50 45 40z" fill="#fbbf24" stroke="#f59e0b" stroke-width="1.5"/><circle cx="75" cy="20" r="4" fill="#fbbf24"/><circle cx="25" cy="80" r="3" fill="#fbbf24"/></svg>`,
+  ribbon: `<svg viewBox="0 0 100 100"><path d="M30 25C30 15 70 15 70 25L75 50C75 55 65 60 50 60 35 60 25 55 25 50z" fill="#fb7185" stroke="#e11d48" stroke-width="2"/><path d="M35 60L20 85 38 72 50 90 62 72 80 85 65 60" fill="#f43f5e" stroke="#e11d48" stroke-width="1.5"/><text x="50" y="47" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="sans-serif">LOVE</text></svg>`,
+  moon: `<svg viewBox="0 0 100 100"><path d="M60 10A40 40 0 1 0 60 90 32 32 0 0 1 60 10z" fill="#fbbf24"/><circle cx="30" cy="25" r="2" fill="#fde68a"/><circle cx="22" cy="55" r="1.5" fill="#fde68a"/><circle cx="40" cy="70" r="2" fill="#fde68a"/></svg>`,
+  cloud: `<svg viewBox="0 0 100 100"><ellipse cx="50" cy="55" rx="38" ry="22" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="2"/><circle cx="30" cy="45" r="18" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="2"/><circle cx="65" cy="42" r="20" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="2"/><path d="M45 52C42 46 48 42 50 48c2-6 8-2 5 4-2 3-5 5-5 5s-3-2-5-5z" fill="#f87171"/></svg>`,
+  dove: `<svg viewBox="0 0 100 100"><path d="M20 55C15 45 25 30 40 35L55 25C65 20 80 25 75 40L65 50C70 60 60 70 50 65L35 70C25 72 22 62 20 55z" fill="white" stroke="#94a3b8" stroke-width="2"/><circle cx="35" cy="42" r="2.5" fill="#334155"/><path d="M15 50L5 45 15 48" fill="none" stroke="#94a3b8" stroke-width="2"/></svg>`,
+  diamond: `<svg viewBox="0 0 100 100"><polygon points="50,10 80,35 50,90 20,35" fill="#67e8f9" stroke="#22d3ee" stroke-width="2"/><polygon points="50,10 80,35 50,35 20,35" fill="#a5f3fc" stroke="#22d3ee" stroke-width="1"/></svg>`,
+  rose: `<svg viewBox="0 0 100 100"><circle cx="50" cy="42" r="18" fill="#fda4af"/><path d="M42 42C42 35 50 30 50 38c0-8 8-3 8 4-2 5-8 8-8 8s-6-3-8-8z" fill="#e11d48" opacity="0.6"/><circle cx="50" cy="42" r="8" fill="#fb7185"/><path d="M50 60L48 85" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/><ellipse cx="38" cy="58" rx="6" ry="4" fill="#22c55e" transform="rotate(-30 38 58)"/></svg>`,
+  envelope: `<svg viewBox="0 0 100 100"><rect x="15" y="30" width="70" height="45" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/><path d="M15 30L50 58 85 30" fill="none" stroke="#f59e0b" stroke-width="2"/><path d="M45 52C42 46 48 42 50 48c2-6 8-2 5 4-2 3-5 5-5 5s-3-2-5-5z" fill="#e8626b"/></svg>`,
+  crown: `<svg viewBox="0 0 100 100"><path d="M15 65L25 30 40 50 50 20 60 50 75 30 85 65z" fill="#fbbf24" stroke="#d97706" stroke-width="2"/><rect x="15" y="65" width="70" height="12" rx="3" fill="#f59e0b" stroke="#d97706" stroke-width="2"/><circle cx="50" cy="35" r="4" fill="#ef4444"/><circle cx="33" cy="45" r="3" fill="#3b82f6"/><circle cx="67" cy="45" r="3" fill="#22c55e"/></svg>`,
+  sun: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="18" fill="#fbbf24"/><g stroke="#f59e0b" stroke-width="3" stroke-linecap="round"><line x1="50" y1="8" x2="50" y2="22"/><line x1="50" y1="78" x2="50" y2="92"/><line x1="8" y1="50" x2="22" y2="50"/><line x1="78" y1="50" x2="92" y2="50"/><line x1="20" y1="20" x2="30" y2="30"/><line x1="70" y1="70" x2="80" y2="80"/><line x1="80" y1="20" x2="70" y2="30"/><line x1="30" y1="70" x2="20" y2="80"/></g></svg>`,
+  infinity: `<svg viewBox="0 0 100 100"><path d="M50 50C50 35 65 25 78 35s8 25-5 25S50 65 50 50zm0 0C50 35 35 25 22 35S14 60 27 60 50 65 50 50z" fill="none" stroke="#e8626b" stroke-width="4" stroke-linecap="round"/></svg>`
+};
+
+// Stickers
+function addSticker(name) {
+  const paper = document.getElementById('letterPaperPreview');
+  const sticker = document.createElement('div');
+  sticker.className = 'letter-sticker';
+  sticker.innerHTML = (stickerSVGs[name] || '') + '<button class="sticker-remove" onclick="this.parentElement.remove()">×</button>';
+  sticker.style.left = (15 + Math.random() * 60) + '%';
+  sticker.style.top = (10 + Math.random() * 70) + '%';
+  paper.appendChild(sticker);
+  makeDraggable(sticker, paper);
+}
+
+// Paper unlock system
+let unlockedPapers = new Set(['cream']); // Only Classic Cream is free
+let hasActivePlan = false; // Set to true if user has a subscription
+
+function handlePaperClick(preset, btn) {
+  if (unlockedPapers.has(preset) || hasActivePlan) {
+    setLetterPaper(preset, btn);
+    return;
+  }
+  // Show unlock modal
+  openPaperUnlockModal(preset, btn);
+}
+
+function openPaperUnlockModal(preset, btn) {
+  const paperNames = {
+    rose: 'Rose Petal', botanical: 'Botanical Garden', parchment: 'Aged Parchment',
+    noir: 'Gold Foil Noir', denim: 'Denim Blue', kraft: 'Kraft',
+    lavender: 'Lavender', midnight: 'Midnight'
+  };
+  const content = document.getElementById('modalContent');
+  content.innerHTML = `
+    <h3 class="modal-title">Unlock Premium Paper</h3>
+    <div style="text-align:center;margin:1.5rem 0">
+      <div style="font-size:2rem;margin-bottom:0.5rem">🔒</div>
+      <p style="font-family:var(--font-serif);font-size:1.1rem;color:var(--ink);margin-bottom:0.3rem">
+        <strong>${paperNames[preset] || preset}</strong>
+      </p>
+      <p style="font-size:0.82rem;color:var(--ink-muted);margin-bottom:1rem">
+        Premium papers cost <strong>$1 per letter</strong> to send.<br>
+        Or subscribe to a plan for unlimited access.
+      </p>
+    </div>
+    <div class="form-group">
+      <label>Your Email</label>
+      <input type="email" id="m-email" placeholder="For purchase confirmation">
+    </div>
+    <button class="btn btn-gold" style="width:100%;justify-content:center;margin-top:1rem" onclick="unlockPaper('${preset}')">
+      Unlock & Use — $1
+    </button>
+    <a href="#offers" class="btn btn-outline" style="width:100%;justify-content:center;margin-top:0.5rem" onclick="closeModal()">
+      View Plans (unlimited papers)
+    </a>
+  `;
+  content.style.display = 'block';
+  document.getElementById('modalSuccess').style.display = 'none';
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function unlockPaper(preset) {
+  const email = document.getElementById('m-email')?.value || '';
+  console.log('Paper unlock purchase:', { preset, email, amount: '$1' });
+  // In production: integrate Stripe / payment processor here
+  unlockedPapers.add(preset);
+  // Remove lock from the paper swatch
+  document.querySelectorAll('.paper-opt').forEach(opt => {
+    if (opt.getAttribute('onclick')?.includes(preset) ||
+        opt.querySelector('[onclick]')?.getAttribute('onclick')?.includes(preset)) {
+      opt.classList.remove('locked');
+    }
+  });
+  // Also find by handlePaperClick reference
+  document.querySelectorAll(`.paper-opt[onclick*="${preset}"]`).forEach(opt => {
+    opt.classList.remove('locked');
+  });
+  // Show success
+  document.getElementById('modalContent').style.display = 'none';
+  document.getElementById('modalSuccess').style.display = 'block';
+  setTimeout(() => {
+    closeModal();
+    // Auto-select the unlocked paper
+    const btn = document.querySelector(`.paper-opt[onclick*="${preset}"]`);
+    if (btn) setLetterPaper(preset, btn);
+  }, 1500);
+}
+
+function makeDraggable(el, container) {
+  let offsetX, offsetY, isDragging = false;
+
+  function onStart(e) {
+    if (e.target.classList.contains('sticker-remove')) return;
+    isDragging = true;
+    const rect = el.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    offsetX = clientX - rect.left;
+    offsetY = clientY - rect.top;
+    el.style.zIndex = 20;
+    e.preventDefault();
+  }
+
+  function onMove(e) {
+    if (!isDragging) return;
+    const containerRect = container.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    let x = clientX - containerRect.left - offsetX;
+    let y = clientY - containerRect.top - offsetY;
+    // Clamp within container
+    x = Math.max(0, Math.min(x, containerRect.width - 40));
+    y = Math.max(0, Math.min(y, containerRect.height - 40));
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.right = 'auto';
+    el.style.bottom = 'auto';
+    e.preventDefault();
+  }
+
+  function onEnd() {
+    isDragging = false;
+    el.style.zIndex = 10;
+  }
+
+  el.addEventListener('mousedown', onStart);
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onEnd);
+  el.addEventListener('touchstart', onStart, { passive: false });
+  document.addEventListener('touchmove', onMove, { passive: false });
+  document.addEventListener('touchend', onEnd);
+}
+
+function selectTone(btn) {
+  document.querySelectorAll('.tone-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedTone = btn.dataset.tone;
+}
+
+/* ── Letter generation (calls backend) ── */
+async function writeLetter() {
+  const recipient = document.getElementById('recipientName').value.trim();
+  const sender = document.getElementById('senderName').value.trim();
+  const relationship = document.getElementById('relationship').value;
+  const occasion = document.getElementById('occasion').value;
+  const feelings = document.getElementById('feelings').value.trim();
+  const memories = document.getElementById('memories').value.trim();
+
+  document.getElementById('letterLoading').style.display = 'block';
+  document.getElementById('letterResult').style.display = 'none';
+  document.getElementById('letterError').style.display = 'none';
+
+  try {
+    const data = await api('generate-letter', {
+      sender, recipient, relationship, occasion, feelings, memories, tone: selectedTone
+    });
+
+    lastLetterText = data.letter;
+    document.getElementById('letterText').textContent = data.letter;
+    document.getElementById('letterTo').textContent = recipient;
+    document.getElementById('letterLoading').style.display = 'none';
+    document.getElementById('letterResult').style.display = 'block';
+  } catch (err) {
+    console.error(err);
+    document.getElementById('letterLoading').style.display = 'none';
+    document.getElementById('letterError').style.display = 'block';
+    document.getElementById('errorText').textContent = err.message || 'Something went wrong. Please try again.';
+  }
+}
+
+function rewriteLetter() {
+  document.getElementById('loadingText').textContent = 'Rewriting with a fresh heart…';
+  goToStep(3);
+}
+
+/* ── Letter Image Capture ── */
+async function captureLetterImage() {
+  // Capture the decorated preview if on step 4, otherwise the original
+  const paper = currentStep === 4
+    ? document.getElementById('letterPaperPreview')
+    : document.getElementById('letterPaper');
+  const status = document.getElementById('shareStatus');
+  status.textContent = 'Generating image…';
+
+  try {
+    const canvas = await html2canvas(paper, {
+      backgroundColor: '#fffdf8',
+      scale: 2,
+      useCORS: true,
+      logging: false,
+      windowWidth: 800
+    });
+    status.textContent = '';
+    return canvas;
+  } catch (err) {
+    console.error('Image capture failed:', err);
+    status.textContent = 'Image capture failed — sharing as text instead.';
+    return null;
+  }
+}
+
+function canvasToBlob(canvas) {
+  return new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+}
+
+/* ── Social Sharing (all image-first) ── */
+
+// Helper: download the letter image
+function downloadLetterImage(canvas, recipient) {
+  const link = document.createElement('a');
+  link.download = `heartfelt-letter-to-${recipient.toLowerCase().replace(/\s+/g, '-')}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+// Helper: try native share with image file, returns true if successful
+async function tryNativeShareWithImage(canvas, shareTitle) {
+  if (!canvas || !navigator.canShare) return false;
+  try {
+    const blob = await canvasToBlob(canvas);
+    const file = new File([blob], 'heartfelt-letter.png', { type: 'image/png' });
+    if (!navigator.canShare({ files: [file] })) return false;
+    await navigator.share({
+      title: shareTitle,
+      text: '✦ Written with Heartfelt Letters',
+      files: [file]
+    });
+    return true;
+  } catch (e) {
+    return false; // user cancelled or failed
+  }
+}
+
+async function shareLetter(platform) {
+  // Gate: must be logged in
+  if (!currentUser) {
+    openAuthModal('login');
+    return;
+  }
+  // Gate: must have a paid plan
+  if (currentUser.plan === 'free') {
+    openSharePaywall();
+    return;
+  }
+  // Gate: must have letters remaining
+  if (currentUser.letters_used >= currentUser.letters_limit) {
+    openNoLettersModal();
+    return;
+  }
+
+  const text = document.getElementById('letterText').textContent;
+  const recipient = document.getElementById('letterTo').textContent;
+  const shareTitle = `A heartfelt letter to ${recipient}`;
+  const status = document.getElementById('shareStatus');
+  const filename = `heartfelt-letter-to-${recipient.toLowerCase().replace(/\s+/g, '-')}.png`;
+
+  // Disable buttons while capturing
+  document.querySelectorAll('.btn-share').forEach(b => b.style.pointerEvents = 'none');
+  const canvas = await captureLetterImage();
+  document.querySelectorAll('.btn-share').forEach(b => b.style.pointerEvents = '');
+
+  if (!canvas) {
+    status.textContent = 'Could not generate image. Please try again.';
+    setTimeout(() => status.textContent = '', 3000);
+    return;
+  }
+
+  // Deduct a letter credit
+  const credited = await useLetterCredit();
+  if (!credited) {
+    status.textContent = 'Could not process. Please try again.';
+    setTimeout(() => status.textContent = '', 3000);
+    return;
+  }
+
+  switch (platform) {
+    case 'download': {
+      downloadLetterImage(canvas, recipient);
+      status.textContent = '✓ Image saved!';
+      setTimeout(() => status.textContent = '', 2500);
+      break;
+    }
+
+    case 'whatsapp': {
+      // Try native share with image (works on mobile)
+      const shared = await tryNativeShareWithImage(canvas, shareTitle);
+      if (shared) {
+        status.textContent = '✓ Shared on WhatsApp!';
+        setTimeout(() => status.textContent = '', 2500);
+      } else {
+        // Desktop fallback: download image + open WhatsApp Web
+        downloadLetterImage(canvas, recipient);
+        status.textContent = '✓ Image saved — send it on WhatsApp!';
+        setTimeout(() => {
+          window.open(`https://web.whatsapp.com/`, '_blank');
+          setTimeout(() => status.textContent = '', 3000);
+        }, 800);
+      }
+      break;
+    }
+
+    case 'facebook': {
+      // Try native share with image (works on mobile)
+      const shared = await tryNativeShareWithImage(canvas, shareTitle);
+      if (shared) {
+        status.textContent = '✓ Shared on Facebook!';
+        setTimeout(() => status.textContent = '', 2500);
+      } else {
+        // Desktop fallback: download image + open Facebook
+        downloadLetterImage(canvas, recipient);
+        status.textContent = '✓ Image saved — post it on Facebook!';
+        setTimeout(() => {
+          window.open('https://www.facebook.com/', '_blank');
+          setTimeout(() => status.textContent = '', 3000);
+        }, 800);
+      }
+      break;
+    }
+
+    case 'twitter': {
+      // Try native share with image (works on mobile)
+      const shared = await tryNativeShareWithImage(canvas, shareTitle);
+      if (shared) {
+        status.textContent = '✓ Shared on X!';
+        setTimeout(() => status.textContent = '', 2500);
+      } else {
+        // Desktop fallback: download image + open X tweet composer
+        downloadLetterImage(canvas, recipient);
+        status.textContent = '✓ Image saved — attach it to your post on X!';
+        setTimeout(() => {
+          window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('✦ Written with Heartfelt Letters')}`, '_blank', 'width=600,height=400');
+          setTimeout(() => status.textContent = '', 3000);
+        }, 800);
+      }
+      break;
+    }
+
+    case 'native': {
+      const shared = await tryNativeShareWithImage(canvas, shareTitle);
+      if (shared) {
+        status.textContent = '✓ Shared!';
+        setTimeout(() => status.textContent = '', 2500);
+      } else if (navigator.share) {
+        // Fallback: share text only
+        try {
+          await navigator.share({
+            title: shareTitle,
+            text: text + '\n\n— Written with Heartfelt Letters ✦'
+          });
+        } catch (e) { /* user cancelled */ }
+      }
+      break;
+    }
+  }
+}
+
+// Show native share buttons if Web Share API is available
+if (navigator.share) {
+  document.querySelectorAll('.btn-native-share').forEach(btn => {
+    btn.style.display = 'inline-flex';
+  });
+}
+
+// Print requires payment
+let hasPaidForPrint = false;
+
+async function handlePrint() {
+  if (!currentUser) {
+    openAuthModal('login');
+    return;
+  }
+  if (currentUser.plan === 'free') {
+    openSharePaywall();
+    return;
+  }
+  if (currentUser.letters_used >= currentUser.letters_limit) {
+    openNoLettersModal();
+    return;
+  }
+  const credited = await useLetterCredit();
+  if (credited) window.print();
+}
+
+function copyLetter() {
+  const text = document.getElementById('letterText').textContent;
+  navigator.clipboard.writeText(text);
+  const btn = document.getElementById('copyBtn');
+  btn.textContent = 'Copied ✓';
+  setTimeout(() => btn.textContent = 'Copy', 1800);
+}
+
+function resetWriter() {
+  document.getElementById('recipientName').value = '';
+  document.getElementById('senderName').value = '';
+  document.getElementById('relationship').value = '';
+  document.getElementById('occasion').value = '';
+  document.getElementById('feelings').value = '';
+  document.getElementById('memories').value = '';
+  document.querySelectorAll('.tone-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelector('.tone-btn[data-tone="Warm"]').classList.add('selected');
+  selectedTone = 'Warm';
+  lastLetterText = '';
+  document.getElementById('loadingText').textContent = 'Writing your letter with care…';
+  currentStep = 1;
+  document.querySelectorAll('.step-tab').forEach(t => {
+    t.classList.remove('active', 'done');
+    t.querySelector('.tab-num').textContent = t.dataset.step;
+  });
+  document.querySelector('.step-tab[data-step="1"]').classList.add('active');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel1').classList.add('active');
+
+  // Reset decoration state
+  currentFont = 'Caveat';
+  currentPaper = 'cream';
+  currentInk = '#4a3225';
+  document.getElementById('letterText').style.fontFamily = '';
+  document.getElementById('letterText').style.color = '';
+  document.getElementById('letterPaper').style = '';
+  // Remove all stickers
+  document.querySelectorAll('.letter-sticker').forEach(s => s.remove());
+  // Reset picker selections
+  document.querySelectorAll('.font-opt').forEach(b => b.classList.remove('selected'));
+  document.querySelector('.font-opt')?.classList.add('selected');
+  document.querySelectorAll('.paper-opt').forEach(b => b.classList.remove('selected'));
+  document.querySelector('.paper-opt')?.classList.add('selected');
+  document.querySelectorAll('.ink-opt').forEach(b => b.classList.remove('selected'));
+  document.querySelector('.ink-opt')?.classList.add('selected');
+}
+
+/* ── Email Capture (calls backend) ── */
+async function handleCapture(e) {
+  e.preventDefault();
+  const email = e.target.querySelector('input').value;
+  try {
+    await api('email-capture', { email });
+  } catch (err) {
+    console.error('Email capture failed:', err);
+  }
+  e.target.style.display = 'none';
+  document.getElementById('captureSuccess').style.display = 'block';
+}
+
+/* ── Modals ── */
+const modalTemplates = {
+  order: {
+    title: 'Order a Handwritten Letter',
+    body: `
+      <div class="form-group"><label>Mailing Address</label><textarea id="m-address" rows="3" placeholder="Full mailing address for delivery"></textarea></div>
+      <div class="form-group"><label>Your Email</label><input type="email" id="m-email" placeholder="For order confirmation"></div>
+    `,
+    cta: 'Continue to Payment — $10',
+    btnClass: 'btn-rose'
+  },
+  subscribe: {
+    title: 'Subscribe — Individual Plan',
+    body: `
+      <div class="form-group"><label>Your Email</label><input type="email" id="m-email" placeholder="you@example.com"></div>
+    `,
+    cta: 'Subscribe — $29.99/mo',
+    btnClass: 'btn-sage'
+  },
+  business: {
+    title: 'Business Plan',
+    body: `
+      <div class="form-group"><label>Company Name</label><input type="text" id="m-company" placeholder="Your company"></div>
+      <div class="form-group"><label>Work Email</label><input type="email" id="m-email" placeholder="you@company.com"></div>
+    `,
+    cta: 'Start Business Plan — $79.99/mo',
+    btnClass: 'btn-rose'
+  },
+  stationery: {
+    title: 'Premium Stationery Collection',
+    body: `
+      <p style="font-size:0.84rem;color:var(--ink-muted);margin-bottom:1rem">Our stationery collection features four handpicked designs — from Classic Linen to Gold Foil Noir. Enter your email to see the full catalog and pricing.</p>
+      <div class="form-group"><label>Your Email</label><input type="email" id="m-email" placeholder="you@example.com"></div>
+    `,
+    cta: 'View Full Collection',
+    btnClass: 'btn-gold'
+  },
+  enterprise: {
+    title: 'Enterprise Inquiry',
+    body: `
+      <div class="form-group"><label>Company Name</label><input type="text" id="m-company" placeholder="Your company"></div>
+      <div class="form-group"><label>Work Email</label><input type="email" id="m-email" placeholder="you@company.com"></div>
+      <div class="form-group"><label>Estimated Monthly Volume</label><input type="number" id="m-volume" placeholder="e.g. 500"></div>
+    `,
+    cta: 'Request a Demo',
+    btnClass: 'btn-dark'
+  }
+};
+
+function openModal(type) {
+  const t = modalTemplates[type];
+  const content = document.getElementById('modalContent');
+  content.innerHTML = `
+    <h3 class="modal-title">${t.title}</h3>
+    ${t.body}
+    <button class="btn ${t.btnClass}" onclick="submitModal('${type}')">${t.cta}</button>
+  `;
+  content.style.display = 'block';
+  document.getElementById('modalSuccess').style.display = 'none';
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+
+async function submitModal(type) {
+  const email = document.getElementById('m-email')?.value || '';
+  const company = document.getElementById('m-company')?.value || '';
+  const address = document.getElementById('m-address')?.value || '';
+  const volume = document.getElementById('m-volume')?.value || '';
+
+  try {
+    if (type === 'order') {
+      await api('orders', { email, address, letterText: lastLetterText });
+    } else if (type === 'subscribe') {
+      await api('subscriptions', { email, plan: 'individual' });
+    } else if (type === 'business') {
+      await api('subscriptions', { email, company, plan: 'business' });
+    } else if (type === 'stationery') {
+      await api('stationery', { email });
+    } else if (type === 'enterprise') {
+      await api('enterprise', { company, email, monthlyVolume: volume ? parseInt(volume) : null });
+    }
+  } catch (err) {
+    console.error('Modal submit error:', err);
+  }
+
+  document.getElementById('modalContent').style.display = 'none';
+  document.getElementById('modalSuccess').style.display = 'block';
+  setTimeout(() => {
+    closeModal();
+    // Refresh auth state after subscription
+    if (type === 'subscribe' || type === 'business') {
+      checkAuth();
+    }
+  }, 2200);
+}
+</script>
+</body>
+</html>
