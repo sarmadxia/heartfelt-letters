@@ -4,6 +4,112 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heartfelt Letters — Write From the Soul</title>
+<!-- ── Google Analytics 4 ── -->
+<!-- Replace G-XXXXXXXXXX with your real GA4 Measurement ID from analytics.google.com -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX', {
+    page_title: 'Heartfelt Letters',
+    send_page_view: true
+  });
+
+  // ── GA4 Event Helpers ──
+
+  // Track any custom event
+  function trackEvent(eventName, params) {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', eventName, params);
+    }
+    console.log('[GA4 Event]', eventName, params);
+  }
+
+  // Track a purchase (called on payment=success)
+  function trackPurchase(type, transactionId) {
+    const plans = {
+      single_letter: { name: 'Single Letter Credit', price: 1.00, category: 'Pay Per Letter' },
+      individual:    { name: 'Individual Plan Monthly', price: 29.99, category: 'Subscription' },
+      business:      { name: 'Business Plan Monthly', price: 79.99, category: 'Subscription' }
+    };
+    const plan = plans[type] || { name: type, price: 0, category: 'Other' };
+
+    // GA4 standard purchase event
+    gtag('event', 'purchase', {
+      transaction_id: transactionId || `HL-${Date.now()}`,
+      value: plan.price,
+      currency: 'USD',
+      items: [{
+        item_id: type,
+        item_name: plan.name,
+        item_category: plan.category,
+        price: plan.price,
+        quantity: 1
+      }]
+    });
+
+    // GA4 standard begin_checkout / conversion event
+    gtag('event', 'conversion', {
+      send_to: 'G-XXXXXXXXXX',
+      value: plan.price,
+      currency: 'USD'
+    });
+
+    console.log('[GA4] Purchase tracked:', plan.name, '$' + plan.price);
+  }
+
+  // Track when checkout starts
+  function trackBeginCheckout(type) {
+    const plans = {
+      single_letter: { name: 'Single Letter Credit', price: 1.00 },
+      individual:    { name: 'Individual Plan Monthly', price: 29.99 },
+      business:      { name: 'Business Plan Monthly', price: 79.99 }
+    };
+    const plan = plans[type] || { name: type, price: 0 };
+
+    gtag('event', 'begin_checkout', {
+      currency: 'USD',
+      value: plan.price,
+      items: [{
+        item_id: type,
+        item_name: plan.name,
+        price: plan.price,
+        quantity: 1
+      }]
+    });
+    console.log('[GA4] Begin checkout:', plan.name);
+  }
+
+  // Track sign up
+  function trackSignUp(method) {
+    gtag('event', 'sign_up', { method: method || 'email' });
+  }
+
+  // Track login
+  function trackLogin(method) {
+    gtag('event', 'login', { method: method || 'email' });
+  }
+
+  // Track letter generation
+  function trackLetterGenerated(tone, occasion) {
+    gtag('event', 'generate_letter', {
+      event_category: 'engagement',
+      tone: tone,
+      occasion: occasion
+    });
+  }
+
+  // Track share action
+  function trackShare(platform) {
+    gtag('event', 'share', {
+      method: platform,
+      content_type: 'letter',
+      item_id: 'heartfelt_letter'
+    });
+  }
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Nunito+Sans:wght@200;300;400;500&family=Dancing+Script:wght@400;500&family=Indie+Flower&family=Satisfy&family=Patrick+Hand&family=Sacramento&family=Pacifico&family=Kalam:wght@400;700&family=Shadows+Into+Light&family=Amatic+SC:wght@400;700&family=Great+Vibes&family=Homemade+Apple&display=swap" rel="stylesheet">
@@ -2339,6 +2445,8 @@ async function handleLogin() {
 
     currentUser = data.user;
     hasActivePlan = currentUser.plan !== 'free';
+    // 🔥 GA4 — Track login
+    trackLogin('email');
     closeModal();
     updateAuthUI();
   } catch (e) {
@@ -2368,6 +2476,8 @@ async function handleSignup() {
 
     currentUser = data.user;
     hasActivePlan = currentUser.plan !== 'free';
+    // 🔥 GA4 — Track sign up
+    trackSignUp('email');
     closeModal();
     updateAuthUI();
   } catch (e) {
@@ -2872,6 +2982,8 @@ async function writeLetter() {
     document.getElementById('letterTo').textContent = recipient;
     document.getElementById('letterLoading').style.display = 'none';
     document.getElementById('letterResult').style.display = 'block';
+    // 🔥 GA4 — Track letter generated
+    trackLetterGenerated(selectedTone, occasion);
   } catch (err) {
     console.error(err);
     document.getElementById('letterLoading').style.display = 'none';
@@ -2944,6 +3056,8 @@ async function tryNativeShareWithImage(canvas, shareTitle) {
 }
 
 async function shareLetter(platform) {
+  // 🔥 GA4 — Track share attempt
+  trackShare(platform);
   // Gate: must be logged in
   if (!currentUser) {
     openAuthModal('login');
@@ -3279,6 +3393,11 @@ async function stripeCheckout(type) {
   try {
     const endpoint = type === 'single-letter' ? 'single-letter' :
                      type === 'individual' ? 'individual' : 'business';
+
+    // 🔥 GA4 — Track checkout start
+    const gaType = type === 'single-letter' ? 'single_letter' : type;
+    trackBeginCheckout(gaType);
+
     const res = await fetch(`/api/stripe/checkout/${endpoint}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -3312,6 +3431,8 @@ async function stripeCheckout(type) {
   if (payment === 'success') {
     // Clean URL
     window.history.replaceState({}, '', '/');
+    // 🔥 GA4 — Track purchase on return from Stripe
+    trackPurchase(type, `HL-${Date.now()}`);
     // Refresh user data
     setTimeout(async () => {
       await checkAuth();
