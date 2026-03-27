@@ -9,7 +9,7 @@ const Stripe = require('stripe');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY) : null;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 // ── JSON File Database ──
@@ -289,13 +289,21 @@ app.post('/api/auth/use-letter', (req, res) => {
 
 // ── Stripe Payment Routes ──
 
+// Stripe guard middleware
+function requireStripe(req, res, next) {
+  if (!stripe) {
+    return res.status(503).json({ error: 'Payment system not configured. Please add Stripe API keys.' });
+  }
+  next();
+}
+
 // Get Stripe publishable key
 app.get('/api/stripe/config', (req, res) => {
-  res.json({ publishableKey: process.env.STRIPE_PUBLISHABLE_KEY });
+  res.json({ publishableKey: process.env.STRIPE_PUBLISHABLE_KEY || null });
 });
 
 // Create checkout session for $1 single letter
-app.post('/api/stripe/checkout/single-letter', async (req, res) => {
+app.post('/api/stripe/checkout/single-letter', requireStripe, async (req, res) => {
   if (!req.session.userId) {
     return res.status(401).json({ error: 'Please sign in first' });
   }
@@ -330,7 +338,7 @@ app.post('/api/stripe/checkout/single-letter', async (req, res) => {
 });
 
 // Create checkout session for individual subscription ($29.99/mo)
-app.post('/api/stripe/checkout/individual', async (req, res) => {
+app.post('/api/stripe/checkout/individual', requireStripe, async (req, res) => {
   if (!req.session.userId) {
     return res.status(401).json({ error: 'Please sign in first' });
   }
@@ -366,7 +374,7 @@ app.post('/api/stripe/checkout/individual', async (req, res) => {
 });
 
 // Create checkout session for business subscription ($79.99/mo)
-app.post('/api/stripe/checkout/business', async (req, res) => {
+app.post('/api/stripe/checkout/business', requireStripe, async (req, res) => {
   if (!req.session.userId) {
     return res.status(401).json({ error: 'Please sign in first' });
   }
@@ -402,7 +410,7 @@ app.post('/api/stripe/checkout/business', async (req, res) => {
 });
 
 // Cancel subscription
-app.post('/api/stripe/cancel-subscription', async (req, res) => {
+app.post('/api/stripe/cancel-subscription', requireStripe, async (req, res) => {
   if (!req.session.userId) {
     return res.status(401).json({ error: 'Not logged in' });
   }
