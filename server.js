@@ -2,12 +2,45 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const Database = require('better-sqlite3');
+const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// ── JSON File Database ──
+const DB_PATH = path.join(__dirname, 'data.json');
+
+function loadDB() {
+  try {
+    if (fs.existsSync(DB_PATH)) {
+      return JSON.parse(fs.readFileSync(DB_PATH, 'utf8'));
+    }
+  } catch (e) {
+    console.error('DB load error:', e.message);
+  }
+  return {
+    users: [],
+    emails: [],
+    orders: [],
+    subscriptions: [],
+    stationery_inquiries: [],
+    enterprise_inquiries: [],
+    letters: [],
+    nextId: { users: 1, emails: 1, orders: 1, subscriptions: 1, stationery: 1, enterprise: 1, letters: 1 }
+  };
+}
+
+function saveDB(data) {
+  try {
+    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
+  } catch (e) {
+    console.error('DB save error:', e.message);
+  }
+}
+
+let db = loadDB();
 
 // ── Middleware ──
 app.use(cors({ origin: true, credentials: true }));
@@ -19,109 +52,22 @@ app.use(session({
   cookie: {
     httpOnly: true,
     sameSite: 'lax',
-    maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+    maxAge: 30 * 24 * 60 * 60 * 1000
   }
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ── Database Setup ──
-const db = new Database(path.join(__dirname, 'heartfelt.db'));
-db.pragma('journal_mode = WAL');
-db.pragma('foreign_keys = ON');
+// ── Helper Functions ──
+function findUserByEmail(email) {
+  return db.users.find(u => u.email === email.toLowerCase().trim()) || null;
+}
 
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,
-    plan TEXT DEFAULT 'free',
-    plan_status TEXT DEFAULT 'active',
-    letters_limit INTEGER DEFAULT 0,
-    letters_used INTEGER DEFAULT 0,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS emails (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT NOT NULL,
-    source TEXT DEFAULT 'capture',
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS orders (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT NOT NULL,
-    address TEXT NOT NULL,
-    letter_text TEXT,
-    stationery TEXT DEFAULT 'standard',
-    status TEXT DEFAULT 'pending',
-    amount_cents INTEGER DEFAULT 1000,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS subscriptions (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT NOT NULL,
-    company TEXT,
-    plan TEXT NOT NULL DEFAULT 'individual',
-    status TEXT DEFAULT 'active',
-    amount_cents INTEGER NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS stationery_inquiries (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS enterprise_inquiries (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    company TEXT NOT NULL,
-    email TEXT NOT NULL,
-    monthly_volume INTEGER,
-    status TEXT DEFAULT 'new',
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS letters (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    sender_name TEXT,
-    recipient_name TEXT,
-    relationship TEXT,
-    occasion TEXT,
-    feelings TEXT,
-    memories TEXT,
-    tone TEXT,
-    generated_text TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-`);
-
-// ── Migrations (add columns if they don't exist) ──
-try {
-  db.exec(`ALTER TABLE users ADD COLUMN letters_limit INTEGER DEFAULT 0`);
-} catch (e) { /* column already exists */ }
-try {
-  db.exec(`ALTER TABLE users ADD COLUMN letters_used INTEGER DEFAULT 0`);
-} catch (e) { /* column already exists */ }
-
-// ── Prepared Statements ──
-const insertUser = db.prepare('INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)');
-const findUserByEmail = db.prepare('SELECT * FROM users WHERE email = ?');
-const findUserById = db.prepare('SELECT id, name, email, plan, plan_status, letters_limit, letters_used, created_at FROM users WHERE id = ?');
-const updateUserPlan = db.prepare('UPDATE users SET plan = ?, plan_status = ?, letters_limit = ?, letters_used = 0 WHERE id = ?');
-const incrementLettersUsed = db.prepare('UPDATE users SET letters_used = letters_used + 1 WHERE id = ?');
-const insertEmail = db.prepare('INSERT INTO emails (email, source) VALUES (?, ?)');
-const insertOrder = db.prepare('INSERT INTO orders (email, address, letter_text, stationery) VALUES (?, ?, ?, ?)');
-const insertSubscription = db.prepare('INSERT INTO subscriptions (email, company, plan, amount_cents) VALUES (?, ?, ?, ?)');
-const insertStationeryInquiry = db.prepare('INSERT INTO stationery_inquiries (email) VALUES (?)');
-const insertEnterprise = db.prepare('INSERT INTO enterprise_inquiries (company, email, monthly_volume) VALUES (?, ?, ?)');
-const insertLetter = db.prepare(`
-  INSERT INTO letters (sender_name, recipient_name, relationship, occasion, feelings, memories, tone, generated_text)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-`);
+function findUserById(id) {
+  const u = db.users.find(u => u.id === id);
+  if (!u) return null;
+  const { password_hash, ...safe } = u;
+  return safe;
+}
 
 // ── Auth Routes ──
 
@@ -135,19 +81,30 @@ app.post('/api/auth/signup', async (req, res) => {
     return res.status(400).json({ error: 'Password must be at least 6 characters' });
   }
 
-  // Check if email already exists
-  const existing = findUserByEmail.get(email.toLowerCase().trim());
+  const existing = findUserByEmail(email);
   if (existing) {
     return res.status(409).json({ error: 'An account with this email already exists' });
   }
 
   try {
     const hash = await bcrypt.hash(password, 10);
-    const result = insertUser.run(name.trim(), email.toLowerCase().trim(), hash);
-    const user = findUserById.get(result.lastInsertRowid);
+    const user = {
+      id: db.nextId.users++,
+      name: name.trim(),
+      email: email.toLowerCase().trim(),
+      password_hash: hash,
+      plan: 'free',
+      plan_status: 'active',
+      letters_limit: 0,
+      letters_used: 0,
+      created_at: new Date().toISOString()
+    };
+    db.users.push(user);
+    saveDB(db);
 
     req.session.userId = user.id;
-    res.json({ success: true, user });
+    const { password_hash, ...safeUser } = user;
+    res.json({ success: true, user: safeUser });
   } catch (err) {
     console.error('Signup error:', err);
     res.status(500).json({ error: 'Failed to create account' });
@@ -161,7 +118,7 @@ app.post('/api/auth/login', async (req, res) => {
     return res.status(400).json({ error: 'Email and password are required' });
   }
 
-  const user = findUserByEmail.get(email.toLowerCase().trim());
+  const user = findUserByEmail(email);
   if (!user) {
     return res.status(401).json({ error: 'Invalid email or password' });
   }
@@ -173,7 +130,7 @@ app.post('/api/auth/login', async (req, res) => {
     }
 
     req.session.userId = user.id;
-    const safeUser = findUserById.get(user.id);
+    const safeUser = findUserById(user.id);
     res.json({ success: true, user: safeUser });
   } catch (err) {
     console.error('Login error:', err);
@@ -197,11 +154,8 @@ app.get('/api/auth/me', (req, res) => {
   if (!req.session.userId) {
     return res.json({ user: null });
   }
-  const user = findUserById.get(req.session.userId);
-  if (!user) {
-    return res.json({ user: null });
-  }
-  res.json({ user });
+  const user = findUserById(req.session.userId);
+  res.json({ user: user || null });
 });
 
 // Use a letter credit
@@ -209,20 +163,20 @@ app.post('/api/auth/use-letter', (req, res) => {
   if (!req.session.userId) {
     return res.status(401).json({ error: 'Not logged in' });
   }
-  const user = findUserById.get(req.session.userId);
+  const user = db.users.find(u => u.id === req.session.userId);
   if (!user || user.plan === 'free') {
     return res.status(403).json({ error: 'No active plan' });
   }
   if (user.letters_used >= user.letters_limit) {
     return res.status(403).json({ error: 'No letters remaining', letters_left: 0 });
   }
-  incrementLettersUsed.run(req.session.userId);
-  const updated = findUserById.get(req.session.userId);
+  user.letters_used++;
+  saveDB(db);
   res.json({
     success: true,
-    letters_used: updated.letters_used,
-    letters_limit: updated.letters_limit,
-    letters_left: updated.letters_limit - updated.letters_used
+    letters_used: user.letters_used,
+    letters_limit: user.letters_limit,
+    letters_left: user.letters_limit - user.letters_used
   });
 });
 
@@ -282,11 +236,17 @@ Instructions:
     }
 
     // Save to database
-    try {
-      insertLetter.run(sender, recipient, relationship, occasion, feelings, memories || null, tone || 'Warm', letterText);
-    } catch (dbErr) {
-      console.error('DB insert error (non-fatal):', dbErr.message);
-    }
+    db.letters.push({
+      id: db.nextId.letters++,
+      sender_name: sender,
+      recipient_name: recipient,
+      relationship, occasion, feelings,
+      memories: memories || null,
+      tone: tone || 'Warm',
+      generated_text: letterText,
+      created_at: new Date().toISOString()
+    });
+    saveDB(db);
 
     res.json({ letter: letterText });
   } catch (err) {
@@ -301,13 +261,9 @@ app.post('/api/email-capture', (req, res) => {
   if (!email || !email.includes('@')) {
     return res.status(400).json({ error: 'Valid email required' });
   }
-  try {
-    const result = insertEmail.run(email, 'capture');
-    res.json({ success: true, id: result.lastInsertRowid });
-  } catch (err) {
-    console.error('Email capture error:', err);
-    res.status(500).json({ error: 'Failed to save email' });
-  }
+  db.emails.push({ id: db.nextId.emails++, email, source: 'capture', created_at: new Date().toISOString() });
+  saveDB(db);
+  res.json({ success: true });
 });
 
 // Order a letter
@@ -316,14 +272,18 @@ app.post('/api/orders', (req, res) => {
   if (!email || !address) {
     return res.status(400).json({ error: 'Email and address required' });
   }
-  try {
-    const result = insertOrder.run(email, address, letterText || null, stationery || 'standard');
-    try { insertEmail.run(email, 'order'); } catch (e) { /* duplicate ok */ }
-    res.json({ success: true, orderId: result.lastInsertRowid });
-  } catch (err) {
-    console.error('Order error:', err);
-    res.status(500).json({ error: 'Failed to create order' });
-  }
+  db.orders.push({
+    id: db.nextId.orders++,
+    email, address,
+    letter_text: letterText || null,
+    stationery: stationery || 'standard',
+    status: 'pending',
+    amount_cents: 1000,
+    created_at: new Date().toISOString()
+  });
+  db.emails.push({ id: db.nextId.emails++, email, source: 'order', created_at: new Date().toISOString() });
+  saveDB(db);
+  res.json({ success: true });
 });
 
 // Subscribe (individual or business)
@@ -333,22 +293,29 @@ app.post('/api/subscriptions', (req, res) => {
     return res.status(400).json({ error: 'Email required' });
   }
   const amountCents = plan === 'business' ? 7999 : 2999;
-  try {
-    const result = insertSubscription.run(email, company || null, plan || 'individual', amountCents);
-    try { insertEmail.run(email, 'subscription'); } catch (e) { /* duplicate ok */ }
+  db.subscriptions.push({
+    id: db.nextId.subscriptions++,
+    email, company: company || null,
+    plan: plan || 'individual',
+    status: 'active',
+    amount_cents: amountCents,
+    created_at: new Date().toISOString()
+  });
+  db.emails.push({ id: db.nextId.emails++, email, source: 'subscription', created_at: new Date().toISOString() });
 
-    // If user is logged in, upgrade their plan with letter limits
-    if (req.session.userId) {
-      // Individual: 10 letters/month, Business: 50 letters/month
+  // If user is logged in, upgrade their plan
+  if (req.session.userId) {
+    const user = db.users.find(u => u.id === req.session.userId);
+    if (user) {
       const limit = (plan === 'business') ? 50 : 10;
-      updateUserPlan.run(plan || 'individual', 'active', limit, req.session.userId);
+      user.plan = plan || 'individual';
+      user.plan_status = 'active';
+      user.letters_limit = limit;
+      user.letters_used = 0;
     }
-
-    res.json({ success: true, subscriptionId: result.lastInsertRowid });
-  } catch (err) {
-    console.error('Subscription error:', err);
-    res.status(500).json({ error: 'Failed to create subscription' });
   }
+  saveDB(db);
+  res.json({ success: true });
 });
 
 // Stationery inquiry
@@ -357,14 +324,10 @@ app.post('/api/stationery', (req, res) => {
   if (!email) {
     return res.status(400).json({ error: 'Email required' });
   }
-  try {
-    const result = insertStationeryInquiry.run(email);
-    try { insertEmail.run(email, 'stationery'); } catch (e) { /* duplicate ok */ }
-    res.json({ success: true, id: result.lastInsertRowid });
-  } catch (err) {
-    console.error('Stationery inquiry error:', err);
-    res.status(500).json({ error: 'Failed to save inquiry' });
-  }
+  db.stationery_inquiries.push({ id: db.nextId.stationery++, email, created_at: new Date().toISOString() });
+  db.emails.push({ id: db.nextId.emails++, email, source: 'stationery', created_at: new Date().toISOString() });
+  saveDB(db);
+  res.json({ success: true });
 });
 
 // Enterprise inquiry
@@ -373,36 +336,31 @@ app.post('/api/enterprise', (req, res) => {
   if (!company || !email) {
     return res.status(400).json({ error: 'Company and email required' });
   }
-  try {
-    const result = insertEnterprise.run(company, email, monthlyVolume || null);
-    try { insertEmail.run(email, 'enterprise'); } catch (e) { /* duplicate ok */ }
-    res.json({ success: true, inquiryId: result.lastInsertRowid });
-  } catch (err) {
-    console.error('Enterprise inquiry error:', err);
-    res.status(500).json({ error: 'Failed to save inquiry' });
-  }
+  db.enterprise_inquiries.push({
+    id: db.nextId.enterprise++,
+    company, email,
+    monthly_volume: monthlyVolume || null,
+    status: 'new',
+    created_at: new Date().toISOString()
+  });
+  db.emails.push({ id: db.nextId.emails++, email, source: 'enterprise', created_at: new Date().toISOString() });
+  saveDB(db);
+  res.json({ success: true });
 });
 
-// ── Admin Routes (basic, no auth — add auth for production) ──
-
+// ── Admin Stats ──
 app.get('/api/admin/stats', (req, res) => {
-  try {
-    const stats = {
-      totalUsers: db.prepare('SELECT COUNT(*) as count FROM users').get().count,
-      totalEmails: db.prepare('SELECT COUNT(*) as count FROM emails').get().count,
-      totalOrders: db.prepare('SELECT COUNT(*) as count FROM orders').get().count,
-      totalSubscriptions: db.prepare('SELECT COUNT(*) as count FROM subscriptions').get().count,
-      activeSubscriptions: db.prepare("SELECT COUNT(*) as count FROM subscriptions WHERE status = 'active'").get().count,
-      totalLettersGenerated: db.prepare('SELECT COUNT(*) as count FROM letters').get().count,
-      enterpriseInquiries: db.prepare('SELECT COUNT(*) as count FROM enterprise_inquiries').get().count,
-      recentOrders: db.prepare('SELECT * FROM orders ORDER BY created_at DESC LIMIT 10').all(),
-      recentEmails: db.prepare('SELECT * FROM emails ORDER BY created_at DESC LIMIT 10').all(),
-    };
-    res.json(stats);
-  } catch (err) {
-    console.error('Stats error:', err);
-    res.status(500).json({ error: 'Failed to get stats' });
-  }
+  res.json({
+    totalUsers: db.users.length,
+    totalEmails: db.emails.length,
+    totalOrders: db.orders.length,
+    totalSubscriptions: db.subscriptions.length,
+    activeSubscriptions: db.subscriptions.filter(s => s.status === 'active').length,
+    totalLettersGenerated: db.letters.length,
+    enterpriseInquiries: db.enterprise_inquiries.length,
+    recentOrders: db.orders.slice(-10).reverse(),
+    recentEmails: db.emails.slice(-10).reverse()
+  });
 });
 
 // ── Catch-all: serve index.html ──
@@ -417,6 +375,6 @@ app.listen(PORT, () => {
 
 // Graceful shutdown
 process.on('SIGINT', () => {
-  db.close();
+  saveDB(db);
   process.exit(0);
 });
