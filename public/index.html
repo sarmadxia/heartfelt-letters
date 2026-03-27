@@ -2003,7 +2003,7 @@ body::after {
       <div class="offer-right">
         <div class="offer-price">$10</div>
         <div class="offer-unit">per letter</div>
-        <button class="btn btn-rose btn-sm" onclick="openModal('order')">Order a Letter</button>
+        <button class="btn btn-rose btn-sm" onclick="stripeCheckout('single-letter')">Order a Letter — $1</button>
       </div>
     </div>
 
@@ -2020,11 +2020,11 @@ body::after {
         <div class="price-tiers">
           <div class="price-tier">
             <span><strong>$29.99</strong>/mo · individuals</span>
-            <button class="btn btn-sage btn-sm" onclick="openModal('subscribe')">Subscribe</button>
+            <button class="btn btn-sage btn-sm" onclick="stripeCheckout('individual')">Subscribe</button>
           </div>
           <div class="price-tier">
             <span><strong>$79.99</strong>/mo · businesses</span>
-            <button class="btn btn-outline btn-sm" onclick="openModal('business')">Business Plan</button>
+            <button class="btn btn-outline btn-sm" onclick="stripeCheckout('business')">Business Plan</button>
           </div>
         </div>
       </div>
@@ -2415,11 +2415,15 @@ function openSharePaywall() {
         </p>
       </div>
     </div>
-    <button class="btn btn-sage" style="width:100%;justify-content:center" onclick="closeModal();openModal('subscribe')">
-      Subscribe — $29.99/mo
+    <button class="btn btn-rose" style="width:100%;justify-content:center" onclick="stripeCheckout('single-letter')">
+      Buy This Letter — $1
     </button>
-    <button class="btn btn-outline" style="width:100%;justify-content:center;margin-top:0.5rem" onclick="closeModal();openModal('business')">
-      Business Plan — $79.99/mo
+    <div style="text-align:center;margin:0.6rem 0;font-size:0.7rem;color:var(--ink-muted)">or subscribe for unlimited</div>
+    <button class="btn btn-sage" style="width:100%;justify-content:center" onclick="stripeCheckout('individual')">
+      Subscribe — $29.99/mo (10 letters)
+    </button>
+    <button class="btn btn-outline" style="width:100%;justify-content:center;margin-top:0.5rem" onclick="stripeCheckout('business')">
+      Business Plan — $79.99/mo (50 letters)
     </button>
     <a href="#offers" class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:0.5rem;text-decoration:none" onclick="closeModal()">
       See All Plans
@@ -2441,10 +2445,13 @@ function openNoLettersModal() {
         You've used all <strong>${currentUser.letters_limit}</strong> letters in your plan this month.
       </p>
       <p style="font-size:0.8rem;color:var(--ink-muted)">
-        Upgrade your plan for more letters, or wait for your monthly reset.
+        Buy a single letter or upgrade your plan.
       </p>
     </div>
-    <button class="btn btn-sage" style="width:100%;justify-content:center" onclick="closeModal();openModal('subscribe')">
+    <button class="btn btn-rose" style="width:100%;justify-content:center" onclick="stripeCheckout('single-letter')">
+      Buy One Letter — $1
+    </button>
+    <button class="btn btn-sage" style="width:100%;justify-content:center;margin-top:0.5rem" onclick="stripeCheckout('individual')">
       Upgrade Plan
     </button>
     <a href="#offers" class="btn btn-outline" style="width:100%;justify-content:center;margin-top:0.5rem;text-decoration:none" onclick="closeModal()">
@@ -3218,14 +3225,22 @@ async function submitModal(type) {
   const address = document.getElementById('m-address')?.value || '';
   const volume = document.getElementById('m-volume')?.value || '';
 
+  // Redirect to Stripe for payment types
+  if (type === 'order') {
+    closeModal();
+    return stripeCheckout('single-letter');
+  }
+  if (type === 'subscribe') {
+    closeModal();
+    return stripeCheckout('individual');
+  }
+  if (type === 'business') {
+    closeModal();
+    return stripeCheckout('business');
+  }
+
   try {
-    if (type === 'order') {
-      await api('orders', { email, address, letterText: lastLetterText });
-    } else if (type === 'subscribe') {
-      await api('subscriptions', { email, plan: 'individual' });
-    } else if (type === 'business') {
-      await api('subscriptions', { email, company, plan: 'business' });
-    } else if (type === 'stationery') {
+    if (type === 'stationery') {
       await api('stationery', { email });
     } else if (type === 'enterprise') {
       await api('enterprise', { company, email, monthlyVolume: volume ? parseInt(volume) : null });
@@ -3238,12 +3253,92 @@ async function submitModal(type) {
   document.getElementById('modalSuccess').style.display = 'block';
   setTimeout(() => {
     closeModal();
-    // Refresh auth state after subscription
-    if (type === 'subscribe' || type === 'business') {
-      checkAuth();
-    }
   }, 2200);
 }
+
+// Stripe Checkout redirect
+async function stripeCheckout(type) {
+  if (!currentUser) {
+    closeModal();
+    openAuthModal('login');
+    return;
+  }
+
+  // Show loading state
+  const content = document.getElementById('modalContent');
+  content.innerHTML = `
+    <div style="text-align:center;padding:2rem">
+      <div style="font-size:1.5rem;margin-bottom:1rem;animation:writeAnim 1.2s ease-in-out infinite">💳</div>
+      <p style="font-family:var(--font-serif);font-style:italic;color:var(--ink-soft)">Redirecting to secure checkout…</p>
+    </div>
+  `;
+  content.style.display = 'block';
+  document.getElementById('modalSuccess').style.display = 'none';
+  document.getElementById('modalOverlay').classList.add('open');
+
+  try {
+    const endpoint = type === 'single-letter' ? 'single-letter' :
+                     type === 'individual' ? 'individual' : 'business';
+    const res = await fetch(`/api/stripe/checkout/${endpoint}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin'
+    });
+    const data = await res.json();
+
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error(data.error || 'Failed to create checkout');
+    }
+  } catch (err) {
+    console.error('Stripe checkout error:', err);
+    content.innerHTML = `
+      <div style="text-align:center;padding:2rem">
+        <div style="font-size:1.5rem;margin-bottom:1rem">⚠️</div>
+        <p style="color:var(--rose-deep);font-size:0.88rem;margin-bottom:1rem">${err.message || 'Payment system unavailable. Please try again.'}</p>
+        <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+      </div>
+    `;
+  }
+}
+
+// Handle payment success/cancel URL params
+(function checkPaymentStatus() {
+  const params = new URLSearchParams(window.location.search);
+  const payment = params.get('payment');
+  const type = params.get('type');
+
+  if (payment === 'success') {
+    // Clean URL
+    window.history.replaceState({}, '', '/');
+    // Refresh user data
+    setTimeout(async () => {
+      await checkAuth();
+      const content = document.getElementById('modalContent');
+      const planName = type === 'single_letter' ? '1 letter credit' :
+                       type === 'individual' ? 'Individual Plan' : 'Business Plan';
+      content.innerHTML = `
+        <div style="text-align:center;padding:2rem">
+          <div style="font-size:2.5rem;margin-bottom:1rem">🎉</div>
+          <h3 class="modal-title" style="text-align:center">Payment Successful!</h3>
+          <p style="font-family:var(--font-serif);font-style:italic;font-size:1.1rem;color:var(--sage);margin-bottom:0.5rem">
+            Welcome to ${planName}
+          </p>
+          <p style="font-size:0.8rem;color:var(--ink-muted)">
+            You can now download, print, and share your letters.
+          </p>
+        </div>
+        <button class="btn btn-sage" style="width:100%;justify-content:center" onclick="closeModal()">Start Writing</button>
+      `;
+      content.style.display = 'block';
+      document.getElementById('modalSuccess').style.display = 'none';
+      document.getElementById('modalOverlay').classList.add('open');
+    }, 500);
+  } else if (payment === 'cancelled') {
+    window.history.replaceState({}, '', '/');
+  }
+})();
 </script>
 </body>
 </html>
