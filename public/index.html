@@ -3342,8 +3342,8 @@ async function stripeCheckout(type) {
     }, 500);
   } else if (payment === 'cancelled') {
     window.history.replaceState({}, '', '/');
-    // User cancelled Stripe checkout — show downsell after a short delay
-    setTimeout(() => showDownsell(), 600);
+    // User cancelled Stripe checkout — show Pay What You Want first
+    setTimeout(() => showPayWhatYouWant(), 600);
   }
 })();
 
@@ -3411,12 +3411,12 @@ function showDownsell() {
     </button>
 
     <p style="text-align:center;margin-top:0.8rem">
-      <a onclick="showPayWhatYouWant()" style="
+      <a onclick="closeModal()" style="
         font-size:0.72rem;
         color:var(--ink-muted);
         text-decoration:underline;
         cursor:pointer;
-      ">No thanks, I'll decide my own price →</a>
+      ">No thanks, I'll pass for now</a>
     </p>
   `;
 }
@@ -3469,8 +3469,8 @@ function showPayWhatYouWant() {
     </p>
 
     <p style="text-align:center;margin-top:0.8rem">
-      <a onclick="closeModal()" style="font-size:0.7rem;color:var(--ink-muted);text-decoration:underline;cursor:pointer">
-        No thanks, I'll pass for now
+      <a onclick="showDownsell()" style="font-size:0.7rem;color:var(--ink-muted);text-decoration:underline;cursor:pointer">
+        → Or grab our $1 Early Access deal instead
       </a>
     </p>
   `;
