@@ -1527,6 +1527,237 @@ body::after {
   .letter-paper { background-image: none; }
   body::after { display: none; }
 }
+
+/* ── Studio Layout ── */
+.studio-wrap {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+.studio-form {
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: sticky;
+  top: 72px;
+}
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+.memories-toggle {
+  font-size: 0.78rem;
+  color: var(--rose);
+  cursor: pointer;
+}
+.memories-toggle summary {
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--rose);
+  list-style: none;
+  padding: 0.2rem 0;
+}
+.memories-toggle summary::-webkit-details-marker { display: none; }
+
+/* Tone pills */
+.tone-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.tone-pill {
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-light);
+  background: var(--paper);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tone-pill:hover { border-color: var(--rose); }
+.tone-pill.selected { background: var(--rose-light); border-color: var(--rose); color: var(--rose-deep); }
+
+/* Font pills */
+.font-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  max-height: 90px;
+  overflow-y: auto;
+}
+.font-pill {
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-light);
+  background: var(--paper);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.font-pill:hover { border-color: var(--rose); }
+.font-pill.selected { background: var(--rose-light); border-color: var(--rose); }
+
+/* Paper swatches (small circles) */
+.paper-swatches {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.paper-swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+  box-shadow: 0 1px 4px rgba(30,18,10,0.1);
+}
+.paper-swatch:hover { transform: scale(1.1); }
+.paper-swatch.selected { border-color: var(--rose); }
+.paper-swatch.locked { opacity: 0.6; }
+.swatch-lock {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+}
+
+/* Ink swatches */
+.ink-swatches {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.ink-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+  box-shadow: 0 1px 4px rgba(30,18,10,0.15);
+}
+.ink-swatch:hover { transform: scale(1.15); }
+.ink-swatch.selected { border-color: var(--rose); transform: scale(1.15); }
+
+.studio-generate-btn { width: 100%; justify-content: center; padding: 0.85rem; font-size: 0.88rem; }
+.studio-rewrite-btn { width: 100%; justify-content: center; margin-top: -0.4rem; }
+.studio-form-error { font-size: 0.78rem; color: var(--rose-deep); background: var(--rose-light); padding: 0.5rem 0.8rem; border-radius: 4px; }
+
+/* Studio preview panel */
+.studio-preview {
+  position: sticky;
+  top: 72px;
+}
+.studio-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  min-height: 32px;
+}
+.studio-preview-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.studio-preview-actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.studio-loading {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+.studio-loading p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ink-soft);
+  margin-top: 0.8rem;
+}
+.studio-error-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--rose-deep);
+  font-size: 0.88rem;
+}
+
+/* Placeholder */
+.studio-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+}
+.placeholder-paper {
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 2px 2px 0 var(--paper-dark), 4px 4px 0 var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  align-items: flex-start;
+}
+.placeholder-line {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--border-light);
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+.placeholder-line.long { width: 90%; }
+.placeholder-line.medium { width: 65%; }
+.placeholder-line.short { width: 40%; }
+@keyframes shimmer {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.placeholder-hint {
+  margin-top: 1rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  text-align: center;
+  width: 100%;
+  line-height: 1.6;
+}
+.placeholder-hint strong { color: var(--rose); font-style: normal; }
+
+/* Responsive studio */
+@media (max-width: 900px) {
+  .studio-wrap { grid-template-columns: 1fr; }
+  .studio-form { position: static; }
+  .studio-preview { position: static; }
+  .form-row-2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .tone-pills { gap: 0.3rem; }
+  .tone-pill { padding: 0.25rem 0.55rem; font-size: 0.68rem; }
+}
 </style>
 </head>
 <body>
@@ -1603,372 +1834,191 @@ body::after {
   <div class="section-header">
     <p class="overline">Free Sample</p>
     <h2 class="section-title">Write your letter <em>right now</em></h2>
-    <p class="section-sub">No sign-up needed. Tell us who it's for and what you feel — we'll do the rest.</p>
+    <p class="section-sub">Fill in the details and watch your letter appear instantly.</p>
   </div>
-  <div class="writer-wrap">
-    <!-- Step Tabs -->
-    <div class="step-tabs">
-      <div class="step-tab active" data-step="1">
-        <div class="tab-num">1</div>
-        <span class="tab-label">About</span>
+
+  <div class="studio-wrap">
+    <!-- LEFT: Form controls -->
+    <div class="studio-form">
+      <!-- Row 1: To / From -->
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>To</label>
+          <input type="text" id="recipientName" placeholder="Recipient's name">
+        </div>
+        <div class="form-group">
+          <label>From</label>
+          <input type="text" id="senderName" placeholder="Your name">
+        </div>
       </div>
-      <div class="step-tab" data-step="2">
-        <div class="tab-num">2</div>
-        <span class="tab-label">Message</span>
+
+      <!-- Row 2: Relationship / Occasion -->
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Relationship</label>
+          <select id="relationship">
+            <option value="">Select...</option>
+            <option>Parent / Child</option>
+            <option>Romantic Partner</option>
+            <option>Best Friend</option>
+            <option>Sibling</option>
+            <option>Grandparent</option>
+            <option>Teacher / Mentor</option>
+            <option>Colleague / Friend</option>
+            <option>Long-Distance Friend</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Occasion</label>
+          <select id="occasion">
+            <option value="">Select...</option>
+            <option>Just Because</option>
+            <option>Birthday</option>
+            <option>Thank You</option>
+            <option>Apology</option>
+            <option>Missing Them</option>
+            <option>Encouragement</option>
+            <option>Anniversary</option>
+            <option>Graduation</option>
+            <option>Farewell</option>
+            <option>Get Well Soon</option>
+            <option>Grief / Loss</option>
+            <option>Congratulations</option>
+          </select>
+        </div>
       </div>
-      <div class="step-tab" data-step="3">
-        <div class="tab-num">3</div>
-        <span class="tab-label">Letter</span>
+
+      <!-- What to express -->
+      <div class="form-group">
+        <label>What do you want to express?</label>
+        <textarea id="feelings" rows="3" placeholder="What have you been wanting to say?"></textarea>
       </div>
-      <div class="step-tab" data-step="4">
-        <div class="tab-num">4</div>
-        <span class="tab-label">Decorate</span>
+
+      <!-- Memories (collapsible) -->
+      <details class="memories-toggle">
+        <summary>+ Add memories or details (optional)</summary>
+        <div class="form-group" style="margin-top:0.6rem">
+          <textarea id="memories" rows="2" placeholder="Inside jokes, specific moments, details..."></textarea>
+        </div>
+      </details>
+
+      <!-- Tone pills -->
+      <div class="form-group">
+        <label>Tone</label>
+        <div class="tone-pills">
+          <button class="tone-pill selected" data-tone="Warm" onclick="selectTone(this)">🌿 Warm</button>
+          <button class="tone-pill" data-tone="Emotional" onclick="selectTone(this)">💧 Emotional</button>
+          <button class="tone-pill" data-tone="Playful" onclick="selectTone(this)">✨ Playful</button>
+          <button class="tone-pill" data-tone="Poetic" onclick="selectTone(this)">🌙 Poetic</button>
+          <button class="tone-pill" data-tone="Formal" onclick="selectTone(this)">🕊️ Formal</button>
+          <button class="tone-pill" data-tone="Simple" onclick="selectTone(this)">🍃 Simple</button>
+        </div>
       </div>
+
+      <!-- Font selector (compact) -->
+      <div class="form-group">
+        <label>Handwriting Style</label>
+        <div class="font-pills">
+          <button class="font-pill selected" style="font-family:'Caveat'" data-font="Caveat" onclick="studioSetFont('Caveat',this)">Caveat</button>
+          <button class="font-pill" style="font-family:'Dancing Script'" data-font="Dancing Script" onclick="studioSetFont('Dancing Script',this)">Dancing Script</button>
+          <button class="font-pill" style="font-family:'Indie Flower'" data-font="Indie Flower" onclick="studioSetFont('Indie Flower',this)">Indie Flower</button>
+          <button class="font-pill" style="font-family:'Satisfy'" data-font="Satisfy" onclick="studioSetFont('Satisfy',this)">Satisfy</button>
+          <button class="font-pill" style="font-family:'Patrick Hand'" data-font="Patrick Hand" onclick="studioSetFont('Patrick Hand',this)">Patrick Hand</button>
+          <button class="font-pill" style="font-family:'Sacramento'" data-font="Sacramento" onclick="studioSetFont('Sacramento',this)">Sacramento</button>
+          <button class="font-pill" style="font-family:'Pacifico'" data-font="Pacifico" onclick="studioSetFont('Pacifico',this)">Pacifico</button>
+          <button class="font-pill" style="font-family:'Kalam'" data-font="Kalam" onclick="studioSetFont('Kalam',this)">Kalam</button>
+          <button class="font-pill" style="font-family:'Great Vibes'" data-font="Great Vibes" onclick="studioSetFont('Great Vibes',this)">Great Vibes</button>
+          <button class="font-pill" style="font-family:'Homemade Apple'" data-font="Homemade Apple" onclick="studioSetFont('Homemade Apple',this)">Homemade Apple</button>
+        </div>
+      </div>
+
+      <!-- Paper style (compact swatches) -->
+      <div class="form-group">
+        <label>Paper Style</label>
+        <div class="paper-swatches">
+          <div class="paper-swatch selected" data-paper="cream" onclick="studioSetPaper('cream',this)" title="Classic Cream" style="background:linear-gradient(135deg,#fffdf8,#f0ebe3)"></div>
+          <div class="paper-swatch locked" data-paper="rose" onclick="studioSetPaper('rose',this)" title="Rose Petal 🔒" style="background:linear-gradient(135deg,#f5e8ef,#dbb5cb)"><span class="swatch-lock">🔒</span></div>
+          <div class="paper-swatch locked" data-paper="sage" onclick="studioSetPaper('sage',this)" title="Botanical 🔒" style="background:linear-gradient(135deg,#e8ede6,#a8c0a1)"><span class="swatch-lock">🔒</span></div>
+          <div class="paper-swatch locked" data-paper="kraft" onclick="studioSetPaper('kraft',this)" title="Vintage Kraft 🔒" style="background:linear-gradient(135deg,#f5ede0,#c9a87c)"><span class="swatch-lock">🔒</span></div>
+          <div class="paper-swatch locked" data-paper="midnight" onclick="studioSetPaper('midnight',this)" title="Midnight 🔒" style="background:linear-gradient(135deg,#1e2a3a,#0d1520)"><span class="swatch-lock">🔒</span></div>
+          <div class="paper-swatch locked" data-paper="noir" onclick="studioSetPaper('noir',this)" title="Gold Foil Noir 🔒" style="background:linear-gradient(135deg,#1e120a,#3d2a1a)"><span class="swatch-lock">🔒</span></div>
+        </div>
+      </div>
+
+      <!-- Ink color -->
+      <div class="form-group">
+        <label>Ink Color</label>
+        <div class="ink-swatches">
+          <div class="ink-swatch selected" data-ink="#4a3225" style="background:#4a3225" onclick="studioSetInk('#4a3225',this)" title="Ink Brown"></div>
+          <div class="ink-swatch" data-ink="#1e120a" style="background:#1e120a" onclick="studioSetInk('#1e120a',this)" title="Deep Black"></div>
+          <div class="ink-swatch" data-ink="#9e4f47" style="background:#9e4f47" onclick="studioSetInk('#9e4f47',this)" title="Rose"></div>
+          <div class="ink-swatch" data-ink="#5e8560" style="background:#5e8560" onclick="studioSetInk('#5e8560',this)" title="Sage"></div>
+          <div class="ink-swatch" data-ink="#be9230" style="background:#be9230" onclick="studioSetInk('#be9230',this)" title="Gold"></div>
+          <div class="ink-swatch" data-ink="#2c4a6e" style="background:#2c4a6e" onclick="studioSetInk('#2c4a6e',this)" title="Navy"></div>
+          <div class="ink-swatch" data-ink="#ffffff" style="background:#ffffff;border:1px solid #ccc" onclick="studioSetInk('#ffffff',this)" title="White"></div>
+        </div>
+      </div>
+
+      <!-- Write button -->
+      <div class="studio-form-error" id="studioError" style="display:none"></div>
+      <button class="btn btn-rose studio-generate-btn" id="studioGenerateBtn" onclick="studioWriteLetter()">
+        ✦ Write My Letter
+      </button>
+      <button class="btn btn-ghost studio-rewrite-btn" id="studioRewriteBtn" style="display:none" onclick="studioRewrite()">
+        ↺ Rewrite
+      </button>
     </div>
 
-    <!-- Panel 1: About -->
-    <div class="panel active" id="panel1">
-      <div class="card">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>To (Recipient's Name)</label>
-            <input type="text" id="recipientName" placeholder="e.g. Sarah">
-          </div>
-          <div class="form-group">
-            <label>From (Your Name)</label>
-            <input type="text" id="senderName" placeholder="e.g. Michael">
-          </div>
-          <div class="form-group">
-            <label>Your Relationship</label>
-            <select id="relationship">
-              <option value="">Select...</option>
-              <option>Parent / Child</option>
-              <option>Romantic Partner</option>
-              <option>Best Friend</option>
-              <option>Sibling</option>
-              <option>Grandparent</option>
-              <option>Teacher / Mentor</option>
-              <option>Colleague / Friend</option>
-              <option>Long-Distance Friend</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Occasion</label>
-            <select id="occasion">
-              <option value="">Select...</option>
-              <option>Just Because</option>
-              <option>Birthday</option>
-              <option>Thank You</option>
-              <option>Apology</option>
-              <option>Missing Them</option>
-              <option>Encouragement</option>
-              <option>Anniversary</option>
-              <option>Graduation</option>
-              <option>Farewell</option>
-              <option>Get Well Soon</option>
-              <option>Grief / Loss</option>
-              <option>Congratulations</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-error" id="error1">Please fill in all the fields above.</div>
-        <div class="form-actions">
-          <button class="btn btn-rose" onclick="goToStep(2)">Continue →</button>
+    <!-- RIGHT: Live preview -->
+    <div class="studio-preview">
+      <div class="studio-preview-header">
+        <span class="studio-preview-label" id="previewLabel">Your letter will appear here</span>
+        <div class="studio-preview-actions" id="previewActions" style="display:none">
+          <button class="btn btn-ghost btn-sm" onclick="handleShare('whatsapp')">WhatsApp</button>
+          <button class="btn btn-ghost btn-sm" onclick="handleShare('instagram')">Instagram</button>
+          <button class="btn btn-ghost btn-sm" onclick="handleShare('download')">⬇ Download</button>
+          <button class="btn btn-ghost btn-sm" onclick="handlePrint()">🖨 Print</button>
         </div>
       </div>
-    </div>
 
-    <!-- Panel 2: Message -->
-    <div class="panel" id="panel2">
-      <div class="card">
-        <div class="form-grid" style="grid-template-columns:1fr">
-          <div class="form-group">
-            <label>What do you want to express?</label>
-            <textarea id="feelings" rows="4" placeholder="What have you been wanting to say? What do you feel?"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Memories, inside jokes, or details to include (optional)</label>
-            <textarea id="memories" rows="3" placeholder="Any specific memories, moments, or details that make your relationship special..."></textarea>
-          </div>
-          <div class="form-group">
-            <label>Tone</label>
-            <div class="tone-grid">
-              <button class="tone-btn selected" data-tone="Warm" onclick="selectTone(this)">🌿 Warm</button>
-              <button class="tone-btn" data-tone="Emotional" onclick="selectTone(this)">💧 Emotional</button>
-              <button class="tone-btn" data-tone="Playful" onclick="selectTone(this)">✨ Playful</button>
-              <button class="tone-btn" data-tone="Poetic" onclick="selectTone(this)">🌙 Poetic</button>
-              <button class="tone-btn" data-tone="Formal" onclick="selectTone(this)">🕊️ Formal</button>
-              <button class="tone-btn" data-tone="Simple" onclick="selectTone(this)">🍃 Simple</button>
-            </div>
-          </div>
-        </div>
-        <div class="form-error" id="error2">Please tell us what you want to express.</div>
-        <div class="form-actions">
-          <button class="btn btn-ghost" onclick="goToStep(1)">← Back</button>
-          <button class="btn btn-rose" onclick="goToStep(3)">Write My Letter ✦</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Panel 3: Letter -->
-    <div class="panel" id="panel3">
-      <div class="letter-loading" id="letterLoading">
+      <!-- Loading state -->
+      <div class="studio-loading" id="studioLoading" style="display:none">
         <div class="writing-icon">✒️</div>
-        <p id="loadingText">Writing your letter with care…</p>
-        <p class="sub">This usually takes a few seconds</p>
+        <p id="studioLoadingText">Writing your letter with care…</p>
       </div>
 
-      <div class="letter-error" id="letterError">
-        <p id="errorText">Something went wrong. Please try again.</p>
-        <button class="btn btn-ghost" onclick="goToStep(2)">← Go back</button>
+      <!-- Error state -->
+      <div class="studio-error-state" id="studioErrorState" style="display:none">
+        <p id="studioErrorText">Something went wrong. Please try again.</p>
       </div>
 
-      <div class="letter-result" id="letterResult">
-        <div class="letter-meta">
-          <span class="letter-meta-title">A letter to <span id="letterTo"></span></span>
-          <div class="letter-actions">
-
-            <button class="btn btn-ghost btn-sm" onclick="handlePrint()">Print</button>
-            <button class="btn btn-ghost btn-sm" onclick="rewriteLetter()">Rewrite</button>
-          </div>
-        </div>
-        <div class="letter-paper" id="letterPaper">
-          <div class="letter-text" id="letterText"></div>
-        </div>
-
-        <div class="decorate-cta">
-          <h4>Make it beautiful ✦</h4>
-          <p>Choose fonts, paper styles, stickers & ink colors before sharing.</p>
-          <button class="btn btn-rose" onclick="goToStep(4)">Decorate Your Letter ✦</button>
-        </div>
-
-        <button class="try-again" onclick="resetWriter()">← Write another letter</button>
+      <!-- The paper -->
+      <div class="letter-paper" id="letterPaper" style="display:none">
+        <div class="letter-text" id="letterText"></div>
       </div>
-    </div>
 
-    <!-- Panel 4: Decorate -->
-    <div class="panel" id="panel4">
-      <div class="deco-layout">
-        <!-- Live letter preview -->
-        <div class="deco-preview">
-          <div class="letter-paper" id="letterPaperPreview">
-            <div class="letter-text" id="letterTextPreview"></div>
-          </div>
-        </div>
-
-        <!-- Controls -->
-        <div class="deco-controls">
-          <!-- Plan status -->
-          <div class="plan-status-bar free" id="planStatusBar">
-            🔒 Free Plan — some features locked
-            <a href="#offers">Upgrade</a>
-          </div>
-
-          <!-- Font picker -->
-          <div class="deco-section">
-            <div class="deco-label">Handwriting Style</div>
-            <div class="font-picker">
-              <button class="font-opt selected" style="font-family:'Caveat'" onclick="setLetterFont('Caveat', this)">Caveat — Hello dear</button>
-              <button class="font-opt" style="font-family:'Dancing Script'" onclick="setLetterFont('Dancing Script', this)">Dancing Script — Hello dear</button>
-              <button class="font-opt" style="font-family:'Indie Flower'" onclick="setLetterFont('Indie Flower', this)">Indie Flower — Hello dear</button>
-              <button class="font-opt" style="font-family:'Satisfy'" onclick="setLetterFont('Satisfy', this)">Satisfy — Hello dear</button>
-              <button class="font-opt" style="font-family:'Patrick Hand'" onclick="setLetterFont('Patrick Hand', this)">Patrick Hand — Hello dear</button>
-              <button class="font-opt" style="font-family:'Sacramento'" onclick="setLetterFont('Sacramento', this)">Sacramento — Hello dear</button>
-              <button class="font-opt" style="font-family:'Pacifico'" onclick="setLetterFont('Pacifico', this)">Pacifico — Hello dear</button>
-              <button class="font-opt" style="font-family:'Kalam'" onclick="setLetterFont('Kalam', this)">Kalam — Hello dear</button>
-              <button class="font-opt" style="font-family:'Shadows Into Light'" onclick="setLetterFont('Shadows Into Light', this)">Shadows Into Light — Hello dear</button>
-              <button class="font-opt" style="font-family:'Amatic SC'" onclick="setLetterFont('Amatic SC', this)">Amatic SC — Hello dear</button>
-              <button class="font-opt" style="font-family:'Great Vibes'" onclick="setLetterFont('Great Vibes', this)">Great Vibes — Hello dear</button>
-              <button class="font-opt" style="font-family:'Homemade Apple'" onclick="setLetterFont('Homemade Apple', this)">Homemade Apple — Hello dear</button>
-            </div>
-          </div>
-
-          <!-- Paper picker -->
-          <div class="deco-section">
-            <div class="deco-label">Paper Style</div>
-            <div class="paper-picker">
-              <div class="paper-opt selected" onclick="setLetterPaper('cream', this)">
-                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#fffdf8,#f0ebe3)">
-                  <span class="paper-opt-line" style="background:#b5635a;width:100%"></span>
-                  <span class="paper-opt-line" style="background:#b5635a;width:75%"></span>
-                  <span class="paper-opt-line" style="background:#b5635a;width:100%"></span>
-                </div>
-                <div class="paper-opt-name">Classic</div>
-              </div>
-              <div class="paper-opt locked" onclick="handlePaperClick('rose', this)">
-                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#f5e8ef,#dbb5cb)">
-                  <span class="paper-opt-line" style="background:#c9a0b5;width:100%"></span>
-                  <span class="paper-opt-line" style="background:#c9a0b5;width:75%"></span>
-                  <span class="paper-opt-line" style="background:#c9a0b5;width:100%"></span>
-                </div>
-                <div class="paper-opt-name">Rose</div>
-              </div>
-              <div class="paper-opt locked" onclick="handlePaperClick('botanical', this)">
-                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#e8ede6,#a8c0a1)">
-                  <span class="paper-opt-line" style="background:#8aaa82;width:100%"></span>
-                  <span class="paper-opt-line" style="background:#8aaa82;width:75%"></span>
-                  <span class="paper-opt-line" style="background:#8aaa82;width:100%"></span>
-                </div>
-                <div class="paper-opt-name">Botanical</div>
-              </div>
-              <div class="paper-opt locked" onclick="handlePaperClick('parchment', this)">
-                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#f5f0e8,#e4d8c8)">
-                  <span class="paper-opt-line" style="background:#c4b49e;width:100%"></span>
-                  <span class="paper-opt-line" style="background:#c4b49e;width:75%"></span>
-                  <span class="paper-opt-line" style="background:#c4b49e;width:100%"></span>
-                </div>
-                <div class="paper-opt-name">Parchment</div>
-              </div>
-              <div class="paper-opt dark-paper locked" onclick="handlePaperClick('noir', this)">
-                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#1e120a,#3d2a1a)">
-                  <span class="paper-opt-line" style="background:#be9230;width:100%"></span>
-                  <span class="paper-opt-line" style="background:#be9230;width:75%"></span>
-                  <span class="paper-opt-line" style="background:#be9230;width:100%"></span>
-                </div>
-                <div class="paper-opt-name">Gold Noir</div>
-              </div>
-              <div class="paper-opt locked" onclick="handlePaperClick('denim', this)">
-                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#2c3e6b,#1a2744)">
-                  <span class="paper-opt-line" style="background:rgba(255,255,255,0.2);width:100%"></span>
-                  <span class="paper-opt-line" style="background:rgba(255,255,255,0.2);width:75%"></span>
-                  <span class="paper-opt-line" style="background:rgba(255,255,255,0.2);width:100%"></span>
-                </div>
-                <div class="paper-opt-name" style="background:rgba(44,62,107,0.8);color:#8aa4d6">Denim Blue</div>
-              </div>
-              <div class="paper-opt locked" onclick="handlePaperClick('kraft', this)">
-                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#c8a87c,#a88558)">
-                  <span class="paper-opt-line" style="background:rgba(80,50,20,0.2);width:100%"></span>
-                  <span class="paper-opt-line" style="background:rgba(80,50,20,0.2);width:75%"></span>
-                  <span class="paper-opt-line" style="background:rgba(80,50,20,0.2);width:100%"></span>
-                </div>
-                <div class="paper-opt-name">Kraft</div>
-              </div>
-              <div class="paper-opt locked" onclick="handlePaperClick('lavender', this)">
-                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#e8e0f0,#c9b8e0)">
-                  <span class="paper-opt-line" style="background:rgba(130,100,170,0.15);width:100%"></span>
-                  <span class="paper-opt-line" style="background:rgba(130,100,170,0.15);width:75%"></span>
-                  <span class="paper-opt-line" style="background:rgba(130,100,170,0.15);width:100%"></span>
-                </div>
-                <div class="paper-opt-name">Lavender</div>
-              </div>
-              <div class="paper-opt dark-paper locked" onclick="handlePaperClick('midnight', this)">
-                <div class="paper-opt-preview" style="background:linear-gradient(180deg,#0d1b2a,#1b2838)">
-                  <span class="paper-opt-line" style="background:rgba(200,220,255,0.12);width:100%"></span>
-                  <span class="paper-opt-line" style="background:rgba(200,220,255,0.12);width:75%"></span>
-                  <span class="paper-opt-line" style="background:rgba(200,220,255,0.12);width:100%"></span>
-                </div>
-                <div class="paper-opt-name">Midnight</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Ink color picker -->
-          <div class="deco-section">
-            <div class="deco-label">Ink Color</div>
-            <div class="ink-picker">
-              <div class="ink-opt selected" style="background:#4a3225" onclick="setInkColor('#4a3225', this)" title="Dark Brown"></div>
-              <div class="ink-opt" style="background:#1a1a1a" onclick="setInkColor('#1a1a1a', this)" title="Black"></div>
-              <div class="ink-opt" style="background:#1e3a5f" onclick="setInkColor('#1e3a5f', this)" title="Navy"></div>
-              <div class="ink-opt" style="background:#9e4f47" onclick="setInkColor('#9e4f47', this)" title="Deep Rose"></div>
-              <div class="ink-opt" style="background:#2d5a3d" onclick="setInkColor('#2d5a3d', this)" title="Forest Green"></div>
-              <div class="ink-opt" style="background:#ffffff; border-color:#ccc" onclick="setInkColor('#ffffff', this)" title="White"></div>
-            </div>
-          </div>
-
-          <!-- Sticker picker -->
-          <div class="deco-section">
-            <div class="deco-label">Stickers (click to add, drag to move)</div>
-            <div class="sticker-picker">
-              <button class="sticker-btn" onclick="addSticker('heart')" title="Heart">
-                <svg viewBox="0 0 100 100"><path d="M50 88C25 70 5 55 5 35 5 18 18 5 35 5c10 0 15 8 15 8s5-8 15-8c17 0 30 13 30 30 0 20-20 35-45 53z" fill="#e8626b" stroke="#d44f58" stroke-width="2"/></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('star')" title="Star">
-                <svg viewBox="0 0 100 100"><polygon points="50,5 63,35 95,38 72,60 78,92 50,76 22,92 28,60 5,38 37,35" fill="#f5c542" stroke="#e0ab2a" stroke-width="2"/></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('flower')" title="Flower">
-                <svg viewBox="0 0 100 100"><circle cx="50" cy="30" r="16" fill="#f9a8d4" opacity="0.9"/><circle cx="70" cy="45" r="16" fill="#f9a8d4" opacity="0.8"/><circle cx="62" cy="68" r="16" fill="#f9a8d4" opacity="0.85"/><circle cx="38" cy="68" r="16" fill="#f9a8d4" opacity="0.8"/><circle cx="30" cy="45" r="16" fill="#f9a8d4" opacity="0.9"/><circle cx="50" cy="50" r="11" fill="#fbbf24"/></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('butterfly')" title="Butterfly">
-                <svg viewBox="0 0 100 100"><ellipse cx="35" cy="40" rx="22" ry="28" fill="#a78bfa" transform="rotate(-15 35 40)" opacity="0.85"/><ellipse cx="65" cy="40" rx="22" ry="28" fill="#c4b5fd" transform="rotate(15 65 40)" opacity="0.85"/><ellipse cx="38" cy="65" rx="12" ry="18" fill="#7c3aed" transform="rotate(-10 38 65)" opacity="0.7"/><ellipse cx="62" cy="65" rx="12" ry="18" fill="#8b5cf6" transform="rotate(10 62 65)" opacity="0.7"/><rect x="48" y="25" width="4" height="55" rx="2" fill="#4c1d95"/></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('leaf')" title="Leaf">
-                <svg viewBox="0 0 100 100"><path d="M50 90C30 75 10 50 20 25 30 5 60 5 75 20c15 15 5 40-10 50-5 3-10 10-15 20z" fill="#34d399" stroke="#059669" stroke-width="2"/><path d="M50 90C45 65 35 45 45 30" fill="none" stroke="#059669" stroke-width="2"/></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('sparkle')" title="Sparkle">
-                <svg viewBox="0 0 100 100"><path d="M50 5L55 40 90 50 55 60 50 95 45 60 10 50 45 40z" fill="#fbbf24" stroke="#f59e0b" stroke-width="1.5"/><circle cx="75" cy="20" r="4" fill="#fbbf24"/><circle cx="25" cy="80" r="3" fill="#fbbf24"/></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('ribbon')" title="Ribbon">
-                <svg viewBox="0 0 100 100"><path d="M30 25C30 15 70 15 70 25L75 50C75 55 65 60 50 60 35 60 25 55 25 50z" fill="#fb7185" stroke="#e11d48" stroke-width="2"/><path d="M35 60L20 85 38 72 50 90 62 72 80 85 65 60" fill="#f43f5e" stroke="#e11d48" stroke-width="1.5"/><text x="50" y="47" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="sans-serif">LOVE</text></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('moon')" title="Moon">
-                <svg viewBox="0 0 100 100"><path d="M60 10A40 40 0 1 0 60 90 32 32 0 0 1 60 10z" fill="#fbbf24"/><circle cx="30" cy="25" r="2" fill="#fde68a"/><circle cx="22" cy="55" r="1.5" fill="#fde68a"/><circle cx="40" cy="70" r="2" fill="#fde68a"/></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('cloud')" title="Cloud Heart">
-                <svg viewBox="0 0 100 100"><ellipse cx="50" cy="55" rx="38" ry="22" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="2"/><circle cx="30" cy="45" r="18" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="2"/><circle cx="65" cy="42" r="20" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="2"/><path d="M45 52C42 46 48 42 50 48c2-6 8-2 5 4-2 3-5 5-5 5s-3-2-5-5z" fill="#f87171"/></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('dove')" title="Dove">
-                <svg viewBox="0 0 100 100"><path d="M20 55C15 45 25 30 40 35L55 25C65 20 80 25 75 40L65 50C70 60 60 70 50 65L35 70C25 72 22 62 20 55z" fill="white" stroke="#94a3b8" stroke-width="2"/><circle cx="35" cy="42" r="2.5" fill="#334155"/><path d="M15 50L5 45 15 48" fill="none" stroke="#94a3b8" stroke-width="2"/><path d="M50 65L45 80 55 72 60 82" fill="none" stroke="#94a3b8" stroke-width="1.5"/></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('diamond')" title="Diamond">
-                <svg viewBox="0 0 100 100"><polygon points="50,10 80,35 50,90 20,35" fill="#67e8f9" stroke="#22d3ee" stroke-width="2"/><polygon points="50,10 80,35 50,35 20,35" fill="#a5f3fc" stroke="#22d3ee" stroke-width="1"/><line x1="50" y1="35" x2="50" y2="90" stroke="#22d3ee" stroke-width="1" opacity="0.5"/></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('rose')" title="Rose">
-                <svg viewBox="0 0 100 100"><circle cx="50" cy="42" r="18" fill="#fda4af"/><path d="M42 42C42 35 50 30 50 38c0-8 8-3 8 4-2 5-8 8-8 8s-6-3-8-8z" fill="#e11d48" opacity="0.6"/><circle cx="50" cy="42" r="8" fill="#fb7185"/><path d="M50 60L48 85" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/><path d="M48 72C40 68 38 60 42 58" stroke="#16a34a" stroke-width="2" fill="none"/><ellipse cx="38" cy="58" rx="6" ry="4" fill="#22c55e" transform="rotate(-30 38 58)"/></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('envelope')" title="Love Letter">
-                <svg viewBox="0 0 100 100"><rect x="15" y="30" width="70" height="45" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/><path d="M15 30L50 58 85 30" fill="none" stroke="#f59e0b" stroke-width="2"/><path d="M45 52C42 46 48 42 50 48c2-6 8-2 5 4-2 3-5 5-5 5s-3-2-5-5z" fill="#e8626b"/></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('crown')" title="Crown">
-                <svg viewBox="0 0 100 100"><path d="M15 65L25 30 40 50 50 20 60 50 75 30 85 65z" fill="#fbbf24" stroke="#d97706" stroke-width="2"/><rect x="15" y="65" width="70" height="12" rx="3" fill="#f59e0b" stroke="#d97706" stroke-width="2"/><circle cx="50" cy="35" r="4" fill="#ef4444"/><circle cx="33" cy="45" r="3" fill="#3b82f6"/><circle cx="67" cy="45" r="3" fill="#22c55e"/></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('sun')" title="Sun">
-                <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="18" fill="#fbbf24"/><g stroke="#f59e0b" stroke-width="3" stroke-linecap="round"><line x1="50" y1="8" x2="50" y2="22"/><line x1="50" y1="78" x2="50" y2="92"/><line x1="8" y1="50" x2="22" y2="50"/><line x1="78" y1="50" x2="92" y2="50"/><line x1="20" y1="20" x2="30" y2="30"/><line x1="70" y1="70" x2="80" y2="80"/><line x1="80" y1="20" x2="70" y2="30"/><line x1="30" y1="70" x2="20" y2="80"/></g></svg>
-              </button>
-              <button class="sticker-btn" onclick="addSticker('infinity')" title="Forever">
-                <svg viewBox="0 0 100 100"><path d="M50 50C50 35 65 25 78 35s8 25-5 25S50 65 50 50zm0 0C50 35 35 25 22 35S14 60 27 60 50 65 50 50z" fill="none" stroke="#e8626b" stroke-width="4" stroke-linecap="round"/></svg>
-              </button>
-            </div>
-          </div>
+      <!-- Placeholder (before generation) -->
+      <div class="studio-placeholder" id="studioPlaceholder">
+        <div class="placeholder-paper">
+          <div class="placeholder-line long"></div>
+          <div class="placeholder-line medium"></div>
+          <div class="placeholder-line long"></div>
+          <div class="placeholder-line short"></div>
+          <div class="placeholder-line long"></div>
+          <div class="placeholder-line medium"></div>
+          <div class="placeholder-line long"></div>
+          <div class="placeholder-line short"></div>
+          <p class="placeholder-hint">Fill in the details and click<br><strong>✦ Write My Letter</strong></p>
         </div>
       </div>
 
-      <!-- Share buttons -->
-      <div class="upsell-banner" style="margin-top:1.5rem">
-        <h4>Share your decorated letter</h4>
-        <p>Your letter is ready — save the image or share it directly.</p>
-        <div class="share-btns">
-          <button class="btn-share btn-download" onclick="shareLetter('download')">
-            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-            Save Image
-          </button>
-          <button class="btn-share btn-whatsapp" onclick="shareLetter('whatsapp')">
-            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            WhatsApp
-          </button>
-          <button class="btn-share btn-facebook" onclick="shareLetter('facebook')">
-            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            Facebook
-          </button>
-          <button class="btn-share btn-twitter" onclick="shareLetter('twitter')">
-            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            X
-          </button>
-          <button class="btn-share btn-native-share" id="nativeShareBtn2" onclick="shareLetter('native')">
-            <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-            Share…
-          </button>
-        </div>
-        <div class="share-status" id="shareStatus"></div>
-      </div>
-
-      <div class="form-actions" style="margin-top:1rem">
-        <button class="btn btn-ghost" onclick="goToStep(3)">← Back to Letter</button>
-        <button class="try-again" onclick="resetWriter()">Write another letter</button>
-      </div>
+      <!-- Share status -->
+      <div id="shareStatus" style="font-size:0.75rem;color:var(--ink-muted);text-align:center;margin-top:0.5rem;min-height:1.2rem"></div>
     </div>
   </div>
 </section>
+
 
 <!-- ── Offers ── -->
 <section class="offers-section" id="offers">
@@ -2845,7 +2895,7 @@ function makeDraggable(el, container) {
 }
 
 function selectTone(btn) {
-  document.querySelectorAll('.tone-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.tone-btn, .tone-pill').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
   selectedTone = btn.dataset.tone;
 }
@@ -2962,7 +3012,9 @@ async function shareLetter(platform) {
   }
 
   const text = document.getElementById('letterText').textContent;
-  const recipient = document.getElementById('letterTo').textContent;
+  const letterToEl = document.getElementById('letterTo');
+  const recipientInputEl = document.getElementById('recipientName');
+  const recipient = (letterToEl ? letterToEl.textContent : null) || (recipientInputEl ? recipientInputEl.value.trim() : '') || 'you';
   const shareTitle = `A heartfelt letter to ${recipient}`;
   const status = document.getElementById('shareStatus');
   const filename = `heartfelt-letter-to-${recipient.toLowerCase().replace(/\s+/g, '-')}.png`;
@@ -3103,42 +3155,65 @@ function copyLetter() {
 }
 
 function resetWriter() {
+  // Clear all inputs
   document.getElementById('recipientName').value = '';
   document.getElementById('senderName').value = '';
   document.getElementById('relationship').value = '';
   document.getElementById('occasion').value = '';
   document.getElementById('feelings').value = '';
-  document.getElementById('memories').value = '';
-  document.querySelectorAll('.tone-btn').forEach(b => b.classList.remove('selected'));
-  document.querySelector('.tone-btn[data-tone="Warm"]').classList.add('selected');
+  const memoriesEl = document.getElementById('memories');
+  if (memoriesEl) memoriesEl.value = '';
+
+  // Reset tone selection
+  document.querySelectorAll('.tone-btn, .tone-pill').forEach(b => b.classList.remove('selected'));
+  const warmTone = document.querySelector('.tone-pill[data-tone="Warm"]') || document.querySelector('.tone-btn[data-tone="Warm"]');
+  if (warmTone) warmTone.classList.add('selected');
   selectedTone = 'Warm';
   lastLetterText = '';
-  document.getElementById('loadingText').textContent = 'Writing your letter with care…';
-  currentStep = 1;
-  document.querySelectorAll('.step-tab').forEach(t => {
-    t.classList.remove('active', 'done');
-    t.querySelector('.tab-num').textContent = t.dataset.step;
-  });
-  document.querySelector('.step-tab[data-step="1"]').classList.add('active');
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('panel1').classList.add('active');
 
-  // Reset decoration state
-  currentFont = 'Caveat';
-  currentPaper = 'cream';
-  currentInk = '#4a3225';
-  document.getElementById('letterText').style.fontFamily = '';
-  document.getElementById('letterText').style.color = '';
-  document.getElementById('letterPaper').style = '';
-  // Remove all stickers
-  document.querySelectorAll('.letter-sticker').forEach(s => s.remove());
-  // Reset picker selections
-  document.querySelectorAll('.font-opt').forEach(b => b.classList.remove('selected'));
-  document.querySelector('.font-opt')?.classList.add('selected');
-  document.querySelectorAll('.paper-opt').forEach(b => b.classList.remove('selected'));
-  document.querySelector('.paper-opt')?.classList.add('selected');
-  document.querySelectorAll('.ink-opt').forEach(b => b.classList.remove('selected'));
-  document.querySelector('.ink-opt')?.classList.add('selected');
+  // Reset studio state
+  studioFont = 'Caveat';
+  studioInk = '#4a3225';
+  studioPaper = 'cream';
+
+  // Hide letter paper, show placeholder
+  const letterPaper = document.getElementById('letterPaper');
+  if (letterPaper) letterPaper.style.display = 'none';
+  const placeholder = document.getElementById('studioPlaceholder');
+  if (placeholder) placeholder.style.display = 'flex';
+  const loading = document.getElementById('studioLoading');
+  if (loading) loading.style.display = 'none';
+  const errorState = document.getElementById('studioErrorState');
+  if (errorState) errorState.style.display = 'none';
+  const studioError = document.getElementById('studioError');
+  if (studioError) studioError.style.display = 'none';
+
+  // Reset preview header
+  const previewLabel = document.getElementById('previewLabel');
+  if (previewLabel) previewLabel.textContent = 'Your letter will appear here';
+  const previewActions = document.getElementById('previewActions');
+  if (previewActions) previewActions.style.display = 'none';
+
+  // Reset buttons
+  const generateBtn = document.getElementById('studioGenerateBtn');
+  if (generateBtn) { generateBtn.style.display = 'block'; generateBtn.disabled = false; }
+  const rewriteBtn = document.getElementById('studioRewriteBtn');
+  if (rewriteBtn) rewriteBtn.style.display = 'none';
+
+  // Reset font pills
+  document.querySelectorAll('.font-pill').forEach(b => b.classList.remove('selected'));
+  const defaultFont = document.querySelector('.font-pill[data-font="Caveat"]');
+  if (defaultFont) defaultFont.classList.add('selected');
+
+  // Reset paper swatches
+  document.querySelectorAll('.paper-swatch').forEach(b => b.classList.remove('selected'));
+  const defaultPaper = document.querySelector('.paper-swatch[data-paper="cream"]');
+  if (defaultPaper) defaultPaper.classList.add('selected');
+
+  // Reset ink swatches
+  document.querySelectorAll('.ink-swatch').forEach(b => b.classList.remove('selected'));
+  const defaultInk = document.querySelector('.ink-swatch[data-ink="#4a3225"]');
+  if (defaultInk) defaultInk.classList.add('selected');
 }
 
 /* ── Email Capture (calls backend) ── */
@@ -3555,6 +3630,126 @@ async function downsellCheckout(type) {
 
 // After signup/login, check if there's a pending downsell
 const _origCheckAuth = checkAuth;
+
+/* ── Studio: Single-screen writer ── */
+let studioFont = 'Caveat';
+let studioInk = '#4a3225';
+let studioPaper = 'cream';
+
+function studioSetFont(font, btn) {
+  studioFont = font;
+  document.querySelectorAll('.font-pill').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const el = document.getElementById('letterText');
+  if (el) el.style.fontFamily = `'${font}', cursive`;
+}
+
+function studioSetInk(color, btn) {
+  studioInk = color;
+  document.querySelectorAll('.ink-swatch').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const el = document.getElementById('letterText');
+  if (el) el.style.color = color;
+}
+
+function studioSetPaper(preset, btn) {
+  if (btn.classList.contains('locked')) {
+    openSharePaywall();
+    return;
+  }
+  studioPaper = preset;
+  document.querySelectorAll('.paper-swatch').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  applyPaperPreset(preset, document.getElementById('letterPaper'));
+}
+
+function applyPaperPreset(preset, el) {
+  const presets = {
+    cream:    { bg: '#fffdf8', line: 'rgba(181,99,90,0.06)', border: '#e4d9cc', corner: '#be9230', shadow1: '#f0ebe3', shadow2: '#e4d9cc' },
+    rose:     { bg: '#fdf0f4', line: 'rgba(181,99,90,0.08)', border: '#e8c8d4', corner: '#b5635a', shadow1: '#f5e4ea', shadow2: '#e8c8d4' },
+    sage:     { bg: '#f2f7f2', line: 'rgba(94,133,96,0.08)', border: '#c8dcc8', corner: '#5e8560', shadow1: '#e4eee4', shadow2: '#c8dcc8' },
+    kraft:    { bg: '#f5ede0', line: 'rgba(160,120,70,0.1)', border: '#d4b88a', corner: '#be9230', shadow1: '#eadbc8', shadow2: '#d4b88a' },
+    midnight: { bg: '#1e2a3a', line: 'rgba(255,255,255,0.05)', border: '#2c3e54', corner: '#6a9fd8', shadow1: '#162030', shadow2: '#0d1520' },
+    noir:     { bg: '#1e120a', line: 'rgba(190,146,48,0.12)', border: '#3d2a1a', corner: '#be9230', shadow1: '#160d06', shadow2: '#3d2a1a' }
+  };
+  const p = presets[preset] || presets.cream;
+  if (!el) return;
+  el.style.background = p.bg;
+  el.style.borderColor = p.border;
+  el.style.boxShadow = `2px 2px 0 ${p.shadow1}, 4px 4px 0 ${p.shadow2}`;
+  el.style.backgroundImage = `repeating-linear-gradient(180deg, transparent, transparent 31px, ${p.line} 31px, ${p.line} 32px)`;
+  const textEl = el.querySelector('.letter-text');
+  if (textEl) textEl.style.color = studioInk;
+}
+
+async function studioWriteLetter() {
+  const recipient = document.getElementById('recipientName').value.trim();
+  const sender = document.getElementById('senderName').value.trim();
+  const relationship = document.getElementById('relationship').value;
+  const occasion = document.getElementById('occasion').value;
+  const feelings = document.getElementById('feelings').value.trim();
+  const memories = document.getElementById('memories')?.value.trim() || '';
+
+  // Validate
+  const errEl = document.getElementById('studioError');
+  if (!recipient || !sender || !relationship || !occasion || !feelings) {
+    errEl.textContent = 'Please fill in all the required fields.';
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  // Show loading, hide placeholder and paper
+  document.getElementById('studioPlaceholder').style.display = 'none';
+  document.getElementById('letterPaper').style.display = 'none';
+  document.getElementById('studioErrorState').style.display = 'none';
+  document.getElementById('studioLoading').style.display = 'block';
+  document.getElementById('studioLoadingText').textContent = 'Writing your letter with care\u2026';
+  document.getElementById('previewActions').style.display = 'none';
+  document.getElementById('previewLabel').textContent = 'Writing\u2026';
+  document.getElementById('studioGenerateBtn').disabled = true;
+
+  try {
+    const data = await api('generate-letter', {
+      sender, recipient, relationship, occasion, feelings, memories, tone: selectedTone
+    });
+
+    lastLetterText = data.letter;
+    document.getElementById('letterText').textContent = data.letter;
+    document.getElementById('letterText').style.fontFamily = `'${studioFont}', cursive`;
+    document.getElementById('letterText').style.color = studioInk;
+    applyPaperPreset(studioPaper, document.getElementById('letterPaper'));
+
+    document.getElementById('studioLoading').style.display = 'none';
+    document.getElementById('letterPaper').style.display = 'block';
+    document.getElementById('previewActions').style.display = 'flex';
+    document.getElementById('previewLabel').textContent = `A letter to ${recipient}`;
+    document.getElementById('studioRewriteBtn').style.display = 'block';
+    document.getElementById('studioGenerateBtn').style.display = 'none';
+  } catch (err) {
+    document.getElementById('studioLoading').style.display = 'none';
+    document.getElementById('studioErrorState').style.display = 'block';
+    document.getElementById('studioErrorText').textContent = err.message || 'Something went wrong. Please try again.';
+    document.getElementById('studioPlaceholder').style.display = 'flex';
+    document.getElementById('previewLabel').textContent = 'Your letter will appear here';
+    document.getElementById('studioGenerateBtn').disabled = false;
+  }
+  document.getElementById('studioGenerateBtn').disabled = false;
+}
+
+function studioRewrite() {
+  document.getElementById('studioLoadingText').textContent = 'Rewriting with a fresh heart\u2026';
+  document.getElementById('letterPaper').style.display = 'none';
+  document.getElementById('previewActions').style.display = 'none';
+  document.getElementById('studioRewriteBtn').style.display = 'none';
+  document.getElementById('studioGenerateBtn').style.display = 'block';
+  document.getElementById('studioGenerateBtn').disabled = false;
+  studioWriteLetter();
+}
+
+function handleShare(platform) {
+  shareLetter(platform);
+}
 </script>
 </body>
 </html>
