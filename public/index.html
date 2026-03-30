@@ -1713,56 +1713,76 @@ body::after {
 }
 
 /* Placeholder */
-.studio-placeholder {
-  width: 100%;
-}
+.studio-placeholder { width: 100%; }
 .placeholder-paper {
-  background: var(--cream);
-  border: 1px solid var(--border-light);
-  border-radius: 4px;
-  padding: 3rem 2.5rem;
+  position: relative;
   width: 100%;
   min-height: 520px;
-  box-shadow: 2px 2px 0 var(--paper-dark), 4px 4px 0 var(--border-light);
-  background-image: repeating-linear-gradient(
-    180deg,
-    transparent,
-    transparent 31px,
-    rgba(181,99,90,0.05) 31px,
-    rgba(181,99,90,0.05) 32px
-  );
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-  align-items: flex-start;
-  justify-content: flex-start;
-  position: relative;
+  border-radius: 4px;
+  border: 1px solid #e0d5c5;
+  box-shadow: 2px 2px 0 #ede7dc, 4px 4px 0 #e0d5c5;
+  overflow: hidden;
+  /* Warm aged paper background */
+  background-color: #fdf8f0;
+  background-image:
+    /* Subtle paper grain */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"),
+    /* Ruled lines */
+    repeating-linear-gradient(
+      180deg,
+      transparent,
+      transparent 37px,
+      rgba(160,130,100,0.12) 37px,
+      rgba(160,130,100,0.12) 38px
+    );
 }
-.placeholder-line {
-  height: 11px;
-  border-radius: 6px;
-  background: var(--border-light);
-  animation: shimmer 2s ease-in-out infinite;
-}
-.placeholder-line.long { width: 88%; }
-.placeholder-line.medium { width: 62%; }
-.placeholder-line.short { width: 38%; }
-@keyframes shimmer {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.85; }
-}
-.placeholder-hint {
+/* Gold decorative corner */
+.placeholder-paper::before {
+  content: '';
   position: absolute;
-  bottom: 2.5rem;
-  left: 0; right: 0;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 0.95rem;
-  color: var(--ink-muted);
-  text-align: center;
-  line-height: 1.7;
+  top: 0; right: 0;
+  width: 48px; height: 48px;
+  border-top: 2px solid rgba(190,146,48,0.35);
+  border-right: 2px solid rgba(190,146,48,0.35);
+  border-radius: 0 4px 0 0;
 }
-.placeholder-hint strong { color: var(--rose); font-style: normal; }
+/* Left margin line */
+.placeholder-paper::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 52px;
+  width: 1px;
+  background: rgba(181,99,90,0.1);
+}
+.placeholder-example-text {
+  font-family: 'Caveat', cursive;
+  font-size: 1.28rem;
+  line-height: 2.37rem;
+  color: #4a3225;
+  white-space: pre-wrap;
+  padding: 2.2rem 2.2rem 2.2rem 4rem;
+  opacity: 0.55;
+  pointer-events: none;
+  user-select: none;
+}
+.placeholder-badge {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(250,246,240,0.92);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 0.3rem 1rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rose);
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+}
 
 /* Responsive studio */
 @media (max-width: 1024px) {
@@ -2026,15 +2046,20 @@ body::after {
       <!-- Placeholder (before generation) -->
       <div class="studio-placeholder" id="studioPlaceholder">
         <div class="placeholder-paper">
-          <div class="placeholder-line long"></div>
-          <div class="placeholder-line medium"></div>
-          <div class="placeholder-line long"></div>
-          <div class="placeholder-line short"></div>
-          <div class="placeholder-line long"></div>
-          <div class="placeholder-line medium"></div>
-          <div class="placeholder-line long"></div>
-          <div class="placeholder-line short"></div>
-          <p class="placeholder-hint">Fill in the details and click<br><strong>✦ Write My Letter</strong></p>
+          <div class="placeholder-example-text">Dear Sarah,
+
+There are moments in life when words feel too small for what the heart holds — and yet, I find myself reaching for them anyway, because some things are simply too important to leave unsaid.
+
+You have been one of the most steadying presences in my life. Through the messy, uncertain, beautiful chapters — you were there. Not with grand gestures, but with quiet, unwavering warmth that meant more than you'll ever know.
+
+I think about the afternoon we spent laughing until our sides ached over absolutely nothing, and how that moment somehow held everything. That's the kind of joy you bring into a room — the kind that lingers long after you've gone.
+
+Thank you for being exactly who you are.
+
+With so much love,
+Michael</div>
+          <div class="placeholder-badge">✦ Example — your letter will appear here</div>
+        </div>
         </div>
       </div>
 
