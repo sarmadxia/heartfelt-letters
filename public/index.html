@@ -3222,9 +3222,9 @@ function closeModal() {
   const wasPaywall = currentModalType === 'paywall';
   currentModalType = null;
   document.getElementById('modalOverlay').classList.remove('open');
-  // If user closed the paywall without paying, show PWYW downsell
+  // If user closed the paywall without paying, show PWYW first
   if (wasPaywall) {
-    setTimeout(() => showDownsell(), 300);
+    setTimeout(() => showPayWhatYouWant(), 300);
   }
 }
 
@@ -3363,13 +3363,14 @@ async function stripeCheckout(type) {
 ───────────────────────────────────────────── */
 
 function showDownsell() {
+  currentModalType = 'early-access';
   const content = document.getElementById('modalContent');
   content.style.display = 'block';
   document.getElementById('modalSuccess').style.display = 'none';
   document.getElementById('modalOverlay').classList.add('open');
 
   content.innerHTML = `
-    <button class="modal-close" onclick="closeModal()">×</button>
+    <button class="modal-close" onclick="currentModalType=null;document.getElementById('modalOverlay').classList.remove('open')">×</button>
 
     <!-- Urgency ribbon -->
     <div style="
@@ -3420,7 +3421,7 @@ function showDownsell() {
     </button>
 
     <p style="text-align:center;margin-top:0.8rem">
-      <a onclick="closeModal()" style="
+      <a onclick="currentModalType=null;document.getElementById('modalOverlay').classList.remove('open')" style="
         font-size:0.72rem;
         color:var(--ink-muted);
         text-decoration:underline;
@@ -3431,9 +3432,13 @@ function showDownsell() {
 }
 
 function showPayWhatYouWant() {
+  currentModalType = 'pwyw';
   const content = document.getElementById('modalContent');
+  content.style.display = 'block';
+  document.getElementById('modalSuccess').style.display = 'none';
+  document.getElementById('modalOverlay').classList.add('open');
   content.innerHTML = `
-    <button class="modal-close" onclick="closeModal()">×</button>
+    <button class="modal-close" onclick="showDownsell()">×</button>
 
     <div style="text-align:center;margin-bottom:1.4rem">
       <div style="font-size:2rem;margin-bottom:0.5rem">🤍</div>
@@ -3479,7 +3484,7 @@ function showPayWhatYouWant() {
 
     <p style="text-align:center;margin-top:0.8rem">
       <a onclick="showDownsell()" style="font-size:0.7rem;color:var(--ink-muted);text-decoration:underline;cursor:pointer">
-        → Or grab our $1 Early Access deal instead
+        No thanks — show me the $1 Early Access deal instead
       </a>
     </p>
   `;
