@@ -2155,7 +2155,7 @@ body::after {
 </footer>
 
 <!-- ── Modal ── -->
-<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this){ closeModal(); }">
   <div class="modal-card">
     <button class="modal-close" onclick="closeModal()">×</button>
     <div id="modalContent"></div>
@@ -2394,6 +2394,7 @@ async function handleLogout() {
 
 // Paywall for sharing/downloading
 function openSharePaywall() {
+  currentModalType = 'paywall';
   const content = document.getElementById('modalContent');
   content.innerHTML = `
     <h3 class="modal-title">Unlock Sharing & Downloads</h3>
@@ -3215,8 +3216,16 @@ function openModal(type) {
   document.getElementById('modalOverlay').classList.add('open');
 }
 
+let currentModalType = null;
+
 function closeModal() {
+  const wasPaywall = currentModalType === 'paywall';
+  currentModalType = null;
   document.getElementById('modalOverlay').classList.remove('open');
+  // If user closed the paywall without paying, show PWYW downsell
+  if (wasPaywall) {
+    setTimeout(() => showDownsell(), 300);
+  }
 }
 
 async function submitModal(type) {
