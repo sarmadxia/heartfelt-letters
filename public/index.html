@@ -3317,8 +3317,12 @@ async function stripeCheckout(type) {
     setTimeout(async () => {
       await checkAuth();
       const content = document.getElementById('modalContent');
+      const credits = params.get('credits');
       const planName = type === 'single_letter' ? '1 letter credit' :
-                       type === 'individual' ? 'Individual Plan' : 'Business Plan';
+                       type === 'individual' ? 'Individual Plan' :
+                       type === 'business' ? 'Business Plan' :
+                       type === 'pwyw' ? `${credits === '999' ? 'Unlimited (3 months)' : credits + ' letter credit' + (parseInt(credits) > 1 ? 's' : '')}` :
+                       'Your plan';
       content.innerHTML = `
         <div style="text-align:center;padding:2rem">
           <div style="font-size:2.5rem;margin-bottom:1rem">🎉</div>
@@ -3338,8 +3342,205 @@ async function stripeCheckout(type) {
     }, 500);
   } else if (payment === 'cancelled') {
     window.history.replaceState({}, '', '/');
+    // User cancelled Stripe checkout — show downsell after a short delay
+    setTimeout(() => showDownsell(), 600);
   }
 })();
+
+/* ─────────────────────────────────────────────
+   DOWNSELL FUNNEL
+   Step 1 → Early Access $1 offer
+   Step 2 → Pay What You Want ($2/$5/$15/$50)
+───────────────────────────────────────────── */
+
+function showDownsell() {
+  const content = document.getElementById('modalContent');
+  content.style.display = 'block';
+  document.getElementById('modalSuccess').style.display = 'none';
+  document.getElementById('modalOverlay').classList.add('open');
+
+  content.innerHTML = `
+    <button class="modal-close" onclick="closeModal()">×</button>
+
+    <!-- Urgency ribbon -->
+    <div style="
+      background: linear-gradient(90deg, var(--gold), #d4a843);
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 0.4rem 1rem;
+      margin: -2.5rem -2rem 1.5rem;
+      border-radius: 4px 4px 0 0;
+    ">⚡ Wait — a special offer just for you</div>
+
+    <!-- Icon + heading -->
+    <div style="text-align:center;margin-bottom:1.2rem">
+      <div style="font-size:2.2rem;margin-bottom:0.5rem">💌</div>
+      <h3 style="font-family:var(--font-serif);font-weight:300;font-size:1.5rem;color:var(--ink);line-height:1.2;margin-bottom:0.5rem">
+        Get <em style="color:var(--rose);font-style:italic">Early Access</em><br>for just $1
+      </h3>
+      <p style="font-size:0.82rem;color:var(--ink-muted);max-width:340px;margin:0 auto">
+        You were about to leave — so here's our founder's deal. One dollar unlocks everything a paid letter includes, equal in value to our personalized handwritten letter plan.
+      </p>
+    </div>
+
+    <!-- Value bullets -->
+    <div style="
+      background: var(--gold-light);
+      border: 1px solid rgba(190,146,48,0.2);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.4rem;
+    ">
+      <p style="font-size:0.68rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.7rem">What you get for $1</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:0.45rem">
+        <li style="font-size:0.82rem;color:var(--ink-soft);display:flex;gap:0.5rem"><span style="color:var(--sage)">✦</span> Download your letter as a beautiful image</li>
+        <li style="font-size:0.82rem;color:var(--ink-soft);display:flex;gap:0.5rem"><span style="color:var(--sage)">✦</span> Print on premium stationery</li>
+        <li style="font-size:0.82rem;color:var(--ink-soft);display:flex;gap:0.5rem"><span style="color:var(--sage)">✦</span> Share to WhatsApp, Instagram, Facebook & more</li>
+        <li style="font-size:0.82rem;color:var(--ink-soft);display:flex;gap:0.5rem"><span style="color:var(--sage)">✦</span> All decoration fonts & paper styles unlocked</li>
+      </ul>
+    </div>
+
+    <!-- CTA -->
+    <button class="btn btn-gold" style="width:100%;justify-content:center;font-size:0.9rem;padding:0.85rem"
+      onclick="downsellCheckout('single-letter')">
+      ✦ Yes! Unlock Everything for $1
+    </button>
+
+    <p style="text-align:center;margin-top:0.8rem">
+      <a onclick="showPayWhatYouWant()" style="
+        font-size:0.72rem;
+        color:var(--ink-muted);
+        text-decoration:underline;
+        cursor:pointer;
+      ">No thanks, I'll decide my own price →</a>
+    </p>
+  `;
+}
+
+function showPayWhatYouWant() {
+  const content = document.getElementById('modalContent');
+  content.innerHTML = `
+    <button class="modal-close" onclick="closeModal()">×</button>
+
+    <div style="text-align:center;margin-bottom:1.4rem">
+      <div style="font-size:2rem;margin-bottom:0.5rem">🤍</div>
+      <h3 style="font-family:var(--font-serif);font-weight:300;font-size:1.4rem;color:var(--ink);line-height:1.2;margin-bottom:0.4rem">
+        What would you pay for this <em style="color:var(--rose);font-style:italic">handwritten letter?</em>
+      </h3>
+      <p style="font-size:0.8rem;color:var(--ink-muted)">
+        Choose what feels right to you. Every plan below unlocks the same features.
+      </p>
+    </div>
+
+    <!-- Price tiles -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-bottom:1.2rem">
+      ${[
+        { price: 2,  label: 'Starter',     desc: '1 letter credit',         emoji: '🌱', color: 'var(--sage-light)',  border: 'rgba(94,133,96,0.25)',  btn: 'btn-sage'  },
+        { price: 5,  label: 'Supporter',   desc: '5 letter credits',        emoji: '💛', color: 'var(--gold-light)',  border: 'rgba(190,146,48,0.25)', btn: 'btn-gold'  },
+        { price: 15, label: 'Patron',      desc: '15 letter credits',       emoji: '✨', color: 'var(--rose-light)',  border: 'rgba(181,99,90,0.25)',  btn: 'btn-rose'  },
+        { price: 50, label: 'Champion',    desc: 'Unlimited for 3 months',  emoji: '🏆', color: '#f7f0df',            border: 'rgba(190,146,48,0.4)',  btn: 'btn-gold'  },
+      ].map(t => `
+        <div style="
+          background:${t.color};
+          border:1px solid ${t.border};
+          border-radius:6px;
+          padding:1rem 0.8rem;
+          text-align:center;
+          cursor:pointer;
+          transition:all 0.2s;
+        " onclick="downsellCheckout('pwyw-${t.price}')"
+           onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(30,18,10,0.1)'"
+           onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="font-size:1.4rem;margin-bottom:0.3rem">${t.emoji}</div>
+          <div style="font-family:var(--font-serif);font-size:1.6rem;font-weight:300;color:var(--ink);line-height:1">$${t.price}</div>
+          <div style="font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);margin:0.2rem 0">${t.label}</div>
+          <div style="font-size:0.72rem;color:var(--ink-muted)">${t.desc}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <p style="text-align:center;font-size:0.72rem;color:var(--ink-muted);line-height:1.5">
+      Every tier gives you full access to download, print, decorate & share.<br>
+      <strong style="color:var(--ink-soft)">No subscription. Pay once, use forever.</strong>
+    </p>
+
+    <p style="text-align:center;margin-top:0.8rem">
+      <a onclick="closeModal()" style="font-size:0.7rem;color:var(--ink-muted);text-decoration:underline;cursor:pointer">
+        No thanks, I'll pass for now
+      </a>
+    </p>
+  `;
+}
+
+async function downsellCheckout(type) {
+  if (!currentUser) {
+    // Save intended purchase, open auth first
+    sessionStorage.setItem('pendingDownsell', type);
+    closeModal();
+    openAuthModal('signup');
+    return;
+  }
+
+  const content = document.getElementById('modalContent');
+  content.innerHTML = `
+    <div style="text-align:center;padding:2rem">
+      <div style="font-size:1.5rem;margin-bottom:1rem;animation:writeAnim 1.2s ease-in-out infinite">💳</div>
+      <p style="font-family:var(--font-serif);font-style:italic;color:var(--ink-soft)">Redirecting to secure checkout…</p>
+    </div>
+  `;
+
+  // Map PWYW tiers to amounts
+  const pwywAmounts = { 'pwyw-2': 200, 'pwyw-5': 500, 'pwyw-15': 1500, 'pwyw-50': 5000 };
+  const pwywCredits  = { 'pwyw-2': 1,   'pwyw-5': 5,   'pwyw-15': 15,   'pwyw-50': 999 };
+  const pwywLabels   = { 'pwyw-2': 'Starter ($2)', 'pwyw-5': 'Supporter ($5)', 'pwyw-15': 'Patron ($15)', 'pwyw-50': 'Champion ($50)' };
+
+  try {
+    let endpoint, body;
+
+    if (type === 'single-letter') {
+      endpoint = 'single-letter';
+      body = {};
+    } else {
+      // PWYW — use a custom endpoint
+      endpoint = 'pwyw';
+      body = {
+        amount: pwywAmounts[type],
+        credits: pwywCredits[type],
+        label: pwywLabels[type] || type
+      };
+    }
+
+    const res = await fetch(`/api/stripe/checkout/${endpoint}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error(data.error || 'Failed to create checkout');
+    }
+  } catch (err) {
+    console.error('Downsell checkout error:', err);
+    content.innerHTML = `
+      <div style="text-align:center;padding:2rem">
+        <div style="font-size:1.5rem;margin-bottom:1rem">⚠️</div>
+        <p style="color:var(--rose-deep);font-size:0.88rem;margin-bottom:1rem">${err.message || 'Payment system unavailable.'}</p>
+        <button class="btn btn-ghost" onclick="showPayWhatYouWant()">← Choose another amount</button>
+      </div>
+    `;
+  }
+}
+
+// After signup/login, check if there's a pending downsell
+const _origCheckAuth = checkAuth;
 </script>
 </body>
 </html>

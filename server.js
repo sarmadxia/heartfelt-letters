@@ -111,6 +111,11 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
             user.letters_used = 0;
             user.stripe_customer_id = session.customer;
             user.stripe_subscription_id = session.subscription;
+          } else if (paymentType === 'pwyw') {
+            const credits = parseInt(session.metadata?.credits || '1');
+            user.letters_limit = (user.letters_limit || 0) + credits;
+            if (user.plan === 'free') user.plan = 'pay_per_letter';
+            user.plan_status = 'active';
           }
         }
       }
@@ -405,6 +410,54 @@ app.post('/api/stripe/checkout/business', requireStripe, async (req, res) => {
     res.json({ url: session.url });
   } catch (err) {
     console.error('Stripe checkout error:', err);
+    res.status(500).json({ error: 'Failed to create checkout session' });
+  }
+});
+
+// ── Pay What You Want Checkout ──
+app.post('/api/stripe/checkout/pwyw', requireStripe, async (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ error: 'Please sign in first' });
+  }
+
+  const { amount, credits, label } = req.body;
+  const validAmounts = [200, 500, 1500, 5000];
+  if (!amount || !validAmounts.includes(amount)) {
+    return res.status(400).json({ error: 'Invalid amount' });
+  }
+
+  const creditsMap = { 200: 1, 500: 5, 1500: 15, 5000: 999 };
+  const resolvedCredits = creditsMap[amount];
+
+  try {
+    const session = await stripe.checkout.sessions.create({
+      mode: 'payment',
+      line_items: [{
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: label || 'Heartfelt Letters Credit',
+            description: resolvedCredits === 999
+              ? 'Unlimited access for 3 months — download, print & share all your letters'
+              : `${resolvedCredits} letter credit${resolvedCredits > 1 ? 's' : ''} — download, print & share`,
+          },
+          unit_amount: amount,
+        },
+        quantity: 1,
+      }],
+      metadata: {
+        userId: req.session.userId.toString(),
+        type: 'pwyw',
+        credits: resolvedCredits.toString(),
+        amount_cents: amount.toString()
+      },
+      success_url: `${BASE_URL}/?payment=success&type=pwyw&credits=${resolvedCredits}`,
+      cancel_url: `${BASE_URL}/?payment=cancelled`,
+    });
+
+    res.json({ url: session.url });
+  } catch (err) {
+    console.error('PWYW checkout error:', err);
     res.status(500).json({ error: 'Failed to create checkout session' });
   }
 });
