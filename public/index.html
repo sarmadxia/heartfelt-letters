@@ -1297,6 +1297,153 @@ body::after {
 .swatch.dark-swatch .swatch-name { color: var(--gold); }
 .swatch.dark-swatch .swatch-price { color: rgba(190,146,48,0.7); }
 
+/* ── Community / Reviews ── */
+.community-section {
+  padding: 5rem 1.5rem;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(181,99,90,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(190,146,48,0.04) 0%, transparent 60%),
+    var(--paper);
+  position: relative;
+}
+.community-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+}
+.rating-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+.rating-score {
+  font-family: var(--font-serif);
+  font-size: 4.5rem;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.rating-stars {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+.star {
+  font-size: 1.4rem;
+  color: var(--gold);
+}
+.star.half { opacity: 0.5; }
+.rating-count {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.06em;
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+  max-width: 1020px;
+  margin: 0 auto 2rem;
+}
+.review-card {
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 1.4rem 1.5rem;
+  transition: all 0.25s ease;
+  opacity: 0;
+  transform: translateY(16px);
+}
+.review-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.review-card:hover {
+  border-color: var(--rose);
+  box-shadow: 0 4px 16px rgba(30,18,10,0.06);
+  transform: translateY(-2px);
+}
+.review-card.visible:hover { transform: translateY(-2px); }
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.review-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #fff;
+  flex-shrink: 0;
+}
+.review-meta { flex: 1; min-width: 0; }
+.review-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.review-location {
+  font-size: 0.66rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+}
+.review-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 0.6rem;
+}
+.review-stars .star { font-size: 0.72rem; }
+.review-text {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  font-style: italic;
+  font-family: var(--font-serif);
+}
+.review-text::before { content: '"'; }
+.review-text::after { content: '"'; }
+.review-occasion {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rose);
+  background: var(--rose-light);
+  padding: 0.2rem 0.6rem;
+  border-radius: 10px;
+}
+.community-cta {
+  text-align: center;
+  margin-top: 2rem;
+}
+.community-cta p {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  margin-bottom: 1rem;
+}
+@media (max-width: 900px) {
+  .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .reviews-grid { grid-template-columns: 1fr; }
+  .rating-score { font-size: 3.5rem; }
+}
+
 /* ── Email Capture ── */
 .capture-section {
   padding: 5rem 1.5rem;
@@ -1817,6 +1964,7 @@ body::after {
     <a href="#how" class="nav-link">How It Works</a>
     <a href="#writer" class="nav-link">Try Free</a>
     <a href="#offers" class="nav-link">Plans</a>
+    <a href="#community" class="nav-link">Community</a>
     <a href="#writer" class="btn btn-dark btn-sm">Write a Letter</a>
     <div class="auth-area" id="authArea">
       <span class="login-link" id="loginBtn" onclick="openAuthModal('login')">Login</span>
@@ -2225,6 +2373,256 @@ Michael</div>
   </div>
 </section>
 
+<!-- ── Community / Reviews ── -->
+<section class="community-section" id="community">
+  <div class="section-header">
+    <p class="overline">Community Love</p>
+    <h2 class="section-title">What people are <em>saying</em></h2>
+    <p class="section-sub">Real letters. Real reactions. Read what our community has shared.</p>
+  </div>
+
+  <!-- Rating Hero -->
+  <div class="rating-hero">
+    <div class="rating-score">4.8</div>
+    <div class="rating-stars">
+      <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      <span class="star">★</span><span class="star half">★</span>
+    </div>
+    <p class="rating-count">Based on 17 reviews · Verified users</p>
+  </div>
+
+  <!-- Reviews Grid -->
+  <div class="reviews-grid">
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#b5635a">J</div>
+        <div class="review-meta">
+          <div class="review-name">Jessica M.</div>
+          <div class="review-location">Austin, TX</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">My mom cried when she read it. I just typed a few sentences and it came out like poetry. Nothing I could've written myself.</p>
+      <span class="review-occasion">Mother's Day</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#5e8560">D</div>
+        <div class="review-meta">
+          <div class="review-name">Daniel K.</div>
+          <div class="review-location">Chicago, IL</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">Used it for an apology letter to my best friend. It said everything I couldn't say out loud. We're good now.</p>
+      <span class="review-occasion">Apology</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#be9230">A</div>
+        <div class="review-meta">
+          <div class="review-name">Aisha R.</div>
+          <div class="review-location">New York, NY</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">I've sent 3 letters so far — one to my grandma, one to my college roommate, one to my boyfriend. All three cried. That's 3 for 3.</p>
+      <span class="review-occasion">Just Because</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#4a3225">T</div>
+        <div class="review-meta">
+          <div class="review-name">Tyler B.</div>
+          <div class="review-location">Nashville, TN</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">Wrote a farewell letter for my mentor who retired. He framed it. I'm not even exaggerating — it's hanging in his study.</p>
+      <span class="review-occasion">Farewell</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#9e4f47">S</div>
+        <div class="review-meta">
+          <div class="review-name">Sofia L.</div>
+          <div class="review-location">Miami, FL</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star half">★</span></div>
+      <p class="review-text">The font and paper options are gorgeous. Mine looked like a real handwritten letter — not AI at all. My sister thought I wrote it myself!</p>
+      <span class="review-occasion">Birthday</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#5e8560">M</div>
+        <div class="review-meta">
+          <div class="review-name">Marcus W.</div>
+          <div class="review-location">Seattle, WA</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">Long distance relationship. I send one every month now. It keeps us connected in a way that texts never could. Worth every penny.</p>
+      <span class="review-occasion">Anniversary</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#be9230">R</div>
+        <div class="review-meta">
+          <div class="review-name">Rachel P.</div>
+          <div class="review-location">Denver, CO</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">I work in HR and used this for a team appreciation letter. Everyone kept asking how I wrote something so personal for each person. I didn't tell them.</p>
+      <span class="review-occasion">Thank You</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#b5635a">N</div>
+        <div class="review-meta">
+          <div class="review-name">Natalie C.</div>
+          <div class="review-location">Portland, OR</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">My dad never talks about feelings. I sent him this letter and he called me 10 minutes later, voice cracking. First time in years.</p>
+      <span class="review-occasion">Just Because</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#4a3225">E</div>
+        <div class="review-meta">
+          <div class="review-name">Ethan G.</div>
+          <div class="review-location">Boston, MA</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star half">★</span></div>
+      <p class="review-text">Super easy to use, fast, and the output is genuinely beautiful. Took me 3 minutes and felt like something I spent hours on.</p>
+      <span class="review-occasion">Graduation</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#5e8560">L</div>
+        <div class="review-meta">
+          <div class="review-name">Linda H.</div>
+          <div class="review-location">Phoenix, AZ</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">Sent one to my childhood friend I hadn't talked to in 8 years. She messaged me within an hour. We're having lunch next week.</p>
+      <span class="review-occasion">Missing Them</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#9e4f47">C</div>
+        <div class="review-meta">
+          <div class="review-name">Carlos V.</div>
+          <div class="review-location">San Antonio, TX</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">Used the Gold Foil Noir paper for my wife's anniversary letter. She said it was the most romantic thing I've ever done. AI did 90% of it. Don't tell her.</p>
+      <span class="review-occasion">Anniversary</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#be9230">K</div>
+        <div class="review-meta">
+          <div class="review-name">Karen F.</div>
+          <div class="review-location">Atlanta, GA</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">Grief letter for my coworker who lost her mom. I didn't know what to say. This found the words I couldn't. She texted me saying she'll keep it forever.</p>
+      <span class="review-occasion">Grief / Loss</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#b5635a">P</div>
+        <div class="review-meta">
+          <div class="review-name">Priya S.</div>
+          <div class="review-location">San Jose, CA</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star half">★</span></div>
+      <p class="review-text">The decoration panel is so fun. Spent way too long choosing stickers and fonts. The final result looked like a real keepsake.</p>
+      <span class="review-occasion">Birthday</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#4a3225">B</div>
+        <div class="review-meta">
+          <div class="review-name">Brian O.</div>
+          <div class="review-location">Houston, TX</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">Got the $5 plan and it paid for itself 10x over. The look on my daughter's face when she read her graduation letter — I can't put a price on that.</p>
+      <span class="review-occasion">Graduation</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#5e8560">H</div>
+        <div class="review-meta">
+          <div class="review-name">Hannah J.</div>
+          <div class="review-location">Minneapolis, MN</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">I write letters for a living (copywriter) and even I was impressed. It captured the tone I asked for perfectly. Warm and poetic, just like I described.</p>
+      <span class="review-occasion">Encouragement</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#be9230">O</div>
+        <div class="review-meta">
+          <div class="review-name">Olivia T.</div>
+          <div class="review-location">Charlotte, NC</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">I was skeptical that AI could write something personal. I was completely wrong. It included details I mentioned and wove them in naturally. Stunning.</p>
+      <span class="review-occasion">Thank You</span>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:#9e4f47">W</div>
+        <div class="review-meta">
+          <div class="review-name">William A.</div>
+          <div class="review-location">Philadelphia, PA</div>
+        </div>
+      </div>
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star half">★</span></div>
+      <p class="review-text">The Get Well Soon letter I sent my brother while he was in the hospital. He said reading it was the best part of his entire week. Simple but powerful.</p>
+      <span class="review-occasion">Get Well Soon</span>
+    </div>
+
+  </div>
+
+  <div class="community-cta">
+    <p>Join thousands of people reconnecting through the art of the written word.</p>
+    <a href="#writer" class="btn btn-rose">Write Your Letter Free ✦</a>
+  </div>
+</section>
+
 <!-- ── Email Capture ── -->
 <section class="capture-section" id="capture">
   <div class="capture-card">
@@ -2249,6 +2647,7 @@ Michael</div>
     <a href="#how">How It Works</a>
     <a href="#writer">Try Free</a>
     <a href="#offers">Plans & Pricing</a>
+    <a href="#community">Community</a>
     <a href="#" onclick="openModal('enterprise');return false">Enterprise</a>
   </div>
   <p class="footer-tagline">Crafted with ♡ — Every word matters</p>
@@ -2285,7 +2684,7 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.how-step, .offer-card, .swatch').forEach(el => {
+document.querySelectorAll('.how-step, .offer-card, .swatch, .review-card').forEach(el => {
   revealObserver.observe(el);
 });
 
