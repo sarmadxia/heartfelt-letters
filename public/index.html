@@ -1681,27 +1681,84 @@ body::after {
 /* ── Studio Layout ── */
 .studio-wrap {
   display: grid;
-  grid-template-columns: 260px 1fr 220px;
-  gap: 1.5rem;
-  max-width: 1280px;
+  grid-template-columns: 240px 1fr 300px;
+  gap: 0;
+  max-width: 1400px;
   margin: 0 auto;
-  align-items: start;
+  align-items: stretch;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(30,18,10,0.08);
+  background: var(--cream);
 }
 .studio-form {
-  background: var(--cream);
-  border: 1px solid var(--border-light);
-  border-radius: 8px;
-  padding: 1.4rem;
+  background: var(--paper-dark);
+  border-right: 1px solid var(--border-light);
+  padding: 1.4rem 1.2rem;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
   position: sticky;
   top: 72px;
-  max-height: calc(100vh - 100px);
+  max-height: calc(100vh - 72px);
   overflow-y: auto;
-  box-shadow: 0 2px 16px rgba(30,18,10,0.05);
   scrollbar-width: thin;
   scrollbar-color: var(--border-light) transparent;
+}
+/* Center: writing area */
+.studio-center {
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+  border-right: 1px solid var(--border-light);
+  min-height: 600px;
+}
+.studio-center-header {
+  padding: 1rem 1.4rem 0.6rem;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.studio-center-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.studio-center-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem 1.4rem;
+  gap: 1rem;
+}
+#feelings {
+  flex: 1;
+  min-height: 280px;
+  resize: none;
+  border: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.75;
+  outline: none;
+  width: 100%;
+  padding: 0;
+}
+#feelings::placeholder { color: var(--border); }
+.studio-center-footer {
+  padding: 1rem 1.4rem;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--paper);
 }
 .form-row-2 {
   display: grid;
@@ -1817,19 +1874,20 @@ body::after {
 
 /* Studio preview panel */
 .studio-preview {
-  position: sticky;
-  top: 72px;
   display: flex;
   flex-direction: column;
+  background: var(--paper-dark);
 }
 .studio-preview-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
-  min-height: 36px;
+  padding: 1rem 1.2rem 0.6rem;
+  border-bottom: 1px solid var(--border-light);
+  min-height: 44px;
   flex-wrap: wrap;
   gap: 0.5rem;
+  background: var(--paper-dark);
 }
 .studio-preview-label {
   font-size: 0.68rem;
@@ -1846,7 +1904,11 @@ body::after {
 /* Letter paper fills the full preview column */
 #letterPaper {
   width: 100%;
-  min-height: 520px;
+  min-height: 480px;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  flex: 1;
 }
 .studio-loading {
   text-align: center;
@@ -2011,19 +2073,17 @@ body::after {
 
 /* Responsive studio */
 @media (max-width: 1100px) {
-  .studio-wrap { grid-template-columns: 230px 1fr 190px; gap: 1rem; }
+  .studio-wrap { grid-template-columns: 210px 1fr 260px; }
 }
 @media (max-width: 860px) {
-  .studio-wrap { grid-template-columns: 210px 1fr; gap: 1rem; }
-  .studio-samples { display: none; }
+  .studio-wrap { grid-template-columns: 200px 1fr; border-radius: 8px; }
+  .studio-preview { display: none; }
 }
-@media (max-width: 640px) {
+@media (max-width: 600px) {
   .studio-wrap { grid-template-columns: 1fr; }
-  .studio-form { position: static; max-height: none; }
-  .studio-preview { position: static; }
+  .studio-form { max-height: none; position: static; border-right: none; border-bottom: 1px solid var(--border-light); }
+  .studio-center { min-height: 320px; }
   .form-row-2 { grid-template-columns: 1fr 1fr; }
-  #letterPaper { min-height: 400px; }
-  .placeholder-paper { min-height: 400px; }
 }
 @media (max-width: 600px) {
   .form-row-2 { grid-template-columns: 1fr; }
@@ -2086,7 +2146,8 @@ body::after {
   </div>
 
   <div class="studio-wrap">
-    <!-- LEFT: Form controls -->
+
+    <!-- ── LEFT: Customization Settings ── -->
     <div class="studio-form">
       <!-- Row 1: To / From -->
       <div class="form-row-2">
@@ -2101,55 +2162,39 @@ body::after {
       </div>
 
       <!-- Row 2: Relationship / Occasion -->
-      <div class="form-row-2">
-        <div class="form-group">
-          <label>Relationship</label>
-          <select id="relationship">
-            <option value="">Select...</option>
-            <option>Parent / Child</option>
-            <option>Romantic Partner</option>
-            <option>Best Friend</option>
-            <option>Sibling</option>
-            <option>Grandparent</option>
-            <option>Teacher / Mentor</option>
-            <option>Colleague / Friend</option>
-            <option>Long-Distance Friend</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Occasion</label>
-          <select id="occasion">
-            <option value="">Select...</option>
-            <option>Just Because</option>
-            <option>Birthday</option>
-            <option>Thank You</option>
-            <option>Apology</option>
-            <option>Missing Them</option>
-            <option>Encouragement</option>
-            <option>Anniversary</option>
-            <option>Graduation</option>
-            <option>Farewell</option>
-            <option>Get Well Soon</option>
-            <option>Grief / Loss</option>
-            <option>Congratulations</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- What to express -->
       <div class="form-group">
-        <label>What do you want to express?</label>
-        <textarea id="feelings" rows="3" placeholder="What have you been wanting to say?"></textarea>
+        <label>Relationship</label>
+        <select id="relationship">
+          <option value="">Select...</option>
+          <option>Parent / Child</option>
+          <option>Romantic Partner</option>
+          <option>Best Friend</option>
+          <option>Sibling</option>
+          <option>Grandparent</option>
+          <option>Teacher / Mentor</option>
+          <option>Colleague / Friend</option>
+          <option>Long-Distance Friend</option>
+          <option>Other</option>
+        </select>
       </div>
-
-      <!-- Memories (collapsible) -->
-      <details class="memories-toggle">
-        <summary>+ Add memories or details (optional)</summary>
-        <div class="form-group" style="margin-top:0.6rem">
-          <textarea id="memories" rows="2" placeholder="Inside jokes, specific moments, details..."></textarea>
-        </div>
-      </details>
+      <div class="form-group">
+        <label>Occasion</label>
+        <select id="occasion">
+          <option value="">Select...</option>
+          <option>Just Because</option>
+          <option>Birthday</option>
+          <option>Thank You</option>
+          <option>Apology</option>
+          <option>Missing Them</option>
+          <option>Encouragement</option>
+          <option>Anniversary</option>
+          <option>Graduation</option>
+          <option>Farewell</option>
+          <option>Get Well Soon</option>
+          <option>Grief / Loss</option>
+          <option>Congratulations</option>
+        </select>
+      </div>
 
       <!-- Tone pills -->
       <div class="form-group">
@@ -2164,7 +2209,7 @@ body::after {
         </div>
       </div>
 
-      <!-- Font selector (compact) -->
+      <!-- Font selector -->
       <div class="form-group">
         <label>Handwriting Style</label>
         <div class="font-pills">
@@ -2181,7 +2226,7 @@ body::after {
         </div>
       </div>
 
-      <!-- Paper style (compact swatches) -->
+      <!-- Paper style -->
       <div class="form-group">
         <label>Paper Style</label>
         <div class="paper-swatches">
@@ -2207,46 +2252,63 @@ body::after {
           <div class="ink-swatch" data-ink="#ffffff" style="background:#ffffff;border:1px solid #ccc" onclick="studioSetInk('#ffffff',this)" title="White"></div>
         </div>
       </div>
-
-      <!-- Write button -->
-      <div class="studio-form-error" id="studioError" style="display:none"></div>
-      <button class="btn btn-rose studio-generate-btn" id="studioGenerateBtn" onclick="studioWriteLetter()">
-        ✦ Write My Letter
-      </button>
-      <button class="btn btn-ghost studio-rewrite-btn" id="studioRewriteBtn" style="display:none" onclick="studioRewrite()">
-        ↺ Rewrite
-      </button>
     </div>
 
-    <!-- RIGHT: Live preview -->
+    <!-- ── CENTER: Writing Area ── -->
+    <div class="studio-center">
+      <div class="studio-center-header">
+        <span class="studio-center-label">✦ What do you want to say?</span>
+      </div>
+      <div class="studio-center-body">
+        <textarea id="feelings" placeholder="Write what's in your heart... Tell us what you feel, what you want to express, what's been left unsaid.
+
+The more you share, the more personal your letter will be."></textarea>
+
+        <!-- Memories (collapsible) -->
+        <details class="memories-toggle">
+          <summary>+ Add memories or details (optional)</summary>
+          <div class="form-group" style="margin-top:0.6rem">
+            <textarea id="memories" rows="2" style="border:1px solid var(--border-light);background:var(--paper);border-radius:4px;padding:0.6rem" placeholder="Inside jokes, specific moments, details..."></textarea>
+          </div>
+        </details>
+      </div>
+      <div class="studio-center-footer">
+        <div class="studio-form-error" id="studioError" style="display:none;flex:1"></div>
+        <div style="display:flex;gap:0.6rem;margin-left:auto">
+          <button class="btn btn-ghost studio-rewrite-btn" id="studioRewriteBtn" style="display:none" onclick="studioRewrite()">↺ Rewrite</button>
+          <button class="btn btn-rose studio-generate-btn" id="studioGenerateBtn" onclick="studioWriteLetter()">✦ Write My Letter</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RIGHT: Letter Preview ── -->
     <div class="studio-preview">
       <div class="studio-preview-header">
-        <span class="studio-preview-label" id="previewLabel">Your letter will appear here</span>
+        <span class="studio-preview-label" id="previewLabel">Preview</span>
         <div class="studio-preview-actions" id="previewActions" style="display:none">
           <button class="btn btn-ghost btn-sm" onclick="handleShare('whatsapp')">WhatsApp</button>
-          <button class="btn btn-ghost btn-sm" onclick="handleShare('instagram')">Instagram</button>
-          <button class="btn btn-ghost btn-sm" onclick="handleShare('download')">⬇ Download</button>
-          <button class="btn btn-ghost btn-sm" onclick="handlePrint()">🖨 Print</button>
+          <button class="btn btn-ghost btn-sm" onclick="handleShare('download')">⬇</button>
+          <button class="btn btn-ghost btn-sm" onclick="handlePrint()">🖨</button>
         </div>
       </div>
 
-      <!-- Loading state -->
+      <!-- Loading -->
       <div class="studio-loading" id="studioLoading" style="display:none">
         <div class="writing-icon">✒️</div>
         <p id="studioLoadingText">Writing your letter with care…</p>
       </div>
 
-      <!-- Error state -->
+      <!-- Error -->
       <div class="studio-error-state" id="studioErrorState" style="display:none">
         <p id="studioErrorText">Something went wrong. Please try again.</p>
       </div>
 
-      <!-- The paper -->
+      <!-- Generated letter paper -->
       <div class="letter-paper" id="letterPaper" style="display:none">
         <div class="letter-text" id="letterText"></div>
       </div>
 
-      <!-- Placeholder (before generation) -->
+      <!-- Placeholder example -->
       <div class="studio-placeholder" id="studioPlaceholder">
         <div class="placeholder-paper">
           <div class="placeholder-example-text">Dear Sarah,
@@ -2255,23 +2317,20 @@ There are moments in life when words feel too small for what the heart holds —
 
 You have been one of the most steadying presences in my life. Through the messy, uncertain, beautiful chapters — you were there. Not with grand gestures, but with quiet, unwavering warmth that meant more than you'll ever know.
 
-I think about the afternoon we spent laughing until our sides ached over absolutely nothing, and how that moment somehow held everything. That's the kind of joy you bring into a room — the kind that lingers long after you've gone.
-
 Thank you for being exactly who you are.
 
 With so much love,
 Michael</div>
-          <div class="placeholder-badge">✦ Example — your letter will appear here</div>
-        </div>
+          <div class="placeholder-badge">✦ Example</div>
         </div>
       </div>
 
       <!-- Share status -->
-      <div id="shareStatus" style="font-size:0.75rem;color:var(--ink-muted);text-align:center;margin-top:0.5rem;min-height:1.2rem"></div>
+      <div id="shareStatus" style="font-size:0.72rem;color:var(--ink-muted);text-align:center;padding:0.5rem;min-height:1.2rem"></div>
     </div>
 
-    <!-- ── Right: Sample Letters Panel ── -->
-    <div class="studio-samples">
+    <!-- ── (samples panel removed, replaced by right preview) ── -->
+    <div class="studio-samples" style="display:none">
       <p class="samples-label">✦ Example letters</p>
 
       <div class="sample-card">
