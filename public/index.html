@@ -1681,9 +1681,9 @@ body::after {
 /* ── Studio Layout ── */
 .studio-wrap {
   display: grid;
-  grid-template-columns: 440px 1fr;
-  gap: 2.5rem;
-  max-width: 1200px;
+  grid-template-columns: 300px 1fr 260px;
+  gap: 1.8rem;
+  max-width: 1320px;
   margin: 0 auto;
   align-items: start;
 }
@@ -1691,13 +1691,17 @@ body::after {
   background: var(--cream);
   border: 1px solid var(--border-light);
   border-radius: 8px;
-  padding: 1.8rem;
+  padding: 1.4rem;
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 0.9rem;
   position: sticky;
   top: 72px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
   box-shadow: 0 2px 16px rgba(30,18,10,0.05);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-light) transparent;
 }
 .form-row-2 {
   display: grid;
@@ -1934,13 +1938,88 @@ body::after {
   backdrop-filter: blur(4px);
 }
 
-/* Responsive studio */
-@media (max-width: 1024px) {
-  .studio-wrap { grid-template-columns: 360px 1fr; gap: 1.5rem; }
+/* Right samples panel */
+.studio-samples {
+  position: sticky;
+  top: 72px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-light) transparent;
 }
-@media (max-width: 900px) {
+.samples-label {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+}
+.sample-card {
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.sample-card:hover { border-color: var(--rose); box-shadow: 0 3px 12px rgba(30,18,10,0.07); }
+.sample-card-paper {
+  padding: 0.9rem 1rem 0.7rem 1.3rem;
+  min-height: 110px;
+  position: relative;
+  font-family: var(--font-cursive);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: #4a3225;
+  background-image: repeating-linear-gradient(
+    180deg, transparent, transparent 22px,
+    rgba(160,130,100,0.1) 22px, rgba(160,130,100,0.1) 23px
+  );
+}
+.sample-card-paper::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 38px;
+  width: 1px;
+  background: rgba(181,99,90,0.1);
+}
+.sample-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.8rem;
+  background: var(--paper-dark);
+  border-top: 1px solid var(--border-light);
+  font-size: 0.62rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.sample-card-tag {
+  background: var(--rose-light);
+  color: var(--rose);
+  padding: 0.15rem 0.45rem;
+  border-radius: 8px;
+  font-size: 0.58rem;
+  font-weight: 500;
+}
+
+/* Responsive studio */
+@media (max-width: 1200px) {
+  .studio-wrap { grid-template-columns: 280px 1fr 220px; gap: 1.2rem; }
+}
+@media (max-width: 960px) {
+  .studio-wrap { grid-template-columns: 260px 1fr; gap: 1rem; }
+  .studio-samples { display: none; }
+}
+@media (max-width: 720px) {
   .studio-wrap { grid-template-columns: 1fr; }
-  .studio-form { position: static; }
+  .studio-form { position: static; max-height: none; }
   .studio-preview { position: static; }
   .form-row-2 { grid-template-columns: 1fr 1fr; }
   #letterPaper { min-height: 400px; }
@@ -2189,6 +2268,67 @@ Michael</div>
 
       <!-- Share status -->
       <div id="shareStatus" style="font-size:0.75rem;color:var(--ink-muted);text-align:center;margin-top:0.5rem;min-height:1.2rem"></div>
+    </div>
+
+    <!-- ── Right: Sample Letters Panel ── -->
+    <div class="studio-samples">
+      <p class="samples-label">✦ Example letters</p>
+
+      <div class="sample-card">
+        <div class="sample-card-paper" style="background-color:#fdf8f0">
+          Dear Mom,<br>
+          There aren't enough words to say how much your love has shaped everything I am. You showed up, every single time — quietly, completely…
+        </div>
+        <div class="sample-card-footer">
+          <span>Mother's Day</span>
+          <span class="sample-card-tag">Warm</span>
+        </div>
+      </div>
+
+      <div class="sample-card">
+        <div class="sample-card-paper" style="background-color:#f5e8ef">
+          My love,<br>
+          Three years. It feels like a lifetime and a single breath at the same time. You changed everything without even trying…
+        </div>
+        <div class="sample-card-footer">
+          <span>Anniversary</span>
+          <span class="sample-card-tag">Romantic</span>
+        </div>
+      </div>
+
+      <div class="sample-card">
+        <div class="sample-card-paper" style="background-color:#eaf2ea">
+          Hey Jake,<br>
+          I never said it enough — but you've been the kind of friend people write books about. I mean that more than you know…
+        </div>
+        <div class="sample-card-footer">
+          <span>Friendship</span>
+          <span class="sample-card-tag">Playful</span>
+        </div>
+      </div>
+
+      <div class="sample-card">
+        <div class="sample-card-paper" style="background-color:#f7f0df">
+          Dear Grandma,<br>
+          Your kitchen always smelled like cinnamon and safety. I still hear your laugh in quiet moments — warm, unhurried, real…
+        </div>
+        <div class="sample-card-footer">
+          <span>Just Because</span>
+          <span class="sample-card-tag">Poetic</span>
+        </div>
+      </div>
+
+      <div class="sample-card">
+        <div class="sample-card-paper" style="background-color:#f0ebe3">
+          To my team,<br>
+          This past year wasn't easy — but watching each of you rise to the challenge reminded me why I'm proud to work alongside you…
+        </div>
+        <div class="sample-card-footer">
+          <span>Appreciation</span>
+          <span class="sample-card-tag">Formal</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
