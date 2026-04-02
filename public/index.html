@@ -1961,7 +1961,6 @@ body::after {
     <span class="logo-text">Heartfelt Letters</span>
   </a>
   <nav>
-    <a href="#how" class="nav-link">How It Works</a>
     <a href="#writer" class="nav-link">Try Free</a>
     <a href="#offers" class="nav-link">Plans</a>
     <a href="#community" class="nav-link">Community</a>
@@ -1993,32 +1992,6 @@ body::after {
   <div class="scroll-indicator">
     <span>Scroll</span>
     <div class="scroll-line"></div>
-  </div>
-</section>
-
-<!-- ── How It Works ── -->
-<section class="how-section" id="how">
-  <div class="section-header">
-    <p class="overline">Simple Process</p>
-    <h2 class="section-title">How it <em>works</em></h2>
-    <p class="section-sub">Three simple steps to a letter that feels like it was written by hand, from your heart.</p>
-  </div>
-  <div class="how-grid">
-    <div class="how-step">
-      <div class="step-num">01</div>
-      <h3 class="step-title">Tell Us Who & Why</h3>
-      <p class="step-desc">Who's receiving this letter, and what's the occasion? A birthday, an apology, or just because.</p>
-    </div>
-    <div class="how-step">
-      <div class="step-num">02</div>
-      <h3 class="step-title">Share Your Heart</h3>
-      <p class="step-desc">Tell us what you feel. Memories, inside jokes, the words you've been meaning to say.</p>
-    </div>
-    <div class="how-step">
-      <div class="step-num">03</div>
-      <h3 class="step-title">Receive Your Letter</h3>
-      <p class="step-desc">Our AI writes a warm, personal letter in your voice — ready to copy, print, or send.</p>
-    </div>
   </div>
 </section>
 
@@ -2644,7 +2617,6 @@ Michael</div>
     <span class="logo-text">Heartfelt Letters</span>
   </div>
   <div class="footer-links">
-    <a href="#how">How It Works</a>
     <a href="#writer">Try Free</a>
     <a href="#offers">Plans & Pricing</a>
     <a href="#community">Community</a>
@@ -2684,7 +2656,7 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.how-step, .offer-card, .swatch, .review-card').forEach(el => {
+document.querySelectorAll('.offer-card, .swatch, .review-card').forEach(el => {
   revealObserver.observe(el);
 });
 
