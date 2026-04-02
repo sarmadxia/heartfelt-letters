@@ -59,17 +59,17 @@ body::after {
 
 /* ── Shared Typography ── */
 .overline {
-  font-family: var(--font-sans);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-family: var(--font-cursive);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: none;
   color: var(--gold);
 }
 .section-title {
-  font-family: var(--font-serif);
-  font-weight: 300;
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-family: var(--font-cursive);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.5vw, 3rem);
   color: var(--ink);
   line-height: 1.2;
   margin: 0.6rem 0;
@@ -77,10 +77,12 @@ body::after {
 .section-title em {
   font-style: italic;
   color: var(--rose);
+  font-family: var(--font-cursive);
 }
 .section-sub {
   color: var(--ink-muted);
-  font-size: 0.86rem;
+  font-family: var(--font-cursive);
+  font-size: 1.05rem;
   max-width: 500px;
   margin: 0 auto;
 }
@@ -162,9 +164,9 @@ body::after {
   color: var(--rose);
 }
 .top-bar .logo-text {
-  font-family: var(--font-serif);
+  font-family: var(--font-cursive);
   font-weight: 400;
-  font-size: 1.05rem;
+  font-size: 1.25rem;
 }
 .top-bar nav {
   display: flex;
@@ -355,19 +357,20 @@ body::after {
 }
 .hero .overline { animation: fadeUp 0.7s ease forwards; animation-delay: 0.2s; opacity: 0; }
 .hero-heading {
-  font-family: var(--font-serif);
-  font-weight: 300;
-  font-size: clamp(2.8rem, 7vw, 4.5rem);
-  line-height: 1.1;
+  font-family: var(--font-cursive);
+  font-weight: 400;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  line-height: 1.15;
   color: var(--ink);
   margin: 1rem 0 1.2rem;
   animation: fadeUp 0.7s ease forwards;
   animation-delay: 0.4s;
   opacity: 0;
 }
-.hero-heading em { font-style: italic; color: var(--rose); }
+.hero-heading em { font-style: italic; color: var(--rose); font-family: var(--font-cursive); }
 .hero-sub {
-  font-size: 1.05rem;
+  font-family: var(--font-cursive);
+  font-size: 1.32rem;
   color: var(--ink-muted);
   max-width: 480px;
   margin-bottom: 2rem;
@@ -780,10 +783,10 @@ body::after {
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 .upsell-banner h4 {
-  font-family: var(--font-serif);
+  font-family: var(--font-cursive);
   font-style: italic;
   font-weight: 400;
-  font-size: 1.2rem;
+  font-size: 1.45rem;
   color: var(--ink);
   margin-bottom: 0.4rem;
 }
@@ -1134,9 +1137,9 @@ body::after {
 .tier-dot.sage { background: var(--sage); }
 .tier-dot.gold { background: var(--gold); }
 .offer-title {
-  font-family: var(--font-serif);
+  font-family: var(--font-cursive);
   font-weight: 400;
-  font-size: 1.25rem;
+  font-size: 1.45rem;
   color: var(--ink);
   margin-bottom: 0.4rem;
 }
@@ -1320,9 +1323,9 @@ body::after {
   margin-bottom: 3rem;
 }
 .rating-score {
-  font-family: var(--font-serif);
-  font-size: 4.5rem;
-  font-weight: 300;
+  font-family: var(--font-cursive);
+  font-size: 5rem;
+  font-weight: 400;
   color: var(--ink);
   line-height: 1;
   margin-bottom: 0.3rem;
@@ -1407,11 +1410,11 @@ body::after {
 }
 .review-stars .star { font-size: 0.72rem; }
 .review-text {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: var(--ink-soft);
-  line-height: 1.65;
+  line-height: 1.6;
   font-style: italic;
-  font-family: var(--font-serif);
+  font-family: var(--font-cursive);
 }
 .review-text::before { content: '"'; }
 .review-text::after { content: '"'; }
@@ -1471,10 +1474,10 @@ body::after {
 }
 .capture-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
 .capture-card h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-cursive);
   font-style: italic;
   font-weight: 400;
-  font-size: 1.3rem;
+  font-size: 1.55rem;
   color: var(--ink);
   margin-bottom: 0.5rem;
 }
@@ -1531,9 +1534,9 @@ body::after {
   color: var(--rose);
 }
 .footer .logo-text {
-  font-family: var(--font-serif);
+  font-family: var(--font-cursive);
   font-weight: 400;
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   color: rgba(250,246,240,0.6);
 }
 .footer-links {
